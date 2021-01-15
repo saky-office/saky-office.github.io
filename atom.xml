@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.saky.site</id>
     <title>Shellblock</title>
-    <updated>2021-01-15T07:18:13.726Z</updated>
+    <updated>2021-01-15T08:05:14.685Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.saky.site"/>
     <link rel="self" href="https://blog.saky.site/atom.xml"/>
@@ -11,35 +11,717 @@
     <icon>https://blog.saky.site/favicon.ico</icon>
     <rights>All rights reserved 2021, Shellblock</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://blog.saky.site/post/hello-gridea/</id>
-        <link href="https://blog.saky.site/post/hello-gridea/">
+        <title type="html"><![CDATA[【公告】博客迁移]]></title>
+        <id>https://blog.saky.site/post/note_1/</id>
+        <link href="https://blog.saky.site/post/note_1/">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2021-01-15T07:56:20.000Z</updated>
+        <content type="html"><![CDATA[<p>由于博客服务器即将到期和阿里云停止学生机售卖，本站将由Typecho转移至Gridea。由于不可抗拒因素，删除了大量文章。本站近期在进行网站迁移+装修，可能存在访问bug，再加上博主学业繁忙，可能无法即时处理。</p>
+<p>本站地址将由原地址www.saky.site转移至blog.saky.site</p>
+<p>如有任何问题请联系QQ:  <a href="http://url.k-on.life/qq">3405193</a></p>
+<p>在此声明一下:<br>
+本站不会无故删除任何贵站友链，所有友链都会备份处理，如果您发现您的友链不在本站友链列表内，请联系我，谢谢(*°∀°)=3</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[给你的博客添加Live2D 看板娘]]></title>
+        <id>https://blog.saky.site/post/add_live2d/</id>
+        <link href="https://blog.saky.site/post/add_live2d/">
+        </link>
+        <updated>2021-01-15T07:52:54.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="dome">DOME:</h2>
+<p>https://domepage.ml/live2d/<br>
+https://k-on.life/</p>
+<h2 id="使用">使用</h2>
+<p>由于代码使用的是第三方API接口，难免一些细节无法自定义。<br>
+但是为了满足大家对 自定义看板娘的需求，我修改了部分代码以实现 直接修改部分参数。<br>
+当然如果你自己有服务器或者虚拟主机，可以考虑自行搭建API</p>
+<ul>
+<li>看板娘 前端 源码 https://github.com/fghrsh/live2d_demo</li>
+<li>模型切换 API 源码 https://github.com/fghrsh/live2d_api (PHP)</li>
+</ul>
+<p>在 <code>&lt;/head&gt;</code>前引入 waifu.css 样式表<br>
+在 <code>&lt;/body&gt;</code> 前引入 waifu-tips.js 和 live2d.js<br>
+在 <code>&lt;/body&gt;</code> 前插入 初始化 JS，可在 初始化前 设置参数<br>
+注意: 以下代码可能不适配所以模板，需要自行更改相应模板代码。</p>
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+
+        · · ·   · · ·
+
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;//live2d-cdn.fghrsh.net/assets/1.4.2/waifu.min.css&quot;/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+        · · ·   · · ·
+
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;waifu&quot;&gt;
+&lt;div class=&quot;waifu-tips&quot;&gt;&lt;/div&gt;
+&lt;canvas id=&quot;live2d&quot; class=&quot;live2d&quot;&gt;&lt;/canvas&gt;
+&lt;div class=&quot;waifu-tool&quot;&gt;
+&lt;span class=&quot;fui-home&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;fui-chat&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;fui-eye&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;fui-user&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;fui-photo&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;fui-info-circle&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;fui-cross&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script src=&quot;//live2d-cdn.fghrsh.net/assets/1.4.2/waifu-tips.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;//live2d-cdn.fghrsh.net/assets/1.4.2/live2d.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+        /* 可直接修改部分参数 */
+        live2d_settings['modelId'] = 2;                            // 默认模型 ID 1-4
+        live2d_settings['modelTexturesId'] = 87;                   // 默认材质 ID
+        live2d_settings['modelStorage'] = false;                   // 不储存模型 ID
+        live2d_settings['canCloseLive2d'] = true;                  // 隐藏 关闭看板娘 按钮
+        live2d_settings['canTurnToHomePage'] = true;               // 隐藏 返回首页 按钮
+        live2d_settings['waifuSize'] = '280x250';                  // 看板娘大小  例如 '280x250', '600x535'
+        live2d_settings['waifuTipsSize'] = '250x70';               // 提示框大小  例如 '250x70', '570x150'
+        live2d_settings['waifuFontSize'] = '12px';                 // 提示框字体  例如 '12px', '30px'
+        live2d_settings['waifuToolFont'] = '14px';                 // 工具栏字体  例如 '14px', '36px'
+        live2d_settings['waifuToolLine'] = '20px';                 // 工具栏行高  例如 '20px', '36px'
+        live2d_settings['waifuToolTop'] = '0px';                   // 工具栏顶部边距 例如 '0px', '-60px'
+        live2d_settings['waifuEdgeSide'] = 'right:0';     // 看板娘贴边方向，例如 'left:0'(靠左 0px), 'right:30'(靠右 30px)
+        live2d_settings['waifuDraggable'] = 'disable';             // 拖拽样式  例如 'disable'(禁用), 'axis-x'(只能水平拖拽), 'unlimited'(自由拖拽)
+        live2d_settings['aboutPageUrl']   = 'https://saky.site/';   // 关于页地址, '{URL 网址}'
+        /* 在 initModel 前添加 */
+        initModel(&quot;//live2d-cdn.fghrsh.net/assets/1.4.2/waifu-tips.json&quot;)
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Markdown文件的基本常用编写语法]]></title>
+        <id>https://blog.saky.site/post/markdown_learning/</id>
+        <link href="https://blog.saky.site/post/markdown_learning/">
+        </link>
+        <updated>2021-01-15T07:50:09.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>        因为现在的前端基本上都用上了前端构建工具，那就难免要写一些readme等等的说明性文件，但是这样的文件一般都是.md的文件，编写的语法自然跟其他格式的文件有所区别，置于为什么要用这种格式的文件，不要问我，我也不知道，大家都这么用，跟着用就对了，本文也是我学习写markdown文件的一个笔记吧，仅供参考！</p>
+<h2>正文</h2>
+<p class="has-large-font-size"><strong>Markdown 语法的简要规则</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>标题</h3>
+<!-- /wp:heading -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69492.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt=""/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>
+	标题是每篇文章都需要也是最常用的格式，在 Markdown 中，如果一段文字被定义为标题，只要在这段文字前加 <code>#</code> 号即可。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	<code># 一级标题</code>
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	<code>## 二级标题</code>
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	<code>### 三级标题</code>
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	以此类推，总共六级标题，建议在井号后加一个空格，这是最标准的 Markdown 语法。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>列表</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	熟悉 HTML 的同学肯定知道有序列表与无序列表的区别，在 Markdown 下，列表的显示只需要在文字前加上 <code>-</code> 或 <code>*</code> 即可变为无序列表，有序列表则直接在文字前加 <code>1.</code><code>2.</code><code>3.</code> 符号要和文字之间加上一个字符的空格。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69493.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt=""/></figure>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>引用</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	如果你需要引用一小段别处的句子，那么就要用引用的格式。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	<code>&gt; 例如这样</code>
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	只需要在文本前加入 <code>&gt;</code> 这种尖括号（大于号）即可
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69494.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt=""/></figure>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>图片与链接</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	插入链接与插入图片的语法很像，区别在一个 <code>!</code>号
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	插入图片的地址需要图床，这里推荐 <a href="http://www.getcloudapp.com">CloudApp</a> 的服务，生成URL地址即可。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69495.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt=""/></figure>
+<!-- /wp:image -->
+<!-- wp:heading {"level":3} -->
+<h3>粗体与斜体</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	Markdown 的粗体和斜体也非常简单，用两个 <code>*</code> 包含一段文本就是粗体的语法，用一个 <code>*</code> 包含一段文本就是斜体的语法。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>
+	例如：<strong>这里是粗体</strong><em>这里是斜体</em>
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>表格</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	表格是我觉得 Markdown 比较累人的地方，例子如下：
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">	<code>| Tables        | Are           | Cool  |</code>
+	<code>| ------------- |:-------------:| -----:|</code>
+	<code>| col 3 is      | right-aligned | $1600 |</code>
+	<code>| col 2 is      | centered      |   $12 |</code>
+	<code>| zebra stripes | are neat      |    $1 |</code>
+</pre>
+<!-- /wp:preformatted -->
+<!-- wp:paragraph -->
+<p>
+	这种语法生成的表格如下：
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:table -->
+<table class="wp-block-table"><thead><tr><th>
+		Tables
+	</th><th>
+		Are
+	</th><th>
+		Cool
+	</th></tr></thead><tbody><tr><td>
+		col 3 is
+	</td><td>
+		right-aligned
+	</td><td>
+		$1600
+	</td></tr><tr><td>
+		col 2 is
+	</td><td>
+		centered
+	</td><td>
+		$12
+	</td></tr><tr><td>
+		zebra stripes
+	</td><td>
+		are neat
+	</td><td>
+		$1
+	</td></tr></tbody></table>
+<!-- /wp:table -->
+<!-- wp:heading {"level":3} -->
+<h3>代码框</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	如果你是个程序猿，需要在文章里优雅的引用代码框，在 Markdown 下实现也非常简单，只需要用两个 ` 把中间的代码包裹起来，如 <code>`code`</code>。图例：
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69496.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt=""/></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p>
+	使用 <code>tab</code> 键即可缩进。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>分割线</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	分割线的语法只需要另起一行，连续输入三个星号 <code>***</code> 即可。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading {"level":3} -->
+<h3>小结</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p>
+	到这里，Markdown 
+的基本语法在日常的使用中基本就没什么大问题了，只要多加练习，配合好用的工具，写起东西来肯定会行云流水。更多的语法规则，其实 Mou 的 Help
+ 文档例子很好，当你第一次使用 Mou 时，就会显示该文档，其次，你也可在撰写过程中，使用 <code>CMD+R</code> 快捷键来快速打开文档，以随时查阅和学习语法。
+</p>
+<!-- /wp:paragraph -->
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69497.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt=""/></figure>
+<!-- /wp:image -->
+<!-- wp:heading -->
+<h2><strong>与 Markdown 相关的一些推荐</strong></h2>
+<!-- /wp:heading -->
+<!-- wp:heading {"level":3} -->
+<h3><strong>可配套使用的工具</strong></h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li><a href="http://droplr.com" target="_blank" rel="noreferrer noopener">Droplr</a></li><li><a href="http://www.getcloudapp.com" target="_blank" rel="noreferrer noopener">Cloudapp</a></li><li><a href="https://itunes.apple.com/cn/app/yi-xiang/id672522335?mt=12&amp;uo=4" target="_blank" rel="noreferrer noopener">ezShare for Mac</a></li><li><a href="http://weibotuchuang.sinaapp.com" target="_blank" rel="noreferrer noopener">围脖图床修复计划</a></li><li><a href="http://maxiang.info" target="_blank" rel="noreferrer noopener">马克飞象，专为印象笔记打造的 Markdown 编辑器，非常推荐</a></li></ul>
+<!-- /wp:list -->
+<!-- wp:heading {"level":3} -->
+<h3><strong>相关文章阅读</strong></h3>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li><a href="http://apple4us.com/2012/02/why-writers-should-use-markdown.html" target="_blank" rel="noreferrer noopener">为什么作家应该用 Markdown 保存自己的文稿</a></li><li><a href="http://www.yangzhiping.com/tech/r-markdown-knitr.html" target="_blank" rel="noreferrer noopener">Markdown 写作浅谈</a></li><li><a href="http://www.appinn.com/markdown-tools/" target="_blank" rel="noreferrer noopener">Markdown 工具补完</a></li><li><a href="http://jianshu.io/p/63HYZ6" target="_blank" rel="noreferrer noopener">Drafts + Scriptogr.am + Dropbox 打造移动端 Markdown 风格博客</a></li><li><a href="http://www.ituring.com.cn/article/23" target="_blank" rel="noreferrer noopener">图灵社区 - 怎样使用 Markdown</a></li><li><a href="http://news.cnblogs.com/n/139649/" target="_blank" rel="noreferrer noopener">为什么我们要学习 Markdown 的三个理由</a></li><li><a href="http://ibuick.me/?p=4093" target="_blank" rel="noreferrer noopener">Markdown 语法写作入门指南 by ibuick</a></li></ul>
+<!-- /wp:list -->
+<!-- wp:heading -->
+<h2> 参考文献</h2>
+<!-- /wp:heading -->
+<!-- wp:list -->
+<ul><li><a href="http://www.appinn.com/markdown/">http://www.appinn.com/markdown/</a></li><li><a href="http://sspai.com/25137">http://sspai.com/25137</a> </li><li><a href="https://www.cnblogs.com/liugang-vip/p/6337580.html">https://www.cnblogs.com/liugang-vip/p/6337580.html</a></li></ul>
+<!-- /wp:list -->]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网课助手专用浏览器（win版）]]></title>
+        <id>https://blog.saky.site/post/wk_win/</id>
+        <link href="https://blog.saky.site/post/wk_win/">
+        </link>
+        <updated>2021-01-15T07:48:54.000Z</updated>
+        <content type="html"><![CDATA[<h2><strong>集合脚本</strong></h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph -->
+<p><strong>已内置，无需重复安装</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="https://greasyfork.org/zh-CN/scripts/369625" target="_blank" rel="noreferrer noopener">超星网课助手</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>自动挂机看尔雅MOOC，支持视频、音频、文档、图书自动完成，章节测验自动答题提交，支持自动切换任务点、挂机阅读时长、自动登录等，解除各类功能限制，开放自定义参数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="https://greasyfork.org/zh-CN/scripts/373131" target="_blank" rel="noreferrer noopener">超星网课助手(考试专版)</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>自动搜索尔雅MOOC考试答案，支持自动答题、自动切换题目、隐藏答案搜索提示框等，解除各类功能限制，开放自定义参数。<br></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><a href="https://greasyfork.org/zh-CN/scripts/380506" target="_blank" rel="noreferrer noopener">智慧树网课助手</a></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>自动挂机看知到MOOC，支持屏蔽弹窗题目、自动切换下一节，章测试和考试支持自动答题，视频自动倍速播放、线路选择、默认静音等，解除各类功能限制，开放自定义参数。</p>
+<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2>使用方法</h2>
+<!-- /wp:heading -->
+<!-- wp:list {"ordered":true} -->
+<ol><li>双击“运行此文件.exe”</li><li>收藏栏内进入网课登录页面，登录</li><li>进入学习页面</li></ol>
+<!-- /wp:list -->
+<!-- wp:heading -->
+<h2> 下载链接</h2>
+<!-- /wp:heading -->
+<!-- wp:button {"className":"is-style-squared"} -->
+<div class="wp-block-button is-style-squared"><a class="wp-block-button__link" href="https://545c.com/file/22821665-425937484">城通网盘</a></div>
+<!-- /wp:button -->
+<!-- wp:paragraph -->
+<p><strong>备用地址：</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:columns -->
+<div class="wp-block-columns has-2-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:button {"className":"is-style-squared"} -->
+<div class="wp-block-button is-style-squared"><a class="wp-block-button__link" href="https://www.lanzous.com/b00z8fpmb">蓝奏云下载</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:column -->
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:button {"className":"is-style-squared"} -->
+<div class="wp-block-button is-style-squared"><a class="wp-block-button__link" href="http://d0.ananas.chaoxing.com/download/7d666933c5b793e7cb7e865b74dcc1fb?fn=%E8%B6%85%E6%98%9F%E6%99%BA%E6%85%A7%E6%A0%91%E7%BD%91%E8%AF%BE%E5%8A%A9%E6%89%8B%E6%B5%8F%E8%A7%88%E5%99%A8%E7%89%88V1.1.1"> 直链下载 </a></div>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Gridea+Github/Coding=0元部署个人博客]]></title>
+        <id>https://blog.saky.site/post/gridea/</id>
+        <link href="https://blog.saky.site/post/gridea/">
+        </link>
+        <updated>2021-01-15T07:44:51.000Z</updated>
+        <content type="html"><![CDATA[<!-- wp:paragraph -->
+<p>如果你使用过 Hexo 等工具基于 Github 做个人博客，那么恭喜你，你可以很轻松的上手使用Gridea。 如果你以前没有使用过，那么希望这篇文章可以帮助你顺利的完成博客搭建。</p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>之前使用过Hexo，但是不是那么方便，后来在网上乱逛的时候发现了 Gridea ，使用之后感觉非常棒。 零基础新手也能快手入手。</p>
+<!-- /wp:paragraph --><!-- wp:heading -->
+<h2>下载地址</h2>
+<!-- /wp:heading --><!-- wp:group -->
+<!-- wp:group -->
+<!-- wp:button {"backgroundColor":"luminous-vivid-orange","className":"is-style-fill"} -->
+<a href="http://pan.shellblock.top/file/22821665-428666630">网盘下载</a>   <a href="https://github.com/getgridea/gridea/releases/download/v0.9.2/Gridea.Setup.0.9.2.exe">直链下载</a>
+<!-- /wp:group --><!-- wp:heading -->
+<h2 id="准备工作">准备工作</h2>
+<!-- /wp:heading --><!-- wp:quote -->
+<blockquote>
+<p>由于 Github 和 Coding 的步骤差不多，下面就以 Github 为例来操作一下</p>
+</blockquote>
+<!-- /wp:quote --><!-- wp:paragraph -->
+<p><strong>必须：确保你已经安装过 <a href="https://git-scm.com/downloads">Git</a> 和 <a href="https://gridea.dev/">Gridea</a></strong><br /><strong>注意：同步会覆盖掉仓库的文件，若仓库内有需要备份的，请手动备份</strong></p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>首先你需要一个 <a href="http://github.com/">Github</a> 账号，如果没有的话，快去注册一个吧！</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550403256560.png" alt="Github Personal access tokesn" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>登录 Github，然后进入到 <a href="https://github.com/settings/tokens/new">这里</a> 创建一个 <strong>Token</strong>，勾选上 <strong>repo</strong> 的相关权限即可，下面是对应的截图示例：</p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>生成之后你可以复制 <strong>Token</strong> 到你可以再次找到的某个地方，因为一旦你关了这个网页就再也不会看到它了，稍后会在软件中使用</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550403732691.png" alt="Token示例" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>接下来你需要创建一个仓库，用来存放博客构建后的静态文件。我们建议你创建仓库名为 <strong>用户名.github.io</strong> 的仓库，因为 Github 会默认将此仓库设置成 <a href="https://pages.github.com/">Github Pages</a> 可访问类型，若不是用此命名的仓库，则不能默认使用 Github Pages，所以请认真确认。例如我的 Github 用户名为 <strong>EryouHao</strong>，则仓库名为 <strong>EryouHao.github.io</strong>。使用这种方式还有一个好处是，在没有自定义域名的情况下，使你的博客域名更短。当然如果想使用其他仓库来存放博客静态文件的话，也不是不可以，只不过，存放之后，若没有设置自定义域名，则访问地址将变成 <code>https://用户名.github.io/blog</code> （blog 为仓库名）这种二级目录的形式。</p>
+<!-- /wp:paragraph --><!-- wp:heading -->
+<h2 id="开始使用">开始使用</h2>
+<!-- /wp:heading --><!-- wp:paragraph -->
+<p>打开 <strong>Hve Notes</strong> 进入到<strong>配置</strong>页面，然后按照下面示例，输入相关配置并保存</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550405739647.png" alt="配置示例" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>在不开启文章评论的情况下，到此为止，你已经可以点击预览，点击同步进行博客部署啦，快去试试看吧！（当然在不同步的情况下）</p>
+<!-- /wp:paragraph --><!-- wp:heading -->
+<h2 id="开启文章评论">开启文章评论</h2>
+<!-- /wp:heading --><!-- wp:paragraph -->
+<p><strong>Gridea</strong>  目前提供了 <a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">Gitalk</a> 和 <a href="https://fehey.com/post/hve-notes-start/">Disqus</a> 两种评论系统支持。</p>
+<!-- /wp:paragraph --><!-- wp:quote -->
+<blockquote>
+<p>Gitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。如果你博客使用的是 Gitalk 的话，建议你可以选择 Gitalk 来作为评论插件。</p>
+</blockquote>
+<!-- /wp:quote --><!-- wp:paragraph -->
+<p>你可以按照 <a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">Gitalk 的文档</a> 进行相关字段配置，或者按照下面的步骤操作。</p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>首先你需要有一个 <strong>Github OAuth Application</strong>，点击<a href="https://github.com/settings/applications/new">这里</a>创建，字段填写可以参照下图</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550455713413.png" alt="Github OAuth" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>创建完成后可将 <strong>Client ID</strong> 和 <strong>Client Secret</strong>复制一下，保存到本地</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550455918492.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>接下来就可以去应用里面填写对应的信息，并开启评论</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550456148809.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>这样评论插件就设置好了，在预览时会在文章页显示评论模块，但不会显示具体的评论信息，因为这个是本地预览，而 <strong>Github OAuth</strong> 设置的域名为线上的域名。待博客同步到线上时就可以显示啦！</p>
+<!-- /wp:paragraph --><!-- wp:paragraph {"fontSize":"medium"} -->
+<p><strong>额，GitHub 看不懂？那就使用Coding吧 </strong></p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>下面介绍如何使用Coding部署个人博客</p>
+<!-- /wp:paragraph --><!-- wp:list -->
+<ul>
+<li>必须：确保你已经安装过 Git 和 Gridea</li>
+<li>注意：同步会覆盖掉仓库的文件，若仓库内有需要备份的，请手动备份</li>
+</ul>
+<!-- /wp:list --><!-- wp:paragraph -->
+<p>首先你需要一个<a href="https://e.coding.net/signup">  Coding  </a>账号，如果没有的话，赶快<a href="https://e.coding.net/signup">注册</a>一个吧（现在 Coding 是腾讯的了，直接微信登录就OK）</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/79ca8669720dbc0f0c2ee2a95ab31795.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>登录 Coding，下面是对应步骤的截图示例：</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/f8c5511d963ebf430774009abb4832a6.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>创建一个  令牌 ，勾选上 repo 的相关权限即可，下面是对应的截图示例：</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/97fe8e085c12d1aa844b31edfc469bca.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>稍后会在软件中使用 令牌 接下来你需要创建一个仓库，用来存放博客构建后的静态文件。建议你创建仓库名为 用户名.coding.me 的仓库。</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/f8c5511d963ebf430774009abb4832a6.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/e6819ee30bdb5ee733892b4ccf54168d.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/4d13a30de012411bc5c55e2cea5b7c44.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>打开 Gridea 进入到配置页面，然后按照下面示例，输入相关配置并保存</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/fde52d4b302636057f2f745739adecf1.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/c88ee13a5f1a0237fd25102eba38d23c.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/98faae94077a3593341eebd2c10e3845.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/49bab2a25661c0353bac883034652973.png" alt="" /></figure>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[简单实现PHP读取数据库]]></title>
+        <id>https://blog.saky.site/post/php_sql/</id>
+        <link href="https://blog.saky.site/post/php_sql/">
+        </link>
+        <updated>2021-01-15T07:44:17.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-php">&lt;?php
+$server = &quot;localhost&quot;;
+$username = &quot;root&quot;;
+$password = &quot;123456&quot;;
+$dbname = &quot;db&quot;;
+$mysqli = new mysqli ($server, $username, $password, $dbname);
+
+$result = mysqli_query ($mysqli, &quot;select * from account&quot;);
+echo &quot;&lt;table border = '1px'&gt;&quot;;
+echo &quot;&lt;caption&gt;&lt;b&gt;账号列表&lt;/b&gt;&lt;/caption&gt;&quot;;
+echo &quot;&lt;tr&gt;&lt;th&gt;用户名&lt;/th&gt;&lt;th&gt;密码&lt;/th&gt;&lt;th&gt;邮箱&lt;/th&gt;&lt;/tr&gt;&quot;;
+while ($r = mysqli_fetch_object ($result)){
+	echo &quot;&lt;tr&gt;&lt;td&gt;&quot; . $r-&gt;username . &quot;&lt;/td&gt;&lt;td&gt;&quot; . $r-&gt;password . &quot;&lt;/td&gt;&lt;td&gt;&quot; . $r-&gt;email .&quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+}
+echo &quot;&lt;/table&gt;&quot;;
+mysqli_fetch_object ($result);
+mysqli_close ($mysqli);
+?&gt;
+</code></pre>
+<p>mysqli_fetch_object</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[简单实现PHP读取数据库]]></title>
+        <id>https://blog.saky.site/post/php_sql_r/</id>
+        <link href="https://blog.saky.site/post/php_sql_r/">
+        </link>
+        <updated>2021-01-15T07:44:17.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-php">&lt;?php
+$server = &quot;localhost&quot;;
+$username = &quot;root&quot;;
+$password = &quot;123456&quot;;
+$dbname = &quot;db&quot;;
+$mysqli = new mysqli ($server, $username, $password, $dbname);
+
+$result = mysqli_query ($mysqli, &quot;select * from account&quot;);
+echo &quot;&lt;table border = '1px'&gt;&quot;;
+echo &quot;&lt;caption&gt;&lt;b&gt;账号列表&lt;/b&gt;&lt;/caption&gt;&quot;;
+echo &quot;&lt;tr&gt;&lt;th&gt;用户名&lt;/th&gt;&lt;th&gt;密码&lt;/th&gt;&lt;th&gt;邮箱&lt;/th&gt;&lt;/tr&gt;&quot;;
+while ($r = mysqli_fetch_object ($result)){
+	echo &quot;&lt;tr&gt;&lt;td&gt;&quot; . $r-&gt;username . &quot;&lt;/td&gt;&lt;td&gt;&quot; . $r-&gt;password . &quot;&lt;/td&gt;&lt;td&gt;&quot; . $r-&gt;email .&quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
+}
+echo &quot;&lt;/table&gt;&quot;;
+mysqli_fetch_object ($result);
+mysqli_close ($mysqli);
+?&gt;
+</code></pre>
+<p>mysqli_fetch_object</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[【Python】控制结构 习题]]></title>
+        <id>https://blog.saky.site/post/python-learn1/</id>
+        <link href="https://blog.saky.site/post/python-learn1/">
+        </link>
+        <updated>2021-01-15T07:43:05.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="有一分数序列213253851382113求出这个数列的前20项之和">有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前20项之和。</h3>
+<p><strong>要求：使用循环，for和while都可以。</strong></p>
+<p>程序分析：抓住分子和分母的变化规律</p>
+<pre><code class="language-python">
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+fenzi = 2
+fenmu = 1
+s = 0
+
+for i in range(1,21):
+    a = fenzi
+    b = fenmu
+    s += (a/b)
+    fenzi = a+b
+    fenmu = a
+print('%f'%s)
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[【数据结构】串的基本操作]]></title>
+        <id>https://blog.saky.site/post/c_sjjg_cdjbcz/</id>
+        <link href="https://blog.saky.site/post/c_sjjg_cdjbcz/">
+        </link>
+        <updated>2021-01-15T07:41:34.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="利用最小操作子集实现定位函数">利用最小操作子集实现定位函数</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#define  MaxLen  256    
+           
+typedef struct
+{ 
+  char  str[MaxLen];                              /*定义可容纳MaxLen个字符的字符数组*/
+  int  curlen;                                    /*定义当前实际串长度*/
+} SString;
+
+void InitString(SString *s,char a[])
+{
+  int i,j;
+  for(j=0;a[j]!='\0';j++);
+  for(i=0;i&lt;j;i++)
+    s-&gt;str[i]=a[i];
+  s-&gt;curlen=j;
+}
+
+void show(SString S)
+{
+  int i;
+  for(i=0;i&lt;S.curlen;i++)
+   printf(&quot;%c&quot;,S.str[i]);
+  printf(&quot;\n字符串实际长度是：%d&quot;,S.curlen);
+}
+
+int StrLength(SString s){
+
+}
+
+int StrEqual(SString s,SString t)
+/*判串s和串t是否相等。相等，返回l；否则返回0*/
+{
+  int i,j;
+  if(s.curlen==t.curlen)                     /*首先判断两个串的长度是否相等*/
+  {
+    for(i=0;i&lt;s.curlen;i++)                  /*长度相等则继续比较对应位置的每个字符是否相等*/
+    {
+      if(s.str[i]==t.str[i])
+        j=1;
+      else
+      {
+        j=0;                                  /*若对应位置字符出现不等，终止比较*/
+        break;
+      }
+    }
+  }
+  else                                       /*长度不相等则判定两个串不相等，返回0*/
+     j=0;
+  return  j;
+}
+
+
+
+SString SubStr(SString s,int pos,int len)
+/*求出串s中从第pos个字符起长度为len的子串*/
+{
+  int i,j=0;
+  SString ch;
+  if((pos&gt;=1 &amp;&amp; pos&lt;=s.curlen) &amp;&amp; (len&gt;=0 &amp;&amp; len&lt;= s.curlen- pos+1))
+  {
+    for(i=pos-1;i&lt;len+pos-1;i++)
+    {                                         /*将s.str[pos-1]～ s.str[1en+pos-2]复制至ch*/
+      ch.str[j++]=s.str[i];
+    }
+    ch.curlen=len;
+    ch.str[ch.curlen]= '\0';
+  }
+  else
+  {
+    printf(&quot;\n error! \n&quot;);                   /*参数不正确时返回错误信息*/
+  }
+  return ch;
+}
+
+int StrIndex (SString s, SString t, int pos) 
+/* t为非空串。若主串s中第pos个字符之后存在与t相等的子串，则返回第一个这样的子串在s中的位置，否则返回-1。*/
+{
+	SString sub;
+	int m,n,i;
+
+  if (pos&gt;0) 
+  {
+     
+     n = s.curlen; 
+     m = t.curlen; 
+     i = pos;
+
+
+     while (i&lt;=n-m+1) 
+     { 
+       sub=SubStr(s,i,m);
+		//printf(&quot;%d&quot;,i);
+		//show(sub);
+
+       if (StrEqual(sub,t) != 0)  
+          ++i;
+       else 
+          return i;                              /* 返回子串在主串中的位置*/
+     } 
+  } 
+  return -1;                                     /* s中不存在与t相等的子串*/
+} 
+
+
+main()
+{
+  SString S,T;
+  char a[MaxLen],b[MaxLen];
+  int wz,x;
+  printf(&quot;\n请输入主串S：&quot;);
+  gets(a); 
+  printf(&quot;\n请输入子串T：&quot;);
+  gets(b);
+  InitString(&amp;S,a);
+  InitString(&amp;T,b);
+  printf(&quot;\n主串S：&quot;);show(S);
+  printf(&quot;\n子串T：&quot;);show(T);
+  printf(&quot;\n请输入开始搜索的位置：&quot;);
+  scanf(&quot;%d&quot;,&amp;wz);   
+  x=StrIndex(S,T,wz);
+  printf(&quot;\n子串在主串的位置是%d\n&quot;,x);
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MAC上安装brew (适用于M1)]]></title>
+        <id>https://blog.saky.site/post/mac-brew/</id>
+        <link href="https://blog.saky.site/post/mac-brew/">
+        </link>
+        <updated>2021-01-15T07:38:19.000Z</updated>
+        <content type="html"><![CDATA[<p>brew 是 Mac 下的一个包管理工具，作用类似于 centos 下的 yum。<br>
+但是，根据brew官网的安装方法会报错<br>
+<code>curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused</code></p>
+<h2 id="安装brew">安装brew</h2>
+<p>运行下面自动脚本（已经全部替换为国内地址）：</p>
+<pre><code>/bin/zsh -c &quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebr
+</code></pre>
+<h2 id="brew基本用法">brew基本用法</h2>
+<h3 id="安装软件">安装软件</h3>
+<p>brew的安装目录在 /usr/local/Cellar，以安装nodejs为例子，只需要执行：</p>
+<pre><code>brew install nodejs
+</code></pre>
+<h3 id="更新软件">更新软件</h3>
+<pre><code>brew upgrade nodejs
+</code></pre>
+<h3 id="卸载软件">卸载软件</h3>
+<pre><code>brew remove nodejs
+</code></pre>
+<h3 id="其他常用命令">其他常用命令：</h3>
+<pre><code>brew list                        # 列出当前安装的软件
+brew search nodejs        # 查询与 nodejs 相关的可用软件
+brew info nodejs            # 查询 nodejs 的安装信息
+</code></pre>
+<p>如果需要安装指定版本的软件，执行 <code>brew search</code> 查看有没有需要的版本<br>
+在 @ 后面指定版本号，例如 brew install thrift@0.9</p>
+<h3 id="brew-services">brew services</h3>
+<p>brew services 是一个非常强大的工具，可以管理软件，进行停止、重启等</p>
+<pre><code>brew install elasticsearch              # 安装 elasticsearch
+brew services start elasticsearch       # 启动 elasticsearch
+brew services stop elasticsearch        # 停止 elasticsearch
+brew services restart elasticsearch     # 重启 elasticsearch
+brew services list                      # 列出当前的状态</code></pre>
 ]]></content>
     </entry>
 </feed>

@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>Shellblock</title>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>VMware安装Centos8系统（命令行模式） | Shellblock</title>
 <link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://blog.saky.site/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 <script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
 
-    <script src="/media/gridea-search/fuse.js"></script>
-    <script src="/media/gridea-search/ejs.min.js"></script>
-    <script src="/media/gridea-search/gridea-search.js"></script>
-    <script src="/media/gridea-search/result-template.ejs" type="text/ejs"></script>
+<link rel="canonical" href="https://blog.saky.site/post/vmware-centos8/" />
 </head>
 <body>
-    <style>
-        .searched-keyword {
-            background-color: yellow;
-        }
-    </style>
-    <div class="main animated">
-        <div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
 <noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
 
 <style>.santa-body{float:left;margin:10.5px 7.5px 0px 0px;font-size:20px;color:#f91047;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;width:1em;height:1em;background-color:currentColor;-webkit-box-shadow:inset 0 -0.25em rgba(0,0,0,0.1);box-shadow:inset 0 -0.25em rgba(0,0,0,0.1);border-radius:50%;-webkit-transform-origin:center bottom;-ms-transform-origin:center bottom;transform-origin:center bottom;-webkit-animation:balance alternate infinite 2s ease-in-out;animation:balance alternate infinite 2s ease-in-out;}.santa-head{font-size:.4em;width:1em;height:1.9em;background-color:white;border-radius:.5em;-webkit-transform:translateY(-1em);-ms-transform:translateY(-1em);transform:translateY(-1em);position:relative;}.santa-head::before{content:'';width:1em;height:.375em;display:block;background-color:#ff9876;position:absolute;left:0;top:.65em;}.santa-ear{background-color:#fc8363;width:.1em;height:.3em;position:absolute;top:.75em;}.santa-ear:nth-of-type(1){border-radius:.05em 0 0 .05em;left:-0.1em;}.santa-ear:nth-of-type(2){border-radius:0 .05em .05em 0;right:-0.1em;}.santa-hat{content:'';width:1em;height:.15em;position:absolute;-webkit-transform:scale(1.1);-ms-transform:scale(1.1);transform:scale(1.1);top:.5em;left:0;background-color:white;}.santa-hat::before{content:'';display:block;width:1em;height:.5em;background:#f91047;border-radius:.5em .5em 0 0;z-index:2;position:absolute;top:-0.5em;}.santa-hat::after{content:'';width:.25em;height:.25em;display:block;background-color:white;border-radius:50%;position:absolute;z-index:0;top:-0.72em;right:0;-webkit-box-shadow:-0.2em .2em 0 .12em rgba(0,0,0,0.2),-0.2em .2em 0 .12em #f91047;box-shadow:-0.2em .2em 0 .12em rgba(0,0,0,0.2),-0.2em .2em 0 .12em #f91047;}.santa-eye{width:.12em;height:.12em;background-color:black;border-radius:50%;position:absolute;top:.76em;left:.2em;}.santa-eye + .santa-eye{left:auto;right:.2em;}.santa-nose{width:.12em;height:.22em;background-color:#f24c4c;border-radius:0 0 .12em .12em;position:absolute;top:.84em;left:50%;-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%);}.santa-mouth{width:.18em;height:.1em;border-bottom-right-radius:5vw;border-bottom-left-radius:5vw;margin-top:.3em;background-color:black;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-animation:hohoho 4s linear forwards infinite;animation:hohoho 4s linear forwards infinite;}@-webkit-keyframes hohoho{0%,10%,20%,40%,100%{width:.18em;height:.1em;border-bottom-right-radius:1vw;border-bottom-left-radius:1vw;}5%,15%,25%,35%{width:.15em;height:.2em;border-radius:50%;}}@keyframes hohoho{0%,10%,20%,40%,100%{width:.18em;height:.1em;border-bottom-right-radius:1vw;border-bottom-left-radius:1vw;}5%,15%,25%,35%{width:.15em;height:.2em;border-radius:50%;}}@-webkit-keyframes balance{from{-webkit-transform:rotate(-4deg);transform:rotate(-4deg);}to{-webkit-transform:rotate(4deg);transform:rotate(4deg);}}@keyframes balance{from{-webkit-transform:rotate(-4deg);transform:rotate(-4deg);}to{-webkit-transform:rotate(4deg);transform:rotate(4deg);}}</style>
@@ -36,14 +27,158 @@
 <style>.deng-box{position:fixed;top:-40px;left:-80px;z-index:9999}.deng-box1{position:fixed;top:-30px;left:-80px;z-index:9999}.deng-box1 .deng{position:relative;width:120px;height:90px;margin:50px;background:#d8000f;background:rgba(216,0,15,0.8);border-radius:50% 50%;-webkit-transform-origin:50% -100px;-webkit-animation:swing 5s infinite ease-in-out;box-shadow:-5px 5px 30px 4px rgba(252,144,61,1)}.deng{position:relative;width:120px;height:90px;margin:50px;background:#d8000f;background:rgba(216,0,15,0.8);border-radius:50% 50%;-webkit-transform-origin:50% -100px;-webkit-animation:swing 3s infinite ease-in-out;box-shadow:-5px 5px 50px 4px rgba(250,108,0,1)}.deng-a{width:100px;height:90px;background:#d8000f;background:rgba(216,0,15,0.1);margin:12px 8px 8px 8px;border-radius:50% 50%;border:2px solid #dc8f03}.deng-b{width:45px;height:90px;background:#d8000f;background:rgba(216,0,15,0.1);margin:-4px 8px 8px 26px;border-radius:50% 50%;border:2px solid #dc8f03}.xian{position:absolute;top:-20px;left:60px;width:2px;height:20px;background:#dc8f03}.shui-a{position:relative;width:5px;height:20px;margin:-5px 0 0 59px;-webkit-animation:swing 4s infinite ease-in-out;-webkit-transform-origin:50% -45px;background:#ffa500;border-radius:0 0 5px 5px}.shui-b{position:absolute;top:14px;left:-2px;width:10px;height:10px;background:#dc8f03;border-radius:50%}.shui-c{position:absolute;top:18px;left:-2px;width:10px;height:35px;background:#ffa500;border-radius:0 0 0 5px}.deng:before{position:absolute;top:-7px;left:29px;height:12px;width:60px;content:" ";display:block;z-index:999;border-radius:5px 5px 0 0;border:solid 1px #dc8f03;background:#ffa500;background:linear-gradient(to right,#dc8f03,#ffa500,#dc8f03,#ffa500,#dc8f03)}.deng:after{position:absolute;bottom:-7px;left:10px;height:12px;width:60px;content:" ";display:block;margin-left:20px;border-radius:0 0 5px 5px;border:solid 1px #dc8f03;background:#ffa500;background:linear-gradient(to right,#dc8f03,#ffa500,#dc8f03,#ffa500,#dc8f03)}.deng-t{font-family:华文行楷,Arial,Lucida Grande,Tahoma,sans-serif;color:#dc8f03;font-weight:bold;line-height:85px;text-align:center}.night .deng-t,.night .deng-box,.night .deng-box1{background:transparent !important}@-moz-keyframes swing{0%{-moz-transform:rotate(-10deg)}50%{-moz-transform:rotate(10deg)}100%{-moz-transform:rotate(-10deg)}}@-webkit-keyframes swing{0%{-webkit-transform:rotate(-10deg)}50%{-webkit-transform:rotate(10deg)}100%{-webkit-transform:rotate(-10deg)}}</style>
 <div class="deng-box"><div class="deng"><div class="xian"></div><div class="deng-a"><div class="deng-b"><div class="deng-t">节</div></div></div><div class="shui shui-a"><div class="shui-c"></div><div class="shui-b"></div></div></div></div> <div class="deng-box1"><div class="deng"><div class="xian"></div><div class="deng-a"><div class="deng-b"><div class="deng-t">春节</div></div></div><div class="shui shui-a"><div class="shui-c"></div><div class="shui-b"></div></div></div></div>
 
-		<div class="main"><div class="main-inner"><div class="content"><div class="round-shape-one"></div>
-        <div id="gridea-search-result">	
-            <p class="searching">搜索中......</p>
-            <p class="no-result" style="display:none">未搜索到相关文章</p>
-        </div>
-		</div></div></div>
-    </div>
-    <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-2021 <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://cdn.jsdelivr.net/gh/shellblock/cdn@master/img/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p></div>
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>VMware安装Centos8系统（命令行模式）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-01-15</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1441字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">6 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://acg.toubiec.cn/random.php?2" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h2 id="centos-8-的新特性">CentOS 8 的新特性</h2>
+<ul>
+<li>DNF 成为了默认的软件包管理器，同时 yum 仍然是可用的</li>
+<li>使用网络管理器（nmcli和nmtui）进行网络配置，移除了网络脚本</li>
+<li>使用 Podman 进行容器管理</li>
+<li>引入了两个新的包仓库：BaseOS 和 AppStream</li>
+<li>使用 Cockpit 作为默认的系统管理工具</li>
+<li>默认使用 Wayland 作为显示服务器</li>
+<li>iptables将被nftables取代</li>
+<li>使用 Linux 内核 4.18</li>
+<li>提供 PHP 7.2、Python 3.6、Ansible 2.8、VIM 8.0 和 Squid 4</li>
+</ul>
+<h3 id="最低安装配置">最低安装配置</h3>
+<ul>
+<li>2 GB RAM</li>
+<li>64 位 x86 架构、2 GHz 或以上的 CPU</li>
+<li>20 GB 硬盘空间</li>
+</ul>
+<h3 id="iso文件-大小约66g">ISO文件 大小约6.6G</h3>
+<p>下载地址：<a href="https://mirrors.aliyun.com/centos/8.0.1905/isos/x86_64/CentOS-8-x86_64-1905-dvd1.iso">阿里云</a> [网易] (http://mirrors.163.com/centos/8.0.1905/isos/x86_64/CentOS-8-x86_64-1905-dvd1.iso)<a href="http://mirror.jdcloud.com/centos/8.0.1905/isos/x86_64/CentOS-8-x86_64-1905-dvd1.iso">京东</a></p>
+<h2 id="一安装环境">一.安装环境</h2>
+<ul>
+<li>软件：VMware 14</li>
+<li>镜像：CentOS 8</li>
+</ul>
+<p>主机环境：Windows10 企业版</p>
+<h2 id="二创建虚拟机">二.创建虚拟机</h2>
+<p>1、打开VMware，选择创建新的虚拟机。<br>
+<img src="https://files.jb51.net/file_images/article/201910/2019101511290114.jpg" alt="" loading="lazy"><br>
+2、选择自定义（高级）（C），下一步。</p>
+<p>3、下一步。</p>
+<p>4、选择稍后安装操作系统，下一步。</p>
+<p>5、选择Linux，版本，下一步。</p>
+<p>6、根据自己的需要设置虚拟机名称和存放位置，下一步。</p>
+<p>7、根据自己电脑的配置设置合适的处理器数量。（安装图形化桌面系统尽量设置大一点）</p>
+<p>8、根据自己电脑的配置设置合适的内存大小。（安装图形化桌面系统尽量设置大一点）</p>
+<p>9、设置虚拟机网络连接模式。（NAT）</p>
+<p>10、选择I/O控制器类型，下一步。</p>
+<p>在这里插入图片描述<br>
+11、选择磁盘类型，下一步。</p>
+<p>在这里插入图片描述<br>
+12、选择创建新虚拟磁盘，下一步。</p>
+<p>在这里插入图片描述<br>
+13、根据自己的需要分配磁盘容量，勾选将虚拟磁盘拆分成多个文件（方便用储存设备拷贝复制虚拟机到其他设备），下一步。</p>
+<p>在这里插入图片描述<br>
+14、指定磁盘文件存储位置，下一步。</p>
+<p>在这里插入图片描述<br>
+15、此处选择自定义硬件，也可以设置处理器与内存。因为计划安装图像化桌面系统（占用系统资源很多），所以分配CPU4核和内存4G。</p>
+<p>在这里插入图片描述<br>
+16、点击完成，虚拟机创建完成。</p>
+<p>三、安装CentOS8<br>
+1、右击刚创建的虚拟机，选择设置。</p>
+<p>在这里插入图片描述<br>
+2、选择CD/DVD，勾选启动时连接，再选择使用ISO映像文件最后选择浏览，找到下载好的系统镜像文件，最后确定。</p>
+<p>在这里插入图片描述<br>
+3、开启此虚拟机。</p>
+<p>在这里插入图片描述<br>
+4、开启虚拟机后会出现以下界面，鼠标点进黑窗口，使用键盘方向键选择第一项，安装CentOS 8，回车，系统开始自动安装。</p>
+<p>在这里插入图片描述<br>
+在这里插入图片描述<br>
+// 第一次安装在这里出现问题， 出现了“ section ％packages does not end with ％end ” “ pane is dead ” 故障 ，然后“ pane is dead ”。点击右侧 解决方案 或往下拉到最下面查看。</p>
+<p>5、选择安装过程中使用的语言，这里选择中文、简体中文（中国），点击继续。</p>
+<p>在这里插入图片描述<br>
+6、点击网络和主机名，设置网络。</p>
+<p>在这里插入图片描述<br>
+7、首先打开网卡开关，然后查看是否能获取到IP地址，更改主机名，点击应用，点击完成。</p>
+<p>在这里插入图片描述<br>
+8、点击日期和时间（T），设置系统日期时间。</p>
+<p>在这里插入图片描述<br>
+9、时区选择亚洲、上海，设置正确的日期和时间，打开网路时间开关（如果宿主主机已经连接互联网，则会自动校准时间），然后点击完成。</p>
+<p>在这里插入图片描述<br>
+10、点击软件选择（S），选择需要安装的软件系统。</p>
+<p>在这里插入图片描述<br>
+11、此处系统选择“服务器”，安装完成后进入命令行系统，然后点击完成。（若选择带GUI的服务器，安装完成后进入图形化桌面系统）。</p>
+<p>在这里插入图片描述<br>
+12、选择安装目的地（此处可进行磁盘划分）。</p>
+<p>在这里插入图片描述<br>
+13、选择我要配置分区，然后点击完成。</p>
+<p>在这里插入图片描述<br>
+14、弹出下图界面，点击加号，选择/boot，给boot分区分200M，最后点击添加挂载点。</p>
+<p>在这里插入图片描述<br>
+15、然后以同样的办法给其他分区分配空间，分配完成后点击完成。</p>
+<p>在这里插入图片描述<br>
+16、弹出更改摘要界面，点击接受更改。</p>
+<p>17、选择开始安装。</p>
+<p>18、点击ROOT密码。</p>
+<p>19、设置完ROOT密码后点击完成。</p>
+<p>20、点击创建用户。</p>
+<p>21、输入用户名密码后点击完成(可以设置此账户为管理员)。</p>
+<p>22、等待系统安装完毕重启系统。</p>
+<p>23、重启后进入命令行模式。</p>
+<p>解决方案<br>
+虚拟主机安装 CentOS 8 出现 “ pane is dead ” 故障解决方案</p>
+<p>故障原因及解决方案：</p>
+<p>虚拟机自动加载两个CD，在设置里把CD/DVD(IDE)autoinst.iso移除</p>
+<p>这样启动时连接，只启用CD/DVD2(IDE)，重启即可顺利进入安装！</p>
+<p>虚拟机自动加载两个镜像<br>
+断开连接左边那个镜像即可</p>
+<p>让后重置即可进入安装界面，如下图所示</p>
+<p>设置虚拟机主机名，方便后续SSH连接<br>
+安装过程在 5-10min</p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#centos-8-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7">CentOS 8 的新特性</a>
+<ul>
+<li><a href="#%E6%9C%80%E4%BD%8E%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE">最低安装配置</a></li>
+<li><a href="#iso%E6%96%87%E4%BB%B6-%E5%A4%A7%E5%B0%8F%E7%BA%A666g">ISO文件 大小约6.6G</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%80%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83">一.安装环境</a></li>
+<li><a href="#%E4%BA%8C%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA">二.创建虚拟机</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-01-15，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-01-15 15:27:23";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-2021 <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://cdn.jsdelivr.net/gh/shellblock/cdn@master/img/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p></div>
 <br />
 <div title="MySSL 安全签章" id="myssl_seal" onclick="window.open('https://myssl.com/seal/detail?domain=blog.saky.site','MySSL安全签章','height=800,width=470,top=0,right=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no')" style="text-align: center">
 		    <img src="https://sealres.myssl.com/seal/img/2x/seal.png?domain=blog.saky.site" alt="MySSL 安全签章" style="width: 100px; height: auto; cursor: pointer">
@@ -54,5 +189,6 @@
 console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
 </script>
 <script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
 </body>
 </html>
