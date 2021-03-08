@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.saky.site</id>
     <title>Shellblock</title>
-    <updated>2021-03-08T13:54:30.983Z</updated>
+    <updated>2021-03-08T15:03:46.864Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.saky.site"/>
     <link rel="self" href="https://blog.saky.site/atom.xml"/>
@@ -10,6 +10,37 @@
     <logo>https://blog.saky.site/images/avatar.png</logo>
     <icon>https://blog.saky.site/favicon.ico</icon>
     <rights>All rights reserved 2021, Shellblock</rights>
+    <entry>
+        <title type="html"><![CDATA[MacBook 安装Photoshop （适用于Apple M1）]]></title>
+        <id>https://blog.saky.site/post/mac_m1_ps/</id>
+        <link href="https://blog.saky.site/post/mac_m1_ps/">
+        </link>
+        <updated>2021-03-08T14:35:33.000Z</updated>
+        <content type="html"><![CDATA[<p>这学期学校开了Photoshop课程，但我把Windows的笔记本换成了MacBook M1版。<br>
+但是M1处理器采用AMR架构，运行罗塞塔的转译的Adobe系列软件会出现不兼容的情况从而无法运行，<br>
+翻遍了互联网，终于找到了可以正常运行在M1上的Photoshop。</p>
+<figure data-type="image" tabindex="1"><img src="https://www.macfuwu.com/data/attachment/forum/202006/23/214207n5mb5ytt6fsssfcm.png" alt="" loading="lazy"></figure>
+<h3 id="基本信息">基本信息</h3>
+<ul>
+<li>软件大小：1.81 GB</li>
+<li>软件版本：v20.0.7  CC 2019</li>
+<li>软件语言：简体中文</li>
+<li>系统要求：macOS 10.12 或更高版本</li>
+</ul>
+<h3 id="安装方法">安装方法</h3>
+<ol>
+<li>打开安装盘dmg 文件</li>
+<li>点击右上角菜单栏网络图标点击关闭WIFI断开网络连接</li>
+<li>打开dmg文件后找到『install』程序点击打开</li>
+<li>点击下一步安装</li>
+<li>安装包中第二个文件 注册机 “Adobe Zii 2019”，双击打开它, 然后注册机会自动破解，完成后，会出现绿色的提示“COMPLETED”<br>
+<img src="https://www.macfuwu.com/data/attachment/forum/202012/08/190311j9a99n9739889318.png" alt="" loading="lazy"></li>
+<li>完成安装</li>
+</ol>
+<h3 id="下载链接">下载链接</h3>
+<p><a href="https://cloud.189.cn/t/fINVFfuMve6j">天翼云</a> 访问码：mba7</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【公告】博客迁移]]></title>
         <id>https://blog.saky.site/post/note_1/</id>
@@ -682,46 +713,6 @@ main()
   printf(&quot;\n子串在主串的位置是%d\n&quot;,x);
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[MAC上安装brew (适用于M1)]]></title>
-        <id>https://blog.saky.site/post/mac-brew/</id>
-        <link href="https://blog.saky.site/post/mac-brew/">
-        </link>
-        <updated>2021-01-15T07:38:19.000Z</updated>
-        <content type="html"><![CDATA[<p>brew 是 Mac 下的一个包管理工具，作用类似于 centos 下的 yum。<br>
-但是，根据brew官网的安装方法会报错<br>
-<code>curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused</code></p>
-<h2 id="安装brew">安装brew</h2>
-<p>运行下面自动脚本（已经全部替换为国内地址）：</p>
-<pre><code>/bin/zsh -c &quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebr
-</code></pre>
-<h2 id="brew基本用法">brew基本用法</h2>
-<h3 id="安装软件">安装软件</h3>
-<p>brew的安装目录在 /usr/local/Cellar，以安装nodejs为例子，只需要执行：</p>
-<pre><code>brew install nodejs
-</code></pre>
-<h3 id="更新软件">更新软件</h3>
-<pre><code>brew upgrade nodejs
-</code></pre>
-<h3 id="卸载软件">卸载软件</h3>
-<pre><code>brew remove nodejs
-</code></pre>
-<h3 id="其他常用命令">其他常用命令：</h3>
-<pre><code>brew list                        # 列出当前安装的软件
-brew search nodejs        # 查询与 nodejs 相关的可用软件
-brew info nodejs            # 查询 nodejs 的安装信息
-</code></pre>
-<p>如果需要安装指定版本的软件，执行 <code>brew search</code> 查看有没有需要的版本<br>
-在 @ 后面指定版本号，例如 brew install thrift@0.9</p>
-<h3 id="brew-services">brew services</h3>
-<p>brew services 是一个非常强大的工具，可以管理软件，进行停止、重启等</p>
-<pre><code>brew install elasticsearch              # 安装 elasticsearch
-brew services start elasticsearch       # 启动 elasticsearch
-brew services stop elasticsearch        # 停止 elasticsearch
-brew services restart elasticsearch     # 重启 elasticsearch
-brew services list                      # 列出当前的状态</code></pre>
 ]]></content>
     </entry>
 </feed>
