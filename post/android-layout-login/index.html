@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>MAC上安装brew (适用于M1) | Shellblock</title>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>【Android】常用界面布局·简单实现一个登录程序 | Shellblock</title>
 <link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://blog.saky.site/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 <script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
 
-<link rel="canonical" href="https://blog.saky.site/post/mac-brew/" />
+<link rel="canonical" href="https://blog.saky.site/post/android-layout-login/" />
 </head>
 <body>
 <div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
@@ -26,69 +26,117 @@
 
 <div class="main"><div class="main-inner"><div class="content">
 <article class="post">
-<h2 class="post_title sm_margin"><a>MAC上安装brew (适用于M1)</a></h2>
+<h2 class="post_title sm_margin"><a>【Android】常用界面布局·简单实现一个登录程序</a></h2>
 <script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
-<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-01-15</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">281字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">2 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-03-30</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/3Y-J-WLOn/" class="tag">Android</a> | 	<a href="https://blog.saky.site/tag/p80tMmYiF8/" class="tag">界面布局</a> | 	<a href="https://blog.saky.site/tag/OgR-IbDzFI/" class="tag">LinearLayout</a> | 	<a href="https://blog.saky.site/tag/FWUyKYcg1u/" class="tag">TableLayout</a> | 	<a href="https://blog.saky.site/tag/aEGaxtNEhZ/" class="tag">FrameLayout</a> | 	<a href="https://blog.saky.site/tag/C7hfehmNsn/" class="tag">RelativeLayout</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">416字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">3 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
 </section>
-
-<img class="featureImg" alt="featureimg" src="https://acg.toubiec.cn/random.php?3" referrerpolicy="no-referrer">
 
 <div style="display:flex">
 <div class="md_block" id="md_block">
 <div class="round-shape-one"></div>
-<p>brew 是 Mac 下的一个包管理工具，作用类似于 centos 下的 yum。<br>
-但是，根据brew官网的安装方法会报错<br>
-<code>curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused</code></p>
-<h2 id="安装brew">安装brew</h2>
-<p>运行下面自动脚本（已经全部替换为国内地址）：</p>
-<pre><code>/bin/zsh -c &quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebr
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/03/30/FIr4TEbxfUJ3H1u.png" alt="登录程序" loading="lazy"></figure>
+<pre><code class="language-Android">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;     //线性布局
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:gravity=&quot;center_vertical|center_horizontal&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;TableLayout        // 表格布局 
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;&gt;
+
+        &lt;TableRow
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;&gt;
+
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:text=&quot;账号&quot; /&gt;
+
+            &lt;EditText
+                android:id=&quot;@+id/etUser&quot;
+                android:layout_width=&quot;200dp&quot; /&gt;
+        &lt;/TableRow&gt;
+
+        &lt;TableRow
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;&gt;
+
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:text=&quot;密码&quot; /&gt;
+
+            &lt;EditText
+                android:id=&quot;@+id/etPass&quot;
+                android:layout_width=&quot;200dp&quot; /&gt;
+        &lt;/TableRow&gt;
+    &lt;/TableLayout&gt;
+
+    &lt;RelativeLayout       // 相对布局 
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;&gt;
+
+        &lt;Button
+            android:id=&quot;@+id/btLogin&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:onClick=&quot;doClock&quot;
+            android:text=&quot;登录&quot; /&gt;
+
+        &lt;Button
+            android:id=&quot;@+id/btExit&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_toRightOf=&quot;@id/btLogin&quot;
+            android:onClick=&quot;doClock&quot;
+            android:text=&quot;退出&quot; /&gt;
+    &lt;/RelativeLayout&gt;
+
+    &lt;FrameLayout    // 帧布局 
+        android:layout_width=&quot;150dp&quot;
+        android:layout_height=&quot;100dp&quot;&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tvSuccess&quot;
+            android:layout_width=&quot;match_content&quot;
+            android:layout_height=&quot;match_content&quot;
+            android:gravity=&quot;center_vertical|center_horizontal&quot;
+            android:text=&quot;登录成功&quot;
+            android:textColor=&quot;#FF00FF00&quot;
+            android:visibility=&quot;invisible&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tvFail&quot;
+            android:layout_width=&quot;match_content&quot;
+            android:layout_height=&quot;match_content&quot;
+            android:gravity=&quot;center_vertical|center_horizontal&quot;
+            android:text=&quot;登录失败&quot;
+            android:textColor=&quot;#FF00FF00&quot;
+            android:visibility=&quot;invisible&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tvGo&quot;
+            android:layout_width=&quot;match_content&quot;
+            android:layout_height=&quot;match_content&quot;
+            android:gravity=&quot;center_vertical|center_horizontal&quot;
+            android:text=&quot;请登录&quot;
+            android:textColor=&quot;#FF00FF00&quot; /&gt;
+    &lt;/FrameLayout&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+
+
 </code></pre>
-<h2 id="brew基本用法">brew基本用法</h2>
-<h3 id="安装软件">安装软件</h3>
-<p>brew的安装目录在 /usr/local/Cellar，以安装nodejs为例子，只需要执行：</p>
-<pre><code>brew install nodejs
-</code></pre>
-<h3 id="更新软件">更新软件</h3>
-<pre><code>brew upgrade nodejs
-</code></pre>
-<h3 id="卸载软件">卸载软件</h3>
-<pre><code>brew remove nodejs
-</code></pre>
-<h3 id="其他常用命令">其他常用命令：</h3>
-<pre><code>brew list                        # 列出当前安装的软件
-brew search nodejs        # 查询与 nodejs 相关的可用软件
-brew info nodejs            # 查询 nodejs 的安装信息
-</code></pre>
-<p>如果需要安装指定版本的软件，执行 <code>brew search</code> 查看有没有需要的版本<br>
-在 @ 后面指定版本号，例如 brew install thrift@0.9</p>
-<h3 id="brew-services">brew services</h3>
-<p>brew services 是一个非常强大的工具，可以管理软件，进行停止、重启等</p>
-<pre><code>brew install elasticsearch              # 安装 elasticsearch
-brew services start elasticsearch       # 启动 elasticsearch
-brew services stop elasticsearch        # 停止 elasticsearch
-brew services restart elasticsearch     # 重启 elasticsearch
-brew services list                      # 列出当前的状态</code></pre>
 
 <span id="footnote"></span>
 <div id = "warn"></div>
 </div>
-<div class="toc-container"><ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85brew">安装brew</a></li>
-<li><a href="#brew%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">brew基本用法</a>
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6">安装软件</a></li>
-<li><a href="#%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6">更新软件</a></li>
-<li><a href="#%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6">卸载软件</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">其他常用命令：</a></li>
-<li><a href="#brew-services">brew services</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="toc-container"></div>
 </div>
 <div id="fullPage"><canvas id="canvas"></canvas></div>
 </article>
@@ -105,7 +153,7 @@ if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop)
 var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
 var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
 var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
-content="本文最后更新于2021-01-15，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-01-15 15:38:19";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+content="本文最后更新于2021-03-30，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-03-30 10:16:00";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
 </script>
 <style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
 <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-2021 <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://cdn.jsdelivr.net/gh/shellblock/cdn@master/img/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p></div>

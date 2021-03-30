@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.saky.site</id>
     <title>Shellblock</title>
-    <updated>2021-03-08T15:03:46.864Z</updated>
+    <updated>2021-03-30T02:31:34.542Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.saky.site"/>
     <link rel="self" href="https://blog.saky.site/atom.xml"/>
@@ -10,6 +10,112 @@
     <logo>https://blog.saky.site/images/avatar.png</logo>
     <icon>https://blog.saky.site/favicon.ico</icon>
     <rights>All rights reserved 2021, Shellblock</rights>
+    <entry>
+        <title type="html"><![CDATA[【Android】常用界面布局·简单实现一个登录程序]]></title>
+        <id>https://blog.saky.site/post/android-layout-login/</id>
+        <link href="https://blog.saky.site/post/android-layout-login/">
+        </link>
+        <updated>2021-03-30T02:16:00.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/03/30/FIr4TEbxfUJ3H1u.png" alt="登录程序" loading="lazy"></figure>
+<pre><code class="language-Android">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;     //线性布局
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:gravity=&quot;center_vertical|center_horizontal&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;TableLayout        // 表格布局 
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;&gt;
+
+        &lt;TableRow
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;&gt;
+
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:text=&quot;账号&quot; /&gt;
+
+            &lt;EditText
+                android:id=&quot;@+id/etUser&quot;
+                android:layout_width=&quot;200dp&quot; /&gt;
+        &lt;/TableRow&gt;
+
+        &lt;TableRow
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;&gt;
+
+            &lt;TextView
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:text=&quot;密码&quot; /&gt;
+
+            &lt;EditText
+                android:id=&quot;@+id/etPass&quot;
+                android:layout_width=&quot;200dp&quot; /&gt;
+        &lt;/TableRow&gt;
+    &lt;/TableLayout&gt;
+
+    &lt;RelativeLayout       // 相对布局 
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;&gt;
+
+        &lt;Button
+            android:id=&quot;@+id/btLogin&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:onClick=&quot;doClock&quot;
+            android:text=&quot;登录&quot; /&gt;
+
+        &lt;Button
+            android:id=&quot;@+id/btExit&quot;
+            android:layout_width=&quot;wrap_content&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_toRightOf=&quot;@id/btLogin&quot;
+            android:onClick=&quot;doClock&quot;
+            android:text=&quot;退出&quot; /&gt;
+    &lt;/RelativeLayout&gt;
+
+    &lt;FrameLayout    // 帧布局 
+        android:layout_width=&quot;150dp&quot;
+        android:layout_height=&quot;100dp&quot;&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tvSuccess&quot;
+            android:layout_width=&quot;match_content&quot;
+            android:layout_height=&quot;match_content&quot;
+            android:gravity=&quot;center_vertical|center_horizontal&quot;
+            android:text=&quot;登录成功&quot;
+            android:textColor=&quot;#FF00FF00&quot;
+            android:visibility=&quot;invisible&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tvFail&quot;
+            android:layout_width=&quot;match_content&quot;
+            android:layout_height=&quot;match_content&quot;
+            android:gravity=&quot;center_vertical|center_horizontal&quot;
+            android:text=&quot;登录失败&quot;
+            android:textColor=&quot;#FF00FF00&quot;
+            android:visibility=&quot;invisible&quot; /&gt;
+
+        &lt;TextView
+            android:id=&quot;@+id/tvGo&quot;
+            android:layout_width=&quot;match_content&quot;
+            android:layout_height=&quot;match_content&quot;
+            android:gravity=&quot;center_vertical|center_horizontal&quot;
+            android:text=&quot;请登录&quot;
+            android:textColor=&quot;#FF00FF00&quot; /&gt;
+    &lt;/FrameLayout&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MacBook 安装Photoshop （适用于Apple M1）]]></title>
         <id>https://blog.saky.site/post/mac_m1_ps/</id>
@@ -579,139 +685,6 @@ for i in range(1,21):
     fenzi = a+b
     fenmu = a
 print('%f'%s)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[【数据结构】串的基本操作]]></title>
-        <id>https://blog.saky.site/post/c_sjjg_cdjbcz/</id>
-        <link href="https://blog.saky.site/post/c_sjjg_cdjbcz/">
-        </link>
-        <updated>2021-01-15T07:41:34.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="利用最小操作子集实现定位函数">利用最小操作子集实现定位函数</h3>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#define  MaxLen  256    
-           
-typedef struct
-{ 
-  char  str[MaxLen];                              /*定义可容纳MaxLen个字符的字符数组*/
-  int  curlen;                                    /*定义当前实际串长度*/
-} SString;
-
-void InitString(SString *s,char a[])
-{
-  int i,j;
-  for(j=0;a[j]!='\0';j++);
-  for(i=0;i&lt;j;i++)
-    s-&gt;str[i]=a[i];
-  s-&gt;curlen=j;
-}
-
-void show(SString S)
-{
-  int i;
-  for(i=0;i&lt;S.curlen;i++)
-   printf(&quot;%c&quot;,S.str[i]);
-  printf(&quot;\n字符串实际长度是：%d&quot;,S.curlen);
-}
-
-int StrLength(SString s){
-
-}
-
-int StrEqual(SString s,SString t)
-/*判串s和串t是否相等。相等，返回l；否则返回0*/
-{
-  int i,j;
-  if(s.curlen==t.curlen)                     /*首先判断两个串的长度是否相等*/
-  {
-    for(i=0;i&lt;s.curlen;i++)                  /*长度相等则继续比较对应位置的每个字符是否相等*/
-    {
-      if(s.str[i]==t.str[i])
-        j=1;
-      else
-      {
-        j=0;                                  /*若对应位置字符出现不等，终止比较*/
-        break;
-      }
-    }
-  }
-  else                                       /*长度不相等则判定两个串不相等，返回0*/
-     j=0;
-  return  j;
-}
-
-
-
-SString SubStr(SString s,int pos,int len)
-/*求出串s中从第pos个字符起长度为len的子串*/
-{
-  int i,j=0;
-  SString ch;
-  if((pos&gt;=1 &amp;&amp; pos&lt;=s.curlen) &amp;&amp; (len&gt;=0 &amp;&amp; len&lt;= s.curlen- pos+1))
-  {
-    for(i=pos-1;i&lt;len+pos-1;i++)
-    {                                         /*将s.str[pos-1]～ s.str[1en+pos-2]复制至ch*/
-      ch.str[j++]=s.str[i];
-    }
-    ch.curlen=len;
-    ch.str[ch.curlen]= '\0';
-  }
-  else
-  {
-    printf(&quot;\n error! \n&quot;);                   /*参数不正确时返回错误信息*/
-  }
-  return ch;
-}
-
-int StrIndex (SString s, SString t, int pos) 
-/* t为非空串。若主串s中第pos个字符之后存在与t相等的子串，则返回第一个这样的子串在s中的位置，否则返回-1。*/
-{
-	SString sub;
-	int m,n,i;
-
-  if (pos&gt;0) 
-  {
-     
-     n = s.curlen; 
-     m = t.curlen; 
-     i = pos;
-
-
-     while (i&lt;=n-m+1) 
-     { 
-       sub=SubStr(s,i,m);
-		//printf(&quot;%d&quot;,i);
-		//show(sub);
-
-       if (StrEqual(sub,t) != 0)  
-          ++i;
-       else 
-          return i;                              /* 返回子串在主串中的位置*/
-     } 
-  } 
-  return -1;                                     /* s中不存在与t相等的子串*/
-} 
-
-
-main()
-{
-  SString S,T;
-  char a[MaxLen],b[MaxLen];
-  int wz,x;
-  printf(&quot;\n请输入主串S：&quot;);
-  gets(a); 
-  printf(&quot;\n请输入子串T：&quot;);
-  gets(b);
-  InitString(&amp;S,a);
-  InitString(&amp;T,b);
-  printf(&quot;\n主串S：&quot;);show(S);
-  printf(&quot;\n子串T：&quot;);show(T);
-  printf(&quot;\n请输入开始搜索的位置：&quot;);
-  scanf(&quot;%d&quot;,&amp;wz);   
-  x=StrIndex(S,T,wz);
-  printf(&quot;\n子串在主串的位置是%d\n&quot;,x);
-}
 </code></pre>
 ]]></content>
     </entry>
