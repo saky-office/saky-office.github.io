@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.saky.site</id>
     <title>Shellblock</title>
-    <updated>2021-03-30T02:33:13.873Z</updated>
+    <updated>2021-03-31T05:51:16.634Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.saky.site"/>
     <link rel="self" href="https://blog.saky.site/atom.xml"/>
@@ -10,6 +10,97 @@
     <logo>https://blog.saky.site/images/avatar.png</logo>
     <icon>https://blog.saky.site/favicon.ico</icon>
     <rights>All rights reserved 2021, Shellblock</rights>
+    <entry>
+        <title type="html"><![CDATA[【Python】变换ndarry的状态]]></title>
+        <id>https://blog.saky.site/post/python-ndarry-change/</id>
+        <link href="https://blog.saky.site/post/python-ndarry-change/">
+        </link>
+        <updated>2021-03-31T05:47:30.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-设置ndarry形状">1. 设置ndarry形状</h2>
+<h3 id="1-reshape">(1) reshape</h3>
+<pre><code class="language-Python">import numpy as np
+arr = np.arange(12)  #创建一维ndarray
+print(arr)
+</code></pre>
+<pre><code class="language-Python">arr1 = arr.reshape(3,4)  #设置ndarry的维度
+print(arr1)
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/03/31/eSjHLmvMzi8TVAB.png" alt="reshape" loading="lazy"></figure>
+<h3 id="2-resize">(2) resize</h3>
+<pre><code class="language-Python">arr.resize(2,6)
+print(arr)
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2021/03/31/Q2I6X5kLYwZRCjU.png" alt="resize" loading="lazy"></figure>
+<h3 id="3-shape">(3) shape</h3>
+<pre><code class="language-Python">arr.shape = (3,4)
+print(arr)
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2021/03/31/SdCu3pJmEVkr864.png" alt="shape" loading="lazy"></figure>
+<h2 id="2-展平ndarry">2. 展平ndarry</h2>
+<h3 id="1-ravel">(1) ravel</h3>
+<pre><code class="language-Python">arr=np.arange(12).reshape(3,4)   #创建二维ndarray
+print(arr)
+
+print(arr.ravel())
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2021/03/31/9ytMqvND1nhsjWw.png" alt="ravel" loading="lazy"></figure>
+<h3 id="2-flatten">(2) flatten</h3>
+<pre><code class="language-Python">print(arr.flatten())        #横向展开
+
+print(arr.flatten('F'))     #纵向展开
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2021/03/31/1BFsxfcghG7i8De.png" alt="flatten" loading="lazy"></figure>
+<h2 id="3-组合ndarry">3. 组合ndarry</h2>
+<h3 id="1-hstack">(1) hstack</h3>
+<pre><code class="language-Python">arr1 = np.arange(12).reshape(3,4)
+print(arr1)
+
+arr2 = arr1*3
+print(arr2)
+
+print(np.hstack((arr1,arr2)))   #横向组合
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2021/03/31/qjfbZMoNPHxwgYW.png" alt="hstack" loading="lazy"></figure>
+<h3 id="2-vstack">(2) vstack</h3>
+<pre><code class="language-Python">print(np.vstack((arr1,arr2)))   #纵向组合
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://i.loli.net/2021/03/31/GJkK1ptINWU9ZLf.png" alt="vstack" loading="lazy"></figure>
+<h3 id="3-concatenate">(3) concatenate</h3>
+<p>concatenate函数既能实现横向组合，又能巩固实现纵向组合。</p>
+<p>当参数<mark>axis=1</mark>时为<mark>横向</mark>组合，当参数<mark>axis=0</mark>时为<mark>纵向</mark>组合。</p>
+<pre><code class="language-Python">print(np.concatenate((arr1,arr2),axis=1))   #横向组合
+print(np.concatenate((arr1,arr2),axis=0))   #纵向组合
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://i.loli.net/2021/03/31/XiaIl43epWbc7dP.png" alt="concatenate" loading="lazy"></figure>
+<h3 id="4-dstack-深度组合">(4) dstack 深度组合</h3>
+<p>即对一系列ndarry沿着纵轴方向进行层叠组合，类型于Python的内置函数zip</p>
+<pre><code class="language-Python">print(np.dstack((arr1,arr2)))
+
+arr3 = []
+for x,y in list(zip(arr1,arr2)):
+    arr3.append(list(zip(x,y)))
+arr3 = np.array(arr3)
+print(arr3 == np.dstack((arr1,arr2)))
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://i.loli.net/2021/03/31/N3ohHMS9z1CvPZn.png" alt="dstack 深度组合" loading="lazy"></figure>
+<h2 id="4-分割ndarray">4. 分割ndarray</h2>
+<h3 id="1-hsplit">(1) hsplit</h3>
+<p>横向分割</p>
+<h3 id="2-vsplit">(2) vsplit</h3>
+<p>纵向分割</p>
+<h3 id="3-split">(3) split</h3>
+<p>split函数也可以实现横合和纵向分割。</p>
+<p>当参数<mark>axis=1</mark>时为<mark>横向</mark>分割，当参数<mark>axis=0</mark>时为<mark>纵向</mark>分割。</p>
+<h3 id="4-dsplit-深度分割">(4) dsplit 深度分割</h3>
+<p>使用dsplit函数可以实现ndarry的深度分割，但被分割的ndarry必须是三维ndarry，且分割的数目必须为shape属性中下标为2的值的公约数。</p>
+<pre><code class="language-Python">arr = np.arange(12).reshape(2,2,3)
+print(arr)
+
+print(np.dsplit(arr,3))
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://i.loli.net/2021/03/31/jG4Yans5f79bCUl.png" alt="dsplit 深度分割" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【Android】常用界面布局·简单实现一个登录程序]]></title>
         <id>https://blog.saky.site/post/android-layout-login/</id>
@@ -657,33 +748,6 @@ mysqli_close ($mysqli);
 ?&gt;
 </code></pre>
 <p>mysqli_fetch_object</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[【Python】控制结构 习题]]></title>
-        <id>https://blog.saky.site/post/python-learn1/</id>
-        <link href="https://blog.saky.site/post/python-learn1/">
-        </link>
-        <updated>2021-01-15T07:43:05.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="有一分数序列213253851382113求出这个数列的前20项之和">有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前20项之和。</h3>
-<p><strong>要求：使用循环，for和while都可以。</strong></p>
-<p>程序分析：抓住分子和分母的变化规律</p>
-<pre><code class="language-python">
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
-
-fenzi = 2
-fenmu = 1
-s = 0
-
-for i in range(1,21):
-    a = fenzi
-    b = fenmu
-    s += (a/b)
-    fenzi = a+b
-    fenmu = a
-print('%f'%s)
-</code></pre>
 ]]></content>
     </entry>
 </feed>
