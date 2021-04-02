@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.saky.site</id>
     <title>Shellblock</title>
-    <updated>2021-03-31T05:53:10.049Z</updated>
+    <updated>2021-04-02T07:21:52.417Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.saky.site"/>
     <link rel="self" href="https://blog.saky.site/atom.xml"/>
@@ -10,6 +10,174 @@
     <logo>https://blog.saky.site/images/avatar.png</logo>
     <icon>https://blog.saky.site/favicon.ico</icon>
     <rights>All rights reserved 2021, Shellblock</rights>
+    <entry>
+        <title type="html"><![CDATA[【Python】排序与搜索]]></title>
+        <id>https://blog.saky.site/post/ndarry-sort-search/</id>
+        <link href="https://blog.saky.site/post/ndarry-sort-search/">
+        </link>
+        <updated>2021-04-02T07:13:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-排序">1. 排序</h2>
+<h3 id="1-sort">(1) sort</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.sort(a, axis=-1, kind='quicksort', order=None)
+</code></pre>
+<p>sort函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td>接收array，表示想要排序的ndarray，无默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">axis</td>
+<td>接收int，表示指定的轴，axis=1时指定横轴，axis=0时指定纵轴。默认值为-1，即ndarry被横向展开排序</td>
+</tr>
+<tr>
+<td style="text-align:center">kind</td>
+<td>接收str，表示排列算式，可取quicksort、mergesort、heapsort、stable。默认为quicksort</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Python">import numpy as np
+np.random.seed(42)              #设置随机种子
+arr = np.random.randint(1,10,size=12).reshape(4,3)
+print(arr)
+
+print(np.sort(arr))             #默认排序
+
+print(np.sort(arr,axis=None))   #展平排序
+
+print(np.sort(arr,axis=1))      #横轴排序
+
+print(np.sort(arr,axis=0))      #纵轴排序
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/04/02/apQAKzR1eXf9EBk.png" alt="sort" loading="lazy"></figure>
+<h3 id="2-argsort-lexsort">(2) argsort / lexsort</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.argsort(a, axis=-1, kind='quicksort', order=None)
+</code></pre>
+<p>rgsort函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td>接收array，表示想要排序的ndarray，无默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">axis</td>
+<td>接收int，表示指定的轴，axis=1时指定横轴，axis=0时指定纵轴。默认值为-1，即ndarry被横向展开排序</td>
+</tr>
+<tr>
+<td style="text-align:center">kind</td>
+<td>接收string，表示排列算式，可取quicksort、mergesort、heapsort、stable。默认为quicksort</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Python">import numpy as np
+np.random.seed(42)                  #设置随机种子
+arr = np.random.randint(1,10,size=12).reshape(4,3)
+print(np.argsort(arr,axis=1))       #横轴排序
+
+print(np.argsort(arr,axis=None))    #展平排序
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2021/04/02/hWsRgcy2r9YwqoH.png" alt="Sngsort / lexsort" loading="lazy"></figure>
+<h2 id="2-搜索">2. 搜索</h2>
+<h3 id="1-argmax-argmin">(1) argmax / argmin</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.argmax(a, axis=None, out=None)
+numpy.argmin(a, axis=None, out=None)
+</code></pre>
+<p>argmax / argmin函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td>接收array，表示想要排序的ndarray，无默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">axis</td>
+<td>接收int，表示指定的轴，axis=1时指定横轴，axis=0时指定纵轴</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Python">arr = np.arange(6,12).reshape(2,3)
+print(np.argmax(arr))
+print(np.argmin(arr))
+
+print(np.argmax(arr,axis=0))
+print(np.argmin(arr,axis=1))
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2021/04/02/8XKJuLB7lA2xdSg.png" alt="argmax / argmin" loading="lazy"></figure>
+<h3 id="2-where">(2) where</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.where(condition, x, y)
+</code></pre>
+<p>where函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">condition</td>
+<td>接收array、bool，表示搜索条件，无默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">x</td>
+<td>接收array，表示搜索对象，无默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td>接收array，表示不满足条件的值的替换值，无默认值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-extract">(3) extract</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.extract(condition, arr)
+</code></pre>
+<p>extract函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">condition</td>
+<td>接收array，表示搜索条件，无默认值</td>
+</tr>
+<tr>
+<td style="text-align:center">arr</td>
+<td>接收array，表示满足条件的元素，无默认值</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[【Python】变换ndarry的状态]]></title>
         <id>https://blog.saky.site/post/python-ndarry-change/</id>
@@ -698,34 +866,6 @@ https://k-on.life/</p>
         <title type="html"><![CDATA[简单实现PHP读取数据库]]></title>
         <id>https://blog.saky.site/post/php_sql/</id>
         <link href="https://blog.saky.site/post/php_sql/">
-        </link>
-        <updated>2021-01-15T07:44:17.000Z</updated>
-        <content type="html"><![CDATA[<pre><code class="language-php">&lt;?php
-$server = &quot;localhost&quot;;
-$username = &quot;root&quot;;
-$password = &quot;123456&quot;;
-$dbname = &quot;db&quot;;
-$mysqli = new mysqli ($server, $username, $password, $dbname);
-
-$result = mysqli_query ($mysqli, &quot;select * from account&quot;);
-echo &quot;&lt;table border = '1px'&gt;&quot;;
-echo &quot;&lt;caption&gt;&lt;b&gt;账号列表&lt;/b&gt;&lt;/caption&gt;&quot;;
-echo &quot;&lt;tr&gt;&lt;th&gt;用户名&lt;/th&gt;&lt;th&gt;密码&lt;/th&gt;&lt;th&gt;邮箱&lt;/th&gt;&lt;/tr&gt;&quot;;
-while ($r = mysqli_fetch_object ($result)){
-	echo &quot;&lt;tr&gt;&lt;td&gt;&quot; . $r-&gt;username . &quot;&lt;/td&gt;&lt;td&gt;&quot; . $r-&gt;password . &quot;&lt;/td&gt;&lt;td&gt;&quot; . $r-&gt;email .&quot;&lt;/td&gt;&lt;/tr&gt;&quot;;
-}
-echo &quot;&lt;/table&gt;&quot;;
-mysqli_fetch_object ($result);
-mysqli_close ($mysqli);
-?&gt;
-</code></pre>
-<p>mysqli_fetch_object</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[简单实现PHP读取数据库]]></title>
-        <id>https://blog.saky.site/post/php_sql_r/</id>
-        <link href="https://blog.saky.site/post/php_sql_r/">
         </link>
         <updated>2021-01-15T07:44:17.000Z</updated>
         <content type="html"><![CDATA[<pre><code class="language-php">&lt;?php

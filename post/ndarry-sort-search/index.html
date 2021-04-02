@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>工具 | Shellblock</title>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>【Python】排序与搜索 | Shellblock</title>
 <link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://blog.saky.site/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 <script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
 
-<link rel="canonical" href="https://blog.saky.site/post/tools/" />
+<link rel="canonical" href="https://blog.saky.site/post/ndarry-sort-search/" />
 </head>
 <body>
 <div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
@@ -26,66 +26,171 @@
 
 <div class="main"><div class="main-inner"><div class="content">
 <article class="post">
-<h2 class="post_title sm_margin"><a>工具</a></h2>
+<h2 class="post_title sm_margin"><a>【Python】排序与搜索</a></h2>
 <script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
-<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-01-15</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">141字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">1 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-04-02</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/xLXyGaSoZ/" class="tag">ndarry</a> | 	<a href="https://blog.saky.site/tag/ruzWW3HYrI/" class="tag">Python</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">582字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">3 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
 </section>
 
 <div style="display:flex">
 <div class="md_block" id="md_block">
 <div class="round-shape-one"></div>
-<p>以下工具网站均为本博客旗下域名，请放心食用</p>
+<h2 id="1-排序">1. 排序</h2>
+<h3 id="1-sort">(1) sort</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.sort(a, axis=-1, kind='quicksort', order=None)
+</code></pre>
+<p>sort函数的常用参数及说明</p>
 <table>
 <thead>
 <tr>
-<th>工具</th>
-<th>链接</th>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>短链接</td>
-<td>https://moelove.ga/</td>
+<td style="text-align:center">a</td>
+<td>接收array，表示想要排序的ndarray，无默认值</td>
 </tr>
 <tr>
-<td>网易云音乐打卡</td>
-<td>https://wyy.saky.tk/</td>
+<td style="text-align:center">axis</td>
+<td>接收int，表示指定的轴，axis=1时指定横轴，axis=0时指定纵轴。默认值为-1，即ndarry被横向展开排序</td>
 </tr>
 <tr>
-<td>必应随机壁纸</td>
-<td>https://bing.moelove.cf/</td>
+<td style="text-align:center">kind</td>
+<td>接收str，表示排列算式，可取quicksort、mergesort、heapsort、stable。默认为quicksort</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Python">import numpy as np
+np.random.seed(42)              #设置随机种子
+arr = np.random.randint(1,10,size=12).reshape(4,3)
+print(arr)
+
+print(np.sort(arr))             #默认排序
+
+print(np.sort(arr,axis=None))   #展平排序
+
+print(np.sort(arr,axis=1))      #横轴排序
+
+print(np.sort(arr,axis=0))      #纵轴排序
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2021/04/02/apQAKzR1eXf9EBk.png" alt="sort" loading="lazy"></figure>
+<h3 id="2-argsort-lexsort">(2) argsort / lexsort</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.argsort(a, axis=-1, kind='quicksort', order=None)
+</code></pre>
+<p>rgsort函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td>接收array，表示想要排序的ndarray，无默认值</td>
 </tr>
 <tr>
-<td>随机二次元壁纸</td>
-<td>https://api.mikumiku.cc/acgimg/</td>
+<td style="text-align:center">axis</td>
+<td>接收int，表示指定的轴，axis=1时指定横轴，axis=0时指定纵轴。默认值为-1，即ndarry被横向展开排序</td>
 </tr>
 <tr>
-<td>在线PhotoShop</td>
-<td>https://www.moelove.gq/ps/</td>
+<td style="text-align:center">kind</td>
+<td>接收string，表示排列算式，可取quicksort、mergesort、heapsort、stable。默认为quicksort</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Python">import numpy as np
+np.random.seed(42)                  #设置随机种子
+arr = np.random.randint(1,10,size=12).reshape(4,3)
+print(np.argsort(arr,axis=1))       #横轴排序
+
+print(np.argsort(arr,axis=None))    #展平排序
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2021/04/02/hWsRgcy2r9YwqoH.png" alt="Sngsort / lexsort" loading="lazy"></figure>
+<h2 id="2-搜索">2. 搜索</h2>
+<h3 id="1-argmax-argmin">(1) argmax / argmin</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.argmax(a, axis=None, out=None)
+numpy.argmin(a, axis=None, out=None)
+</code></pre>
+<p>argmax / argmin函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a</td>
+<td>接收array，表示想要排序的ndarray，无默认值</td>
 </tr>
 <tr>
-<td>在线PhotoShop备用</td>
-<td>https://api.mikumiku.cc/ps/</td>
+<td style="text-align:center">axis</td>
+<td>接收int，表示指定的轴，axis=1时指定横轴，axis=0时指定纵轴</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-Python">arr = np.arange(6,12).reshape(2,3)
+print(np.argmax(arr))
+print(np.argmin(arr))
+
+print(np.argmax(arr,axis=0))
+print(np.argmin(arr,axis=1))
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2021/04/02/8XKJuLB7lA2xdSg.png" alt="argmax / argmin" loading="lazy"></figure>
+<h3 id="2-where">(2) where</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.where(condition, x, y)
+</code></pre>
+<p>where函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">condition</td>
+<td>接收array、bool，表示搜索条件，无默认值</td>
 </tr>
 <tr>
-<td>MoeloveTV</td>
-<td>https://www.moelove.gq/</td>
+<td style="text-align:center">x</td>
+<td>接收array，表示搜索对象，无默认值</td>
 </tr>
 <tr>
-<td>网课专用打包集成脚步浏览器</td>
-<td>https://www.moelove.gq/wk/</td>
+<td style="text-align:center">y</td>
+<td>接收array，表示不满足条件的值的替换值，无默认值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-extract">(3) extract</h3>
+<p>基本语法格式：</p>
+<pre><code>numpy.extract(condition, arr)
+</code></pre>
+<p>extract函数的常用参数及说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">condition</td>
+<td>接收array，表示搜索条件，无默认值</td>
 </tr>
 <tr>
-<td>萌爱社区</td>
-<td>https://ovvo.club/</td>
-</tr>
-<tr>
-<td>白嫖の神发布站</td>
-<td>http://www.saky.ga/</td>
-</tr>
-<tr>
-<td>JavaScript从入门到精通</td>
-<td>https://note.mikumiku.cc/javascript/ (备用：http://note.saky.tk/javascript/ )</td>
+<td style="text-align:center">arr</td>
+<td>接收array，表示满足条件的元素，无默认值</td>
 </tr>
 </tbody>
 </table>
@@ -93,7 +198,26 @@
 <span id="footnote"></span>
 <div id = "warn"></div>
 </div>
-<div class="toc-container"></div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E6%8E%92%E5%BA%8F">1. 排序</a>
+<ul>
+<li><a href="#1-sort">(1) sort</a></li>
+<li><a href="#2-argsort-lexsort">(2) argsort / lexsort</a></li>
+</ul>
+</li>
+<li><a href="#2-%E6%90%9C%E7%B4%A2">2. 搜索</a>
+<ul>
+<li><a href="#1-argmax-argmin">(1) argmax / argmin</a></li>
+<li><a href="#2-where">(2) where</a></li>
+<li><a href="#3-extract">(3) extract</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="fullPage"><canvas id="canvas"></canvas></div>
 </article>
@@ -110,7 +234,7 @@ if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop)
 var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
 var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
 var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
-content="本文最后更新于2021-01-15，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-01-15 14:58:01";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+content="本文最后更新于2021-04-02，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-04-02 15:13:56";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
 </script>
 <style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
 <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-2021 <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://cdn.jsdelivr.net/gh/shellblock/cdn@master/img/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p></div>
