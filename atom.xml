@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.saky.site</id>
     <title>Shellblock</title>
-    <updated>2021-04-07T06:25:08.023Z</updated>
+    <updated>2021-04-07T06:34:11.174Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.saky.site"/>
     <link rel="self" href="https://blog.saky.site/atom.xml"/>
@@ -16,7 +16,38 @@
         <link href="https://blog.saky.site/post/python-numpy-ufunc/">
         </link>
         <updated>2021-04-07T06:12:42.000Z</updated>
-        <content type="html"><![CDATA[<p>ufunc是universal function的缩写，这些函数能够作用于narray对象的每一个元素上，而不是针对narray对象操作，numpy提供了大量的ufunc的函数。这些函数在对narray进行运算的速度比使用循环或者列表推导式要快很多，但请注意，在对单个数值进行运算时，python提供的运算要比numpy效率高。</p>
+        <content type="html"><![CDATA[<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6">广播机制</a>
+<ul>
+<li><a href="#%E4%B8%80%E7%BB%B4ndarray%E5%B9%BF%E6%92%AD">一维ndarray广播</a></li>
+<li><a href="#%E4%BA%8C%E7%BB%B4ndarray%E5%B9%BF%E6%92%AD">二维ndarray广播</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8ufunc%E8%BF%90%E7%AE%97">常用ufunc运算</a>
+<ul>
+<li><a href="#%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97">四则运算</a></li>
+<li><a href="#%E6%AF%94%E8%BE%83%E5%92%8C%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97">比较和布尔运算</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89ufunc%E5%87%BD%E6%95%B0">自定义ufunc函数</a>
+<ul>
+<li><a href="#1%E9%80%9A%E8%BF%87%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E8%AE%A1%E7%AE%97">1.通过列表推导计算</a></li>
+<li><a href="#2-fromnpyfunc-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97">2. fromnpyfunc( )函数计算</a></li>
+<li><a href="#3-vectorize-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97">3. vectorize( )函数计算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<p>ufunc是universal function的缩写，这些函数能够作用于narray对象的每一个元素上，而不是针对narray对象操作，numpy提供了大量的ufunc的函数。这些函数在对narray进行运算的速度比使用循环或者列表推导式要快很多，但请注意，在对单个数值进行运算时，python提供的运算要比numpy效率高。</p>
 <h3 id="广播机制">广播机制</h3>
 <p>广播（Broadcasting）是指不同形状的数组之间执行算术运算的方式，需要遵循4个原则：</p>
 <ol>
@@ -25,7 +56,7 @@
 <li>如果各个输入数组的对应轴的长度相同或者其长度为1时，这样的数组之间能够用来计算，否则会出错；</li>
 <li>当输入数组的某个轴的长度为1时，沿着此轴运算时，使用此轴上的第一组值。</li>
 </ol>
-<p>**注意：**当使用 ufunc 函数进行数组计算时, ufunc 函数会对两个数组的对应元素进行计算。进行这种计算的前提是两个数组的 <code>shape</code> 一致。若两个数组的 <code>shape</code> 不一致，则 NumPy 会实行广播机制。</p>
+<p><strong>注意</strong>: 当使用 ufunc 函数进行数组计算时, ufunc 函数会对两个数组的对应元素进行计算。进行这种计算的前提是两个数组的 <code>shape</code> 一致。若两个数组的 <code>shape</code> 不一致，则 NumPy 会实行广播机制。</p>
 <h4 id="一维ndarray广播">一维ndarray广播</h4>
 <pre><code class="language-Python">import numpy as np
 arr1 = np.array([[0,0,0],[1,1,1],[2,2,2],[3,3,3]])
@@ -36,20 +67,20 @@ print(arr2)
 
 print(arr1 + arr2)
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://upload-images.jianshu.io/upload_images/18328086-3c3bb9914e6e96ec.png" alt="一维ndarray广播" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://upload-images.jianshu.io/upload_images/18328086-950d1ff067272b16.gif" alt="计算两个ndarry的和的过程" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/img_convert/15d19cdd8f8016947fb683ad3393c8fc.png" alt="一维ndarray广播" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/img_convert/865525fdc4f37635270168472f249926.gif" alt="计算两个ndarry的和的过程" loading="lazy"></figure>
 <h4 id="二维ndarray广播">二维ndarray广播</h4>
 <pre><code class="language-Python">arr3 = np.arange(1,5).reshape(4,1)
 print(arr3)
 
 print(arr1+arr3)
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://upload-images.jianshu.io/upload_images/18328086-87430c1cd37cadf1.png" alt="二维ndarray广播" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/img_convert/22cad798549c9b4912923c35329293a9.png" alt="二维ndarray广播" loading="lazy"></figure>
 <p><strong>注意：</strong> 如果一维数组元素的数量与二维数组列的数量匹配，则将二维数组乘以一维数组将导致广播。<br>
 A two dimensional array multiplied by a one dimensional array results in broadcasting if number of 1-d array elements matches the number of 2-d array columns.</p>
-<figure data-type="image" tabindex="4"><img src="https://upload-images.jianshu.io/upload_images/18328086-a867cd5d88de663b.gif" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/img_convert/c17b4dfea5e486b5e89d849421044656.gif" alt="" loading="lazy"></figure>
 <h3 id="常用ufunc运算">常用ufunc运算</h3>
-<p>**注意：**对于计算单个元素，则建议采用Math库里对应的函数，np.sin( )对应math.sin( )，因为对于np.sin( )为了实现数组计算，底层做了很多复杂的处理，因此对于单个元素，math库里的函数计算速度快得多；而对于数组元素，则采用numpy库里的函数计算。<br>
+<p><strong>注意</strong>: 对于计算单个元素，则建议采用Math库里对应的函数，np.sin( )对应math.sin( )，因为对于np.sin( )为了实现数组计算，底层做了很多复杂的处理，因此对于单个元素，math库里的函数计算速度快得多；而对于数组元素，则采用numpy库里的函数计算。<br>
 在读取计算结果时，通过下标获取数组元素的类型为Numpy中定义的类型，将其转换为python的标准类型需耗时间。针对此问题，可以采用数组提供的item( )方法，用来获取数组中单个元素，并直接返回标准的python数据类型，如：</p>
 <pre><code>&gt;&gt;&gt; a = np.arange(6.0).reshape(2,3)
 &gt;&gt;&gt; a.item(1,2)  #与a[1,2]类似
@@ -60,7 +91,7 @@ A two dimensional array multiplied by a one dimensional array results in broadca
 &lt;class 'numpy.float64'&gt;
 </code></pre>
 <h4 id="四则运算">四则运算</h4>
-<p><img src="https://upload-images.jianshu.io/upload_images/18328086-9e27e0b0f58b8964.png" alt="四则运算" loading="lazy"><br>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/b5c3e543d96f11bae6f5645ba33800c8.png" alt="四则运算" loading="lazy"><br>
 numpy提供的四则运算ufunc能够大大的提高计算效率，但如果运算式复杂，且参与运算的narray过大，会产生大量的中间结果，从而降低计算效率。例如：计算x=a*b+c时，实际上会按照如下方式计算：</p>
 <pre><code>t = a*b
 x = t+c
@@ -78,7 +109,7 @@ array([False,  True, False], dtype=bool)
 &gt;&gt;&gt; np.array([1,2,3])&lt;np.array([3,2,1])
 array([ True, False, False], dtype=bool)
 </code></pre>
-<figure data-type="image" tabindex="5"><img src="https://upload-images.jianshu.io/upload_images/18328086-c393973f208a6513.png" alt="比较和布尔运算" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/img_convert/c33219abfc6c5b8bec179aca42a3fcfc.png" alt="比较和布尔运算" loading="lazy"></figure>
 <p><strong>注意：</strong><br>
 对两个bool数组进行逻辑运算时，将发生ValueError异常，因为bool值也是True和False，numpy无法确定运算目的，可以使用numpy.any()和numpy.all()函数，他们的使用方法和python的any()、all()函数用法相同。以bitwise_开头的函数时用于位运算，如(bitwise_and、bitwise_or)等，也可以使用<code>&amp; | ~ ^</code>来进行运算。<br>
 除了numpy提供的内置ufunc函数，用户也可以编写自定义的ufunc函数，方式是：</p>
@@ -100,7 +131,7 @@ ret = u_func(narray_object,param1,param2..)
 </code></pre>
 <h4 id="自定义ufunc函数">自定义ufunc函数</h4>
 <p>通过Numpy提供的标准ufunc函数可以满足大多要求，但有些特殊情况需要自定义函数来实现。这时，可以采用python来实现，然后使用frompyfunc( )函数将一个计算单个元素的函数转换为ufunc函数。例如，用一个分段函数来描述三角波，它的样子如图所示：<br>
-<img src="https://upload-images.jianshu.io/upload_images/18328086-3348b4c63d8d9d54.jpeg" alt="三角波" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/img_convert/762944ad58dbe0f6a8ceddbd1b5c391e.png" alt="三角波" loading="lazy"><br>
 Python函数定义如下：</p>
 <pre><code>ef triangle_wave(x,c,c0,hc):
     x = x - int(x)   #周期为1，取小数部分计算
@@ -136,6 +167,8 @@ y3 = triangle_wave_vec(x,0.6,0.4,1.0)
 <li><a href="https://numpy.org/devdocs/user/theory.broadcasting.html">https://numpy.org/devdocs/user/theory.broadcasting.html</a></li>
 <li><a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">https://numpy.org/doc/stable/user/basics.broadcasting.html</a></li>
 <li><a href="https://www.numpy.org.cn/user/basics/broadcasting.html">https://www.numpy.org.cn/user/basics/broadcasting.html</a></li>
+<li><a href="https://blog.csdn.net/lanchunhui/article/details/50158975">https://blog.csdn.net/lanchunhui/article/details/50158975</a></li>
+<li><a href="https://blog.csdn.net/kezunhai/article/details/46127845">https://blog.csdn.net/kezunhai/article/details/46127845</a></li>
 </ul>
 ]]></content>
     </entry>
