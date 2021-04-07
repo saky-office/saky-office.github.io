@@ -20,7 +20,7 @@
 <div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
 <div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
 <div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友联</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
-<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1617776908103" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1617777852367" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
 </div></div>
 <script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
 
@@ -28,43 +28,12 @@
 <article class="post">
 <h2 class="post_title sm_margin"><a>【Python】NumPy ufunc</a></h2>
 <script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
-<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-04-07</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/4k7HTYxmQ/" class="tag">numpy</a> | 	<a href="https://blog.saky.site/tag/zBxoY-sjdN/" class="tag">ufunc</a> | 	<a href="https://blog.saky.site/tag/xLXyGaSoZ/" class="tag">ndarry</a> | 	<a href="https://blog.saky.site/tag/ruzWW3HYrI/" class="tag">Python</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1794字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">8 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-04-07</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/4k7HTYxmQ/" class="tag">numpy</a> | 	<a href="https://blog.saky.site/tag/zBxoY-sjdN/" class="tag">ufunc</a> | 	<a href="https://blog.saky.site/tag/xLXyGaSoZ/" class="tag">ndarry</a> | 	<a href="https://blog.saky.site/tag/ruzWW3HYrI/" class="tag">Python</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1733字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">8 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
 </section>
 
 <div style="display:flex">
 <div class="md_block" id="md_block">
 <div class="round-shape-one"></div>
-<p><ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6">广播机制</a>
-<ul>
-<li><a href="#%E4%B8%80%E7%BB%B4ndarray%E5%B9%BF%E6%92%AD">一维ndarray广播</a></li>
-<li><a href="#%E4%BA%8C%E7%BB%B4ndarray%E5%B9%BF%E6%92%AD">二维ndarray广播</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B8%B8%E7%94%A8ufunc%E8%BF%90%E7%AE%97">常用ufunc运算</a>
-<ul>
-<li><a href="#%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97">四则运算</a></li>
-<li><a href="#%E6%AF%94%E8%BE%83%E5%92%8C%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97">比较和布尔运算</a></li>
-<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89ufunc%E5%87%BD%E6%95%B0">自定义ufunc函数</a>
-<ul>
-<li><a href="#1%E9%80%9A%E8%BF%87%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E8%AE%A1%E7%AE%97">1.通过列表推导计算</a></li>
-<li><a href="#2-fromnpyfunc-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97">2. fromnpyfunc( )函数计算</a></li>
-<li><a href="#3-vectorize-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97">3. vectorize( )函数计算</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</p>
 <p>ufunc是universal function的缩写，这些函数能够作用于narray对象的每一个元素上，而不是针对narray对象操作，numpy提供了大量的ufunc的函数。这些函数在对narray进行运算的速度比使用循环或者列表推导式要快很多，但请注意，在对单个数值进行运算时，python提供的运算要比numpy效率高。</p>
 <h3 id="广播机制">广播机制</h3>
 <p>广播（Broadcasting）是指不同形状的数组之间执行算术运算的方式，需要遵循4个原则：</p>
