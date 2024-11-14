@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>小米路由器获取SSH权限 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/miwifi_ssh/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1731594091006" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>小米路由器获取SSH权限</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-08-17</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1011字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">4 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h2 id="写在开始前">写在开始前</h2>
+<p>**注意！！！：**开启SSH功能，即为放弃保修，也可能导致路由器不稳定或应操作失误导致变砖。<br>
+以下教程仅支持官方提供开发版ROM适用,其它版本路由器请从“其它版本SSH权限获取”开始操作。</p>
+<h2 id="刷入开发版rom">刷入开发版ROM</h2>
+<ul>
+<li>前往<a href="http://www1.miwifi.com/miwifi_download.html">http://www1.miwifi.com/miwifi_download.html</a> 下载对应开发版ROM</li>
+<li>在后台点击上传安装开发版的 bin，然后等待重启，完成开发版安装</li>
+<li>小米帐号绑定小米路由器，设置路由器正常上网，并使用手机版小米 wifi 绑定路由器</li>
+<li>进入 <a href="https://d.miwifi.com/rom/ssh">https://d.miwifi.com/rom/ssh</a> 获取 SSH 登录的 root 密码</li>
+</ul>
+<h2 id="其它版本ssh权限获取">其它版本SSH权限获取</h2>
+<p>可用于开启SSH权限的固件版本为：AX3600 1.0.17版本/AX1800 1.0.34/1.0.328/1.0.336版本/AX5 1.0.16/1.0.26版本，如果您的固件版本高于以上版本，请先执行降级操作！否则请直接跳到“开启SSH权限”。</p>
+<h3 id="手动降级">手动降级</h3>
+<p>降级的具体固件下载地址为：<a href="https://www.right.com.cn/forum/thread-4032490-1-1.html">https://www.right.com.cn/forum/thread-4032490-1-1.html</a> ，下载合适的固件到本地后，登陆路由器的管理界面：<code>miwifi.com</code> ，然后在：常用设置——系统状态——升级检测中，点击手动升级按钮。之后在弹出的界面中点击选择文件——选择您刚刚下载的固件bin文件，之后点击开始上传即可。降级之前，建议在此界面下方先使用备份功能新建一份配置备份。</p>
+<p>成功降级后，请重新设置及登陆路由器。</p>
+<p>如需要升级到最新版本，请参考此贴提供的方式设置永久保留SSH：<a href="https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=4046020">https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=4046020</a></p>
+<h3 id="开启ssh权限">开启SSH权限</h3>
+<p>首先登陆路由器的管理界面，点击路由状态页签，此时地址栏应该显示如下地址：</p>
+<p>http://miwifi.com/cgi-bin/luci/;stok=xxxxxxx <strong>/web/home#router</strong></p>
+<p>将加粗的/web/home#router（注意不要把那一串xxxx代表的密码替换掉）替换为如下文本，之后输入回车访问，此时页面返回<code>{“code”:0}</code>，即可使用ssh工具测试是否开启成功。</p>
+<p>（注意不要使用mac或iOS自带的safari浏览器）</p>
+<pre><code>/api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20nvram%20set%20ssh_en%3D1%3B%20nvram%20commit%3B%20sed%20-i%20's%2Fchannel%3D.*%2Fchannel%3D%5C%22debug%5C%22%2Fg'%20%2Fetc%2Finit.d%2Fdropbear%3B%20%2Fetc%2Finit.d%2Fdropbear%20start%3B%20echo%20-e%20'admin%5Cnadmin'%20%7C%20passwd%20root%3B
+</code></pre>
+<p>最终应该是<code>http://miwifi.com/cgi-bin/luci/;stok=一小串密码/api/misystem/后面一大串</code>这样的形式，如果不对，可能无法开启，请认真检查，不要弄错！！！</p>
+<p>如果以上方式无法开启SSH，请参考：<a href="https://www.right.com.cn/forum/thread-4032490-1-1.html">https://www.right.com.cn/forum/thread-4032490-1-1.html </a>或 <a href="https://www.right.com.cn/forum/thread-4039512-1-1.html">https://www.right.com.cn/forum/thread-4039512-1-1.html</a> 尝试更多方法开启。</p>
+<h3 id="固化ssh权限">固化SSH权限</h3>
+<p>部分设备升级系统后会丢失SSH权限且无法使用上面的开启方式直接开启，这里提供小米AX3600固化SSH权限的相关教程：</p>
+<p><a href="https://blog.saky.site/post/ax3600_miwifi_ssh/">AX3600等小米路由器破解固化永久SSH</a></p>
+<p>也可以通过路由器web或app中的相关设置，禁止其自动升级以防止其丢失SSH权限。</p>
+<h2 id="登陆ssh">登陆SSH</h2>
+<p>使用SSH连接工具来登陆SSH，推荐putty（体积最小），JuiceSSH（支持安卓手机）</p>
+<p>打开SSH工具，在IP（或者host）一栏填写你路由器的网关IP，即刚刚登陆路由器管理界面的IP地址或网址（例如192.168.1.1或者miwifi.com）,端口为默认的22端口不变，密码为admin（刚刚那串破解码中设定的密码），设置好之后点击连接即可登陆路由器SSH！</p>
+<p>建议修改默认的登陆密码，在SSH界面输入passwd即可修改密码，注意修改时需要输入2次密码，且输入的密码不会显示，输入好直接回车即可完成修改。</p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%86%99%E5%9C%A8%E5%BC%80%E5%A7%8B%E5%89%8D">写在开始前</a></li>
+<li><a href="#%E5%88%B7%E5%85%A5%E5%BC%80%E5%8F%91%E7%89%88rom">刷入开发版ROM</a></li>
+<li><a href="#%E5%85%B6%E5%AE%83%E7%89%88%E6%9C%ACssh%E6%9D%83%E9%99%90%E8%8E%B7%E5%8F%96">其它版本SSH权限获取</a>
+<ul>
+<li><a href="#%E6%89%8B%E5%8A%A8%E9%99%8D%E7%BA%A7">手动降级</a></li>
+<li><a href="#%E5%BC%80%E5%90%AFssh%E6%9D%83%E9%99%90">开启SSH权限</a></li>
+<li><a href="#%E5%9B%BA%E5%8C%96ssh%E6%9D%83%E9%99%90">固化SSH权限</a></li>
+</ul>
+</li>
+<li><a href="#%E7%99%BB%E9%99%86ssh">登陆SSH</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-08-17，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-08-17 17:21:51";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>86</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>
