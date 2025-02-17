@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>VMware安装Centos8系统（命令行模式） | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/vmware-centos8/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1739781088499" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>VMware安装Centos8系统（命令行模式）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-01-15</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1441字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">6 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://acg.toubiec.cn/random.php?2" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h2 id="centos-8-的新特性">CentOS 8 的新特性</h2>
+<ul>
+<li>DNF 成为了默认的软件包管理器，同时 yum 仍然是可用的</li>
+<li>使用网络管理器（nmcli和nmtui）进行网络配置，移除了网络脚本</li>
+<li>使用 Podman 进行容器管理</li>
+<li>引入了两个新的包仓库：BaseOS 和 AppStream</li>
+<li>使用 Cockpit 作为默认的系统管理工具</li>
+<li>默认使用 Wayland 作为显示服务器</li>
+<li>iptables将被nftables取代</li>
+<li>使用 Linux 内核 4.18</li>
+<li>提供 PHP 7.2、Python 3.6、Ansible 2.8、VIM 8.0 和 Squid 4</li>
+</ul>
+<h3 id="最低安装配置">最低安装配置</h3>
+<ul>
+<li>2 GB RAM</li>
+<li>64 位 x86 架构、2 GHz 或以上的 CPU</li>
+<li>20 GB 硬盘空间</li>
+</ul>
+<h3 id="iso文件-大小约66g">ISO文件 大小约6.6G</h3>
+<p>下载地址：<a href="https://mirrors.aliyun.com/centos/8.0.1905/isos/x86_64/CentOS-8-x86_64-1905-dvd1.iso">阿里云</a> [网易] (http://mirrors.163.com/centos/8.0.1905/isos/x86_64/CentOS-8-x86_64-1905-dvd1.iso)<a href="http://mirror.jdcloud.com/centos/8.0.1905/isos/x86_64/CentOS-8-x86_64-1905-dvd1.iso">京东</a></p>
+<h2 id="一安装环境">一.安装环境</h2>
+<ul>
+<li>软件：VMware 14</li>
+<li>镜像：CentOS 8</li>
+</ul>
+<p>主机环境：Windows10 企业版</p>
+<h2 id="二创建虚拟机">二.创建虚拟机</h2>
+<p>1、打开VMware，选择创建新的虚拟机。<br>
+<img src="https://files.jb51.net/file_images/article/201910/2019101511290114.jpg" alt="" loading="lazy"><br>
+2、选择自定义（高级）（C），下一步。</p>
+<p>3、下一步。</p>
+<p>4、选择稍后安装操作系统，下一步。</p>
+<p>5、选择Linux，版本，下一步。</p>
+<p>6、根据自己的需要设置虚拟机名称和存放位置，下一步。</p>
+<p>7、根据自己电脑的配置设置合适的处理器数量。（安装图形化桌面系统尽量设置大一点）</p>
+<p>8、根据自己电脑的配置设置合适的内存大小。（安装图形化桌面系统尽量设置大一点）</p>
+<p>9、设置虚拟机网络连接模式。（NAT）</p>
+<p>10、选择I/O控制器类型，下一步。</p>
+<p>在这里插入图片描述<br>
+11、选择磁盘类型，下一步。</p>
+<p>在这里插入图片描述<br>
+12、选择创建新虚拟磁盘，下一步。</p>
+<p>在这里插入图片描述<br>
+13、根据自己的需要分配磁盘容量，勾选将虚拟磁盘拆分成多个文件（方便用储存设备拷贝复制虚拟机到其他设备），下一步。</p>
+<p>在这里插入图片描述<br>
+14、指定磁盘文件存储位置，下一步。</p>
+<p>在这里插入图片描述<br>
+15、此处选择自定义硬件，也可以设置处理器与内存。因为计划安装图像化桌面系统（占用系统资源很多），所以分配CPU4核和内存4G。</p>
+<p>在这里插入图片描述<br>
+16、点击完成，虚拟机创建完成。</p>
+<p>三、安装CentOS8<br>
+1、右击刚创建的虚拟机，选择设置。</p>
+<p>在这里插入图片描述<br>
+2、选择CD/DVD，勾选启动时连接，再选择使用ISO映像文件最后选择浏览，找到下载好的系统镜像文件，最后确定。</p>
+<p>在这里插入图片描述<br>
+3、开启此虚拟机。</p>
+<p>在这里插入图片描述<br>
+4、开启虚拟机后会出现以下界面，鼠标点进黑窗口，使用键盘方向键选择第一项，安装CentOS 8，回车，系统开始自动安装。</p>
+<p>在这里插入图片描述<br>
+在这里插入图片描述<br>
+// 第一次安装在这里出现问题， 出现了“ section ％packages does not end with ％end ” “ pane is dead ” 故障 ，然后“ pane is dead ”。点击右侧 解决方案 或往下拉到最下面查看。</p>
+<p>5、选择安装过程中使用的语言，这里选择中文、简体中文（中国），点击继续。</p>
+<p>在这里插入图片描述<br>
+6、点击网络和主机名，设置网络。</p>
+<p>在这里插入图片描述<br>
+7、首先打开网卡开关，然后查看是否能获取到IP地址，更改主机名，点击应用，点击完成。</p>
+<p>在这里插入图片描述<br>
+8、点击日期和时间（T），设置系统日期时间。</p>
+<p>在这里插入图片描述<br>
+9、时区选择亚洲、上海，设置正确的日期和时间，打开网路时间开关（如果宿主主机已经连接互联网，则会自动校准时间），然后点击完成。</p>
+<p>在这里插入图片描述<br>
+10、点击软件选择（S），选择需要安装的软件系统。</p>
+<p>在这里插入图片描述<br>
+11、此处系统选择“服务器”，安装完成后进入命令行系统，然后点击完成。（若选择带GUI的服务器，安装完成后进入图形化桌面系统）。</p>
+<p>在这里插入图片描述<br>
+12、选择安装目的地（此处可进行磁盘划分）。</p>
+<p>在这里插入图片描述<br>
+13、选择我要配置分区，然后点击完成。</p>
+<p>在这里插入图片描述<br>
+14、弹出下图界面，点击加号，选择/boot，给boot分区分200M，最后点击添加挂载点。</p>
+<p>在这里插入图片描述<br>
+15、然后以同样的办法给其他分区分配空间，分配完成后点击完成。</p>
+<p>在这里插入图片描述<br>
+16、弹出更改摘要界面，点击接受更改。</p>
+<p>17、选择开始安装。</p>
+<p>18、点击ROOT密码。</p>
+<p>19、设置完ROOT密码后点击完成。</p>
+<p>20、点击创建用户。</p>
+<p>21、输入用户名密码后点击完成(可以设置此账户为管理员)。</p>
+<p>22、等待系统安装完毕重启系统。</p>
+<p>23、重启后进入命令行模式。</p>
+<p>解决方案<br>
+虚拟主机安装 CentOS 8 出现 “ pane is dead ” 故障解决方案</p>
+<p>故障原因及解决方案：</p>
+<p>虚拟机自动加载两个CD，在设置里把CD/DVD(IDE)autoinst.iso移除</p>
+<p>这样启动时连接，只启用CD/DVD2(IDE)，重启即可顺利进入安装！</p>
+<p>虚拟机自动加载两个镜像<br>
+断开连接左边那个镜像即可</p>
+<p>让后重置即可进入安装界面，如下图所示</p>
+<p>设置虚拟机主机名，方便后续SSH连接<br>
+安装过程在 5-10min</p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#centos-8-%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7">CentOS 8 的新特性</a>
+<ul>
+<li><a href="#%E6%9C%80%E4%BD%8E%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE">最低安装配置</a></li>
+<li><a href="#iso%E6%96%87%E4%BB%B6-%E5%A4%A7%E5%B0%8F%E7%BA%A666g">ISO文件 大小约6.6G</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%80%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83">一.安装环境</a></li>
+<li><a href="#%E4%BA%8C%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA">二.创建虚拟机</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-01-15，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-01-15 15:27:23";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>87</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>
