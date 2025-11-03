@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>macOS m1系列 侧载运行ipa文件 实现运行原神/崩坏3 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/macos-m1-PlayCover/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1762161536360" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>macOS m1系列 侧载运行ipa文件 实现运行原神/崩坏3</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-12-18</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/wZduneu0L/" class="tag">原神</a> | 	<a href="https://blog.saky.site/tag/t0MBiiJ7F/" class="tag">macOS</a> | 	<a href="https://blog.saky.site/tag/8keZTOPbQQ/" class="tag">指南</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1530字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">6 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p><strong>注意</strong>：本教程仅适用于MacBook M1系列芯片。</p>
+<h2 id="前言">前言</h2>
+<p>苦于原神没有Mac端，网上的教程全部是教你装虚拟机运行Windows，拿iPhone抓ipa。这些方法都不是太好，我只是想简单玩个原神而已。。。最近在Github发现有个歪果仁为了在Mac上玩原神而开发的一款软件--- PlayCover</p>
+<blockquote>
+<p>Github：<a href="https://github.com/iVoider/PlayCover">https://github.com/iVoider/PlayCover</a></p>
+</blockquote>
+<h2 id="相关软件下载">相关软件下载</h2>
+<p>PlayCover：</p>
+<ul>
+<li><a href="https://github.com/iVoider/PlayCover/releases/">releases</a></li>
+<li><a href="https://dl.012233.xyz/f/22821665-529400403-9c088e?key=1772">网盘下载（key：1772）</a></li>
+<li><a href="http://mtw.so/66P6Wv">世纪互联</a></li>
+<li><a href="https://dwz.mk/n6jQju">阿里云OSS</a></li>
+</ul>
+<p>Sideloadly （原神/崩坏3无需下载）</p>
+<ul>
+<li><a href="http://dl.012233.xyz/f/22821665-529400420-e69353">https://dl.012233.xyz/f/22821665-529400420-e69353</a>（访问密码：1772）</li>
+</ul>
+<p>原神2.3.0砸壳ipa</p>
+<ul>
+<li><a href="https://dwz.mk/fERJvi">世纪互联</a></li>
+<li><a href="https://dwz.mk/JFRrIf">阿里云OSS</a></li>
+</ul>
+<p>崩坏3 5.4.0砸壳ipa</p>
+<ul>
+<li><a href="https://moecloud.cn/s/7V08fJ">网盘下载</a></li>
+<li><a href="https://dwz.mk/7Rvqm2">阿里云OSS</a></li>
+</ul>
+<h2 id="安装和使用">安装和使用</h2>
+<ol>
+<li>安装PlayCover</li>
+<li>导入原神ipa文件</li>
+<li>映射 (键鼠玩家直接从<code>键盘映射</code>开始阅读)</li>
+</ol>
+<pre><code>快捷键：
+========
+按键器切换
+CTRL + P  →  切按按键映射模式
+
+控制器指南（最新版现已支持原生）
+CTRL + N 然后 Shift + A,X,B,Y
+Shift + 1,2,3,4 用于 十字键
+Shift + 5,6,7,8 用于 L1,L2,R1,R2
+Shift + 9 用于 Left Stick
+Ctrl + M 用于 Right Stick
+
+键盘映射:
+CTRL + J  →  添加 W/A/S/D 操纵杆
+CTRL + N  →  添加 添加新按钮
+CTRL + M  →  鼠标模式/视角移动模式
+
+选择新按钮后：
+*key*  →  通过按下按任何一个键来绑定该按键
+SHIFT + L (L 键盘上的按键 )  →  绑定鼠标左键
+SHIFT + R (R 键盘上的按键 )  →  绑定鼠标右键
+CTRL + ‘+’  →  增加按钮大小
+CTRL + ‘-’  →  减少按钮大小
+CTRL + DEL (Backspace)  →  删除该按钮
+
+杂项 :
+CTRL + F  →  调整分辨率
+
+宏程序:
+CTRL + U  →  开始录制
+CTRL + I  →  结束录制
+CTRL + O  →  重放宏程序
+
+流量控制 :
+Press option  →  显示/隐藏光标
+CTRL + W/A/S/D  →  提醒/轻推/拍一拍按钮
+</code></pre>
+<ol start="4">
+<li>键鼠映射常用键位一览<br>
+<img src="https://s2.loli.net/2021/12/18/M3dRNSuCcig7ELn.png" alt="" loading="lazy"></li>
+</ol>
+<h3 id="常见问题">常见问题</h3>
+<p>操作方面Q&amp;A</p>
+<hr>
+<p><strong>1. Q：无法移动视角？</strong></p>
+<p>如果当前是鼠标指针状态，请按一次⌥Option切换鼠标模式（视角移动/指针模式）。<br>
+如果当前已经是视角移动状态，可以按两次⌥ 即可恢复正常。</p>
+<p><strong>2.Q：按键映射没有反应？</strong></p>
+<p>试着按两次⌥Option。</p>
+<p><strong>3. Q：按下⌃Control + N没有反应？</strong></p>
+<p>添加按钮首先要按下⌃+⌥ + P 进入按钮编辑模式。</p>
+<p><strong>4. Q：配置好按键映射，但是按下按键没有反应。</strong></p>
+<p>重启程序后将没有反应的映射删掉重新添加一次。此外，检查你是否移动过程序。程序应保持在～/Documents/PlayCover目录下。</p>
+<p>5**. Q：无法同时按下wasd中两个，只能上下左右移动？**</p>
+<p>不要使用⌃ + N添加四个按钮，直接使用⌃ + J 添加joystick拖动到正确位置。</p>
+<p><strong>6. Q：无法同时按下wasd中两个，只能上下左右移动？</strong></p>
+<p>不要使用⌃ + N添加四个按钮，直接使用⌃ + J<br>
+添加joystick拖动到正确位置即可。</p>
+<p><strong>7. Q：外接鼠标按下左中右键没有反应？</strong></p>
+<p>每次设置键盘映射后，都需重新连接外接鼠标。我们更推荐大家直接使用触控版进行游戏，体验更好。</p>
+<p><strong>8. Q：为什么我打开一次后退出，再进启动盘找不到之前安装好的游戏？</strong></p>
+<p>应用安装到了～/Documents/PlayCover目录下，需要手动创建替身放到Application目录下，当然也可以直接在finder中打开。</p>
+<p><strong>9. Q：在系统偏好设置-安全性与隐私中找不到「仍要打开」，无法打开PlayCover</strong></p>
+<p>在终端（Terminal）输入</p>
+<pre><code class="language-{.shell}">sudo spctl --master-disable
+</code></pre>
+<p><strong>10. Q：想要抖音、斗鱼之类的ipa</strong></p>
+<p>这些都有网页版可以用，不用大家这么麻烦。</p>
+<p><strong>11. Q: 安装好后提示没有权限打开游戏？</strong></p>
+<p>确认一下安装游戏时，PlayCover是否只勾了第一个选项FullScreen &amp;<br>
+Keymapping，这个选项必须勾上，但是如果你不确定自己有没有关闭SIP，则不要勾选其他选项。</p>
+<p><strong>12. Q：原神登录时无法加载成功验证码，或者出现登录参数错误，或一直智能分析？</strong></p>
+<p>需要关闭SIP并修改nvram中的开机启动参数。</p>
+<p>NVRAM修改方法: 打开terminal,输入：</p>
+<pre><code class="language-terminal">sudo nvram boot-args=-v cs\_enforcement\_disable=1
+amfi\_get\_out\_of\_my\_way=1 keepsyms=1 intcoproc\_unrestricted=1
+amfi\_unrestrict\_task\_for\_pid=1 amfi\_allow\_any\_signature=1
+cs\_debug=1
+</code></pre>
+<p>之后重启进恢复模式，命令行输入</p>
+<pre><code class="language-terminal">csrutil enable --no-internal --without
+kext --without nvram --without fs --without basesystem
+</code></pre>
+<h3 id="关于playcover">关于PlayCover：</h3>
+<p>翻译自官方文档</p>
+<hr>
+<p><strong>PlayCover的原理？</strong></p>
+<p>iOS应用程序的二进制操作，改变UNIX可执行类型，iOS支持libs与Mac<br>
+Catalyst的直接桥接。</p>
+<p><strong>按键映射是如何工作的？</strong></p>
+<p>使用原生的iOS方法进行触摸生成。</p>
+<p><strong>苹果能解决这个问题吗？</strong></p>
+<p>不能。否则他们将需要从MacAppStore中删除30%的应用程序，并完全关闭iOS支持。<br>
+此外，在11月，苹果将提出新的通用框架，所以这种方式会更好。</p>
+<p><strong>这对用户来说安全吗？</strong></p>
+<p>所有这些应用程序都是默认的沙盒，所以是的，即使是危险的.ipa安装包也不会对用户的电脑造成损害。</p>
+<p><strong>应用程序开发人员能否检测到应用程序是否在Mac下运行？</strong></p>
+<p>有一种特殊的绕过方法，所以不能。但这是可选的，所以如果你打算将应用程序分享给Mac用户，所有的数据提供者都是可用的。</p>
+<p><strong>广告和应用程序中的广告是否有效？</strong></p>
+<p>是的，应用程序是按照从AppStore下载后的方式运行的，所以每一个登录、验证码和分析机制都在工作。</p>
+<p><strong>应用程序是否会受到影响（黑客攻击）？</strong></p>
+<p>我们为将在PlayCover上可用的应用程序提供特别保护。</p>
+<h3 id="已知问题">已知问题：</h3>
+<hr>
+<p>以下问题都不影响游戏，尽量避开。</p>
+<ol>
+<li>
+<p>原神不要打开公告，可能无法退出。（测试版已修复）</p>
+</li>
+<li>
+<p>配置队伍时有可能闪退。（测试版已修复）</p>
+</li>
+<li>
+<p>手柄使用？（手柄支持已经做好了，很快会Release）</p>
+</li>
+</ol>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD">相关软件下载</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8">安装和使用</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8Eplaycover">关于PlayCover：</a></li>
+<li><a href="#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98">已知问题：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-12-18，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-12-18 09:44:51";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>89</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>
