@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>修正C语言编译警告 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/c-bugs/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>修正C语言编译警告</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2022-02-09</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/J2tIW5pwHX/" class="tag">C</a> | 	<a href="https://blog.saky.site/tag/Qrpj75zyW/" class="tag">笔记</a> | 	<a href="https://blog.saky.site/tag/H6sPSW8m1P/" class="tag">VSCode</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">827字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">4 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<blockquote>
+<p>本文以编译警告为引入点述说在开发过程中的匪夷所思的问题。引以为鉴，重视警告的影响。</p>
+</blockquote>
+<h2 id="1未引用形参">1.未引用形参</h2>
+<pre><code>warning: unused variable 'value'.
+警告：未使用变量&quot;value&quot;
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>用错变量导致程序得不到正确结果。</li>
+</ul>
+<pre><code>double sum(double a, double b)
+{
+	return a;
+}
+</code></pre>
+<ul>
+<li>变量未使用造成内存泄漏。</li>
+</ul>
+<pre><code>Car car = new Car();
+</code></pre>
+<p>建议：</p>
+<ul>
+<li>避免这种行为，但这种情况下大多数出现在作为函数参数。但你要明确的是尽管作为扩展(以后使用)用的函数参数，是否应该考虑下本身设计的问题。</li>
+</ul>
+<h2 id="2可能丢失数据">2.可能丢失数据</h2>
+<pre><code>warning: implicit conversion turns floating-point number into integer: 'double' to 'int'.
+警告：隐式转换将浮点数转换为整数：&quot;double&quot;到&quot;int&quot;。
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>丢失精度，类似于蝴蝶效应，小小的精度却会引起巨大的误差。</li>
+<li>整型转换枚举导致枚举变量成不确定值。</li>
+</ul>
+<pre><code>enum Fruits { Apple, Orange, Banana};
+Fruits fruits = (Fruits)5; // fruits成不确定值，值取决于编译器。
+</code></pre>
+<p>建议：</p>
+<ul>
+<li>强制转换导致丢失数据，应该避免此行为。</li>
+<li>但有些情况下却不会，例如整型转换浮点型，枚举转整型。它们都是从小范围转换到大范围。</li>
+</ul>
+<h2 id="3初始化变量顺序不正确">3.初始化变量顺序不正确</h2>
+<pre><code>warning: field 'j' will be initialized after field 'i'.
+警告:字段&quot;j&quot;将在字段&quot;i&quot;之后初始化。
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>导致变量值偏离。</li>
+</ul>
+<pre><code>class Car
+{
+public:
+    Car () : j(i + 2), i(1) // 由于j先于i初始化,导致j变量的预期结果却不是3。
+    {
+    }
+
+private:
+    int i;
+    int j;
+};
+</code></pre>
+<p>建议：</p>
+<ul>
+<li>注意：该行为多出现于类和结构体(C++)的构造函数中。</li>
+<li>变量之间存在依赖关系容易造成难以想象的bug，就好比怎么有时运行可以，有时却不可以的问题。</li>
+</ul>
+<h2 id="4if语句有空语句">4.if语句有空语句</h2>
+<pre><code>warning: if statement has empty body.
+警告:if语句有语句。
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>有时运行正常，有时运行异常(非常令人恼火的bug)。</li>
+</ul>
+<pre><code>if (enable); // 由于&quot;;&quot;语句的存在导致value的值一直不会刷新。
+    value = sum(i, j);
+</code></pre>
+<p>建议：</p>
+<ul>
+<li>必须修正！</li>
+</ul>
+<h2 id="5可能除0">5.可能除0</h2>
+<pre><code>warning: division by zero is undefined.
+警告:未定义被零除。
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>导致程序异常退出。</li>
+</ul>
+<pre><code>value = i / j; // 由于j变量可能为0值，严重会导致程序异常退出。
+</code></pre>
+<p>建议：<br>
+-先判断变量是否为不为0，再做运算。</p>
+<h2 id="6变量使用前未初始化">6.变量使用前未初始化</h2>
+<pre><code>warning: variable 'value' is uninitialized when used here.
+警告:变量&quot;value&quot;在这里使用时未初始化。
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>过于相信直觉，以为value默认为0。导致难以想象的bug。</li>
+</ul>
+<pre><code>int value;
+if (value == 0) // 由于变量未确定初始值，则值不确定会导致判断有时会不进入。
+	enable = true;
+</code></pre>
+<p>建议：</p>
+<ul>
+<li>养成给变量初始化的好习惯。</li>
+</ul>
+<h2 id="7使用作为比较">7.使用=作为比较</h2>
+<pre><code>warning: using the result of an assignment as a condition without parentheses.
+警告：将赋值结果用作不带括号的条件。
+use '==' to turn this assignment into an equality comparison.
+使用'=='将该赋值转换为相等比较
+</code></pre>
+<p>致命行为：</p>
+<ul>
+<li>唔使用导致判断一直生效或失效的行为。</li>
+</ul>
+<pre><code>if (i = 1) // 一直生效
+    enable = true;	
+ 
+if (i = 0) // 一直失效
+    enable = true;	   
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1%E6%9C%AA%E5%BC%95%E7%94%A8%E5%BD%A2%E5%8F%82">1.未引用形参</a></li>
+<li><a href="#2%E5%8F%AF%E8%83%BD%E4%B8%A2%E5%A4%B1%E6%95%B0%E6%8D%AE">2.可能丢失数据</a></li>
+<li><a href="#3%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%98%E9%87%8F%E9%A1%BA%E5%BA%8F%E4%B8%8D%E6%AD%A3%E7%A1%AE">3.初始化变量顺序不正确</a></li>
+<li><a href="#4if%E8%AF%AD%E5%8F%A5%E6%9C%89%E7%A9%BA%E8%AF%AD%E5%8F%A5">4.if语句有空语句</a></li>
+<li><a href="#5%E5%8F%AF%E8%83%BD%E9%99%A40">5.可能除0</a></li>
+<li><a href="#6%E5%8F%98%E9%87%8F%E4%BD%BF%E7%94%A8%E5%89%8D%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96">6.变量使用前未初始化</a></li>
+<li><a href="#7%E4%BD%BF%E7%94%A8%E4%BD%9C%E4%B8%BA%E6%AF%94%E8%BE%83">7.使用=作为比较</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2022-02-09，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2022-02-09 11:46:57";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

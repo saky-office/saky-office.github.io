@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>Github+Cloudflare Worker 搭建 PikPak网页版 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/pikpak-build/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>Github+Cloudflare Worker 搭建 PikPak网页版</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2022-05-19</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/uDI8rjin5/" class="tag">PikPak</a> | 	<a href="https://blog.saky.site/tag/V5d7vesq6J/" class="tag">Worker</a> | 	<a href="https://blog.saky.site/tag/f1jeiNXBS4/" class="tag">Cloudflare</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1708字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">7 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<ul>
+<li>Github：<a href="https://github.com/mumuchenchen/pikpak">https://github.com/mumuchenchen/pikpak</a></li>
+<li>DEMO：<a href="https://mumuchenchen.github.io/pikpak/">https://mumuchenchen.github.io/pikpak/</a></li>
+</ul>
+<p>因为一些原因，PikPak在国内无法访问，使用Github+Cloudflare Worker反代服务进行访问。</p>
+<p>Demo为源码作者搭建示例，仅供参考，请勿用于生产环境。</p>
+<hr>
+<p>开始前请准备以下账号：</p>
+<ul>
+<li><a href="https://github.com/signup">Github</a></li>
+<li><a href="https://dash.cloudflare.com/sign-up">CloudFlare</a></li>
+</ul>
+<h2 id="cloudflare-workers部署">Cloudflare Workers部署</h2>
+<ol>
+<li>
+<p>登录你的Cloudflare</p>
+</li>
+<li>
+<p>在主页右侧找到<code>Workers</code></p>
+</li>
+<li>
+<p>点进<code>Workers</code>选择一个预设的子域，点击<code>set up</code>之后，我们选择免费套餐。</p>
+</li>
+<li>
+<p>点进<code>Workers</code>，选择<code>创建Workers</code></p>
+</li>
+<li>
+<p>（非必须）在服务名称里起个好记好写的名字，比如<code>pikpak</code>，方便自己记忆。记住下边写的那行</p>
+<p>您的服务将被部署到：<code>https://pikpak.XXXXX.workers.dev</code><br>
+下边的<code>简介</code>、<code>HTTP处理程序</code>随便选一个就行，点击<code>创建服务</code></p>
+</li>
+<li>
+<p>删除页面左侧代码框内一切内容后，把<a href="https://cdn.jsdelivr.net/gh/mumuchenchen/pikpak@main/cf-worker/index.js"><strong>这里的代码</strong></a>粘贴到页面左侧的输入框，覆盖原有内容。</p>
+</li>
+<li>
+<p>点击<code>保存并部署</code>按钮，</p>
+</li>
+<li>
+<p>记住你在第5步里的Worker的域名<code>pikpak.XXXX.workers.dev</code>之后要用到</p>
+</li>
+</ol>
+<h2 id="github部署">GitHub部署</h2>
+<h3 id="github-aciton">Github Aciton</h3>
+<ol>
+<li>
+<p>登录你的Github，<a href="https://github.com/mumuchenchen/pikpak">进入项目</a></p>
+</li>
+<li>
+<p>点击右上角的<code>Fork</code>将项目复刻到你自己的仓库</p>
+</li>
+<li>
+<p>点击上侧一排的最后一个按钮<code>settings</code>切换到设置页面</p>
+</li>
+<li>
+<p>选择左侧的<code>secrets</code>-<code>Actions</code>项，点击右上角<code>New repository secrets</code></p>
+</li>
+<li>
+<p>Name填<code>CF_DOMAIN</code> ,Value填你Worker的域名（Cloudflare Workers部署第5步里让你记住的那个，类似于<code>pikpak.XXXX.workers.dev</code> <strong>注意</strong>只是域名本身，不带https://之类的前缀），点<code>Add secret</code></p>
+<figure data-type="image" tabindex="1"><img src="https://s2.loli.net/2022/05/15/5NefD1uwJcMXsvK.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>如果你修改了仓库名则进行这一步，否则直接执行下边的第7步 ：</p>
+<p>点击<code>New repository secrets</code>，Name填<code>BASE_PATH</code>,Value填你的仓库名如<code>xxxxxpikpak</code></p>
+</li>
+<li>
+<p>点击上侧一排的<code>Actions</code>按钮，点<code>I understand my workdlows, go ahead and enable them</code>表示你明白你要干啥。</p>
+</li>
+<li>
+<p>点击左侧的<code>deploy</code>，点右侧的<code>Run workflow ▽</code>切换到main分支，选择绿色的【Run workflow】 按钮。等待代码被构架并运行，如果没出什么问题，你会看到一个绿色√出现。（不超过5分钟）</p>
+<figure data-type="image" tabindex="2"><img src="https://s2.loli.net/2022/05/15/PVaDfAXyHuIWjBc.png" alt="" loading="lazy"></figure>
+</li>
+</ol>
+<h3 id="github-page">Github Page</h3>
+<ol>
+<li>
+<p>再次点击上侧那一排按钮中最后的【settings】切换到设置页面</p>
+</li>
+<li>
+<p>选择左侧的【pages】</p>
+</li>
+<li>
+<p>把Source这一项的branch切换到【gh-pages】【/(root)】，然后点击保存。</p>
+</li>
+<li>
+<p>等1分钟左右你就可以通过页面上部显示的</p>
+<p><code>Your site is published at https://xxxx.github.io/pikpak/</code></p>
+<p>访问你的PikPak网页版客户端了。</p>
+</li>
+</ol>
+<h3 id="自定义secrets">自定义secrets</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CF_DOMAIN</td>
+<td>CF反代的域名（写DIRECT就是不走反代）</td>
+</tr>
+<tr>
+<td>BASE_PATH</td>
+<td>自定义仓库名</td>
+</tr>
+<tr>
+<td>INVITE_CODE</td>
+<td>设置你的专属邀请链接</td>
+</tr>
+<tr>
+<td>CNAME_DOMAIN</td>
+<td>如果你设置了CNAME这里写你的域名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="代理设置">代理设置</h3>
+<p>Cloudflare Workers是有限制的，免费计划每分钟最多1000次请求，每天最多10W次请求，超了就会报错，这里给出一些额外的搭建好的API，请不要恶意刷流量。</p>
+<p>访问你的PikPak网页版客户端-&gt;设置-&gt;代理设置，填入下面👇🏻的一些API</p>
+<pre><code class="language-api">https://api.pikpak.cf
+https://api.13pikpak.cf
+https://api.14pikpak.cf
+https://api.15pikpak.cf
+https://api.16pikpak.cf
+https://api.17pikpak.cf
+https://api.18pikpak.cf
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://s2.loli.net/2022/05/15/iUOpknEP9D1Lwzd.png" alt="" loading="lazy"></figure>
+<h2 id="后期更新">后期更新</h2>
+<p>因为网页版还在不断的迭代中，上游代码更新后，如果你希望更新，那么需要这样更新一下</p>
+<h3 id="更新正常流程">更新正常流程</h3>
+<ol>
+<li>
+<p>回到你的<a href="https://github.com/">Github主页</a> 切换到项目。</p>
+</li>
+<li>
+<p>点击【Fetch upsteam ▽】，如果上游有更新，【Fetch and merge】按钮会是可点击的，选择【Fetch and merge】。</p>
+</li>
+<li>
+<p>正常来说，没自己改过文件，就不会出问题，Github Aciton会自动重新deploy，在几分钟内就更新好了。如果出现无法合并，deploy时出错等等问题，要么自己介入处理导致了报错的文件，要么用更新出错时流程更新吧。</p>
+<blockquote>
+<p>PS：只需合并main分支即可，不需要合并gh-pages分支，合并main后deploy会更新gh_pages分支内容。</p>
+</blockquote>
+</li>
+<li>
+<p>检查一下<a href="https://cdn.jsdelivr.net/gh/mumuchenchen/pikpak@main/cf-worker/index.js">index.js</a>在你部署后有没有更新过，如果有更新，将更新后的代码，更新到你的Workers中，重新部署Workers</p>
+</li>
+</ol>
+<h3 id="更新出错的解决方案">更新出错的解决方案</h3>
+<p>这个操作不是最简单的，但是是最不容易出错的方式</p>
+<ol>
+<li>
+<p>首先注意一下<a href="https://cdn.jsdelivr.net/gh/mumuchenchen/pikpak@main/cf-worker/index.js">index.js</a>在你部署后有没有更新过，如果有更新，将更新后的代码，更新到你的Workers中，重新部署Workers（或者就直接不管是否更新，就直接无脑复制过去重新部署）</p>
+</li>
+<li>
+<p>回到你的Github主页切换到项目，选择【settings】，拉到底，在Danger Zone中找到【Delete this repository】，在输入框中输入他要求的XXXX/pikpak删除整个仓库。</p>
+</li>
+<li>
+<p>然后重新执行一遍 GitHub部署 操作</p>
+<hr>
+<p><strong>一些可能需要你注意的东西</strong></p>
+</li>
+</ol>
+<ul>
+<li>最好自己部署并审查代码，毕竟涉及了一次反代，如果在反带部分动动手脚，反代的搭建者是很容易知道你存了什么东西的。（当然能动手脚的地方不止这一处，想干坏事的人的方法多了）</li>
+<li>没必要绑定自己的域名，用github.io就好，github的那个绑定咋说呢，广播的有点慢。进行绑定子域时，站点会有不短的一段时间都无法访问，尤其是在你设置了HTTPS时。</li>
+<li>一般来说没必要改仓库名，保持是<code>XXXX/pikpak</code>，如果你真的希望改，请新建一个secrets，Name填<code>BASE_PATH</code>,Value填你的仓库名如<code>/xxxxpikpak</code>。</li>
+<li>如果你想绑自己的域名，因为绑定后地址就从类似<code>xxxx.github.io/pikpak/</code>变成了类似<code>pikpak.xxx.com</code>的无子目录状态，所以新建的secrets，Name填<code>BASE_PATH</code>,Value填一个<code>/</code>就可以了。</li>
+<li>这个的部署方式非常多，比如你可以用cloudflare page代替GitHub page部署网站，可以用自己的服务器，替代Cloudflare Workers去做反代。。。等等很多方式。</li>
+<li>最近官方出了邀请新用户得会员的活动，这里说一下怎么把网页版登录页里的邀请注册换成你自己的：<br>
+– 首先在官方APP里得到你的邀请链接（类似https://toapp.mypikpak.com/activity/invited?code=860983）<br>
+– 然后新建一个secrets，Name填<code>INVITE_CODE</code> , Value填邀请链接中的数字，比如我的是<code>860983</code></li>
+<li>源码中目前删除了【资源库】，这是因为官方出于当地法律风险（pikpak是新加坡公司，有些类型的资源（比如成人内容，盗版电影）在网盘里持有（储存）是合法的，但是传播（分享）就会给pikpak带来被警方上门的风险）不建议搞这个，所以大佬给去除了。<br>
+这是个开源的东西，有代码基础的估计一看历史修改记录就懂怎么改回来。</li>
+</ul>
+<pre><code class="language-vue">src/router/index.ts（40~50行左右）
+src/views/layout/index.vue（120~130行左右）
+src/views/list.vue（1090~1010行左右）
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#cloudflare-workers%E9%83%A8%E7%BD%B2">Cloudflare Workers部署</a></li>
+<li><a href="#github%E9%83%A8%E7%BD%B2">GitHub部署</a>
+<ul>
+<li><a href="#github-aciton">Github Aciton</a></li>
+<li><a href="#github-page">Github Page</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89secrets">自定义secrets</a></li>
+<li><a href="#%E4%BB%A3%E7%90%86%E8%AE%BE%E7%BD%AE">代理设置</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%8E%E6%9C%9F%E6%9B%B4%E6%96%B0">后期更新</a>
+<ul>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%AD%A3%E5%B8%B8%E6%B5%81%E7%A8%8B">更新正常流程</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E5%87%BA%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">更新出错的解决方案</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2022-05-19，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2022-05-19 19:40:59";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

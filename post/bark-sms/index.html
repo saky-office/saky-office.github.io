@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>基于Bark的短信转发  | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/bark-sms/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>基于Bark的短信转发 </a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2022-04-12</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/5pAwEKgfH/" class="tag">Bark</a> | 	<a href="https://blog.saky.site/tag/Mtbp9LQ5Vp/" class="tag">IOS</a> | 	<a href="https://blog.saky.site/tag/3Y-J-WLOn/" class="tag">Android</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">781字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">4 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>如果我们有两个号码： A 和 B，因为号码 A 流量多，就把它留在了主力机上，号码 B 挪到了备用机。可大部分服务都是用号码 B 注册的，使用主力机时，时常因为各种原因，需要填写号码 B 收到的短信验证码，此时又得拿起备用机查看验证码。通过Bark可以实现无需备用机B在身边也可以收到验证码。</p>
+</blockquote>
+<p>本文仅以短信验证码转发为例，其它功能请自行尝试。</p>
+<p>-【推送端】Android：<a href="https://gitee.com/pp/SmsForwarder/releases/">SmsForwarder</a>  <a href="https://od-api.moelove.tk/fodi/?file=/%E5%BA%94%E7%94%A8/Android/Tasker.apk">Tasker</a><br>
+-【接收端】iOS：<a href="https://apps.apple.com/cn/app/id1403753865">Bark</a>  / Android：<a href="https://github.com/xlvecle/PushLite/releases">Push Lite</a></p>
+<h2 id="smsforwarder">SmsForwarder</h2>
+<ul>
+<li>https://github.com/pppscn/SmsForwarder</li>
+<li>https://gitee.com/pp/SmsForwarder</li>
+</ul>
+<blockquote>
+<p>SmsForwarder 是一款开源的Android 短信转发工具，它有一个简单直白的中文名称「短信转发器」，它可以监控Android手机短信、来电、APP通知，并根据指定规则转发到其他手机：钉钉机器人、企业微信群机器人、飞书机器人、企业微信应用消息、邮箱、bark、webhook、Telegram机器人、Server酱、PushPlus、手机短信等。</p>
+</blockquote>
+<p><strong>下载地址</strong>： <a href="https://github.com/pppscn/SmsForwarder/releases">Github</a>/ <a href="https://gitee.com/pp/SmsForwarder/releases">Gitee</a> / <a href="https://www.coolapk.com/apk/com.idormy.sms.forwarder">酷安</a></p>
+<ol>
+<li>打开「短信转发器」，依次点击「发送通道」–「添加发送通道」，选择「Bark」，填入上一步在 iPhone 端 Bark 中生成的推送地址，点击「确定」保存设置。<br>
+<img src="https://s2.loli.net/2022/04/12/ioXgMPsT6dtOQDq.png" alt="" loading="lazy"></li>
+<li>将Bark设置为发送通道<br>
+返回 app 首页，点击「转发规则」–「添加短信转发」，设置好你自己的短信转发规则。比如：当你只想转发备用机的验证码短信时，可以将短信内容匹配关键字设置为「验证码」，这样只有包含验证码的短信才会被转发，其它诸如广告营销、公益宣传等内容的短信则不会被转发。此处也可以根据自己的需要添加其它规则。<br>
+<img src="https://s2.loli.net/2022/04/12/cwRV6ZjKdbGzEeh.png" alt="" loading="lazy"></li>
+</ol>
+<h2 id="tasker">Tasker</h2>
+<p>建议配合<a href="https://od-api.moelove.tk/fodi/?file=/%E5%BA%94%E7%94%A8/Android/BuzzKill.apk">BuzzKill</a>使用</p>
+<ol>
+<li>获取Push URL<br>
+安装<code>Bark</code>，在App的主界面，可以看到形如 <code>https://api.day.app/xxxxxxxxxx/</code> 的Push URL，记录下来</li>
+<li>配置Tasker Profile<br>
+<a href="https://taskernet.com/shares/?user=AS35m8kd%2B%2B8TCtuKD5vi%2BgxDuL5p9VAa8vrSP6viIGO6nBMQGv6ntB%2BfsCHAjiN7MZx1YA%3D%3D&amp;id=Profile%3A%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BD%AC%E5%8F%91">点我导入</a> 或者按下面的描述手动创建profile</li>
+</ol>
+<pre><code class="language-xml">   Profile: 验证码转发
+    	Restore: no
+    	Event: Received Text [ Type:SMS Sender:* Content:* SIM Card:* ]
+    Enter: Anon
+    	A1: If [ %SMSRB ~R (验证|校验|安全|authentication|security)(码|code) | %SMSRB ~R (密码|password) ]
+    	A2: Variable Search Replace [ Variable:%SMSRB Search:\d{4,8} Ignore Case:Off Multi-Line:Off One Match Only:On Store Matches In Array:%CODE Replace Matches:Off Replace With: ] 
+    	&lt;https://api.day.app/{Your Key}&gt;  //改为自己的服务端地址/设备码，👇🏻下面的同理(记得删除本行注释)
+    	A3: HTTP Request [  Method:HEAD URL:https://api.day.app/{Your Key}/%SMSRB?copy=%CODE1&amp;automaticallycopy=1&amp;isArchive=1 Headers: Query Parameters: Body: File To Send: File/Directory To Save With Output: Timeout (Seconds):10 Trust Any Certificate:Off Automatically Follow Redirects:Off Use Cookies:Off Continue Task After Error:On ] 
+    	&lt;宕机时以短信转发作为备选&gt;
+    	A4: [X] Send SMS [ Number:xxxxxxxxxxx Message:%SMSRB Store In Messaging App:Off SIM Card: Wait For Result:Off ] If [ %http_response_code !~ 200 ]
+    	A5: End If
+</code></pre>
+<p>导入完成后记得配置<code>Bark</code>的<code>Push URL</code>和接收<code>转发</code>的手机号码<br>
+<img src="https://s2.loli.net/2022/04/12/g3S7jBmPDlpfwy8.png" alt="" loading="lazy"></p>
+<h2 id="更多">更多</h2>
+<p><a href="https://support.apple.com/zh-cn/HT208386">将 iPhone 中的短信/彩信转发到 iPad、iPod touch 或 Mac</a><br>
+<a href="https://feeshy.github.io/tech/pushbullet.html">手动用快捷指令和Pushbullet转发到安卓或Chrome（iOS14暂不支持自动触发）</a></p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#smsforwarder">SmsForwarder</a></li>
+<li><a href="#tasker">Tasker</a></li>
+<li><a href="#%E6%9B%B4%E5%A4%9A">更多</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2022-04-12，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2022-04-12 20:08:48";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

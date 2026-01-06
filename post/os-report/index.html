@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>操作系统实验报告（Linux编程基础实验） | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/os-report/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>操作系统实验报告（Linux编程基础实验）</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2023-12-25</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/MlLPNzFmM/" class="tag">实验报告</a> | 	<a href="https://blog.saky.site/tag/WZfES9slRI/" class="tag">OS</a> | 	<a href="https://blog.saky.site/tag/77cTbWQo3/" class="tag">CentOS</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">866字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">4 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h1 id="操作系统实验报告">操作系统实验报告</h1>
+<h2 id="linux编程基础实验">Linux编程基础实验</h2>
+<h3 id="一-设计目的">一、设计目的：</h3>
+<ol>
+<li>
+<p>了解 Linux 编程环境和编程工具。</p>
+</li>
+<li>
+<p>掌握基本的 Linux 系统命令及执行过程</p>
+</li>
+<li>
+<p>了解 shell的作用及主要分类。</p>
+</li>
+<li>
+<p>掌握shell 脚本程序运行原理及基础语法，学会编写简单的 shell 脚本程序。</p>
+</li>
+</ol>
+<h3 id="二-设计内容">二、设计内容：</h3>
+<p>编写 Linux bash 脚本文件实现查看目录 home 中包含的文件数量和子目录数量，并以以下格式输出到文件 fle.ini 中，格式如下：</p>
+<pre><code>[ 文件夹 ]
+文件夹下文件(夹)1
+文件夹下文件(夹)2
+...
+[文件夹 2]
+文件夹下文件(夹)1
+文件夹下文件(夹)2
+...
+[Directories Count]
+10
+[ File Count ]
+4
+</code></pre>
+<h3 id="三-设计任务和要求">三、设计任务和要求：</h3>
+<h4 id="31-实验准备">3.1 实验准备：</h4>
+<ul>
+<li>确保拥有 Linux 操作系统环境</li>
+<li>了解基本的 Linux 命令行操作</li>
+<li>了解 Bash 脚本的基础语法</li>
+</ul>
+<h4 id="32-实验基本知识及原理">3.2 实验基本知识及原理：</h4>
+<p>Linux 操作系统提供了强大的命令行工具，Bash 是其中一种常用的 Shell。Bash 脚本可以用于自动化执行一系列任务，包括文件和目录的操作。在脚本中，可以使用循环、条件语句等结构，以及一系列 Linux 命令来实现特定的功能。</p>
+<h4 id="33-实验说明">3.3 实验说明：</h4>
+<p>创建一个 Bash 脚本文件（比如 <code>count_files.sh</code>）。在脚本中使用循环和条件语句遍历指定目录下的文件和子目录。输出每个子目录及其下文件的列表，并格式化输出到指定的文件 <code>file.ini</code> 中。统计目录数量和文件数量，将结果输出到文件 <code>file.ini</code> 中。运行脚本并检查生成的 <code>file.ini</code> 文件，确保输出符合预期格式。</p>
+<h3 id="四-可选器材">四、可选器材：</h3>
+<p>Linux实验环境</p>
+<h3 id="五-参考资料">五、参考资料：</h3>
+<p>《Linux 编程基础》《计算机操作系统实验指导》</p>
+<h3 id="六-实验内容">六、实验内容</h3>
+<blockquote>
+<p>count_files.sh</p>
+</blockquote>
+<pre><code class="language-bash">#!/bin/bash
+
+# 输出文件路径
+output_file=&quot;file.ini&quot;
+
+# 遍历 home 目录
+for entry in &quot;$HOME&quot;/*; do
+  # 检查是否为目录
+  if [ -d &quot;$entry&quot; ]; then
+    # 输出目录名称
+    echo &quot;[$(basename &quot;$entry&quot;)]&quot;
+
+    # 遍历目录中的文件和子目录
+    for sub_entry in &quot;$entry&quot;/*; do
+      # 输出文件或子目录
+      echo &quot;$(basename &quot;$sub_entry&quot;)&quot;
+    done
+
+    # 输出空行
+    echo &quot;&quot;
+  fi
+done
+
+# 统计目录数量
+directory_count=$(find &quot;$HOME&quot; -type d | wc -l)
+# 统计文件数量
+file_count=$(find &quot;$HOME&quot; -type f | wc -l)
+
+# 输出目录数量
+echo &quot;[Directories Count]&quot; &gt;&gt; &quot;$output_file&quot;
+echo &quot;$directory_count&quot; &gt;&gt; &quot;$output_file&quot;
+
+# 输出文件数量
+echo &quot;[File Count]&quot; &gt;&gt; &quot;$output_file&quot;
+echo &quot;$file_count&quot; &gt;&gt; &quot;$output_file&quot;
+
+echo &quot;操作完成。请查看 $output_file 文件。&quot;
+</code></pre>
+<p>确保在保存脚本后给予执行权限：</p>
+<pre><code class="language-bash">chmod +x count_files.sh
+</code></pre>
+<p>然后执行脚本：</p>
+<pre><code class="language-bash">./count_files.sh
+</code></pre>
+<p>这将生成一个包含目录和文件信息的 <code>file.ini</code> 文件。</p>
+<h3 id="七-实验结论">七、实验结论</h3>
+<h4 id="71-实验难点">7.1 实验难点</h4>
+<p>在之前没有接触过 Linux 操作系统，在使用命令行进行各项操作的时候，可能会有些不适应。Linux 的架构与 Windows 也存在一定的区别。</p>
+<h4 id="72实验重点">7.2.实验重点</h4>
+<p>熟悉 Linux 的操作环境，了解 shell 脚本基本语法，通过执行脚本文件和C 语言程序进行对比，体会解释执行和编译执行的区别。</p>
+<h4 id="版权所有">版权所有</h4>
+<ul>
+<li><a href="https://www.bilibili.com/read/cv28758487">https://www.bilibili.com/read/cv28758487</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/674003149">https://zhuanlan.zhihu.com/p/674003149</a></li>
+<li><a href="https://www.jianshu.com/p/fb45d617acb1">https://www.jianshu.com/p/fb45d617acb1</a></li>
+<li><a href="https://blog.csdn.net/shellblock/article/details/135193990">https://blog.csdn.net/shellblock/article/details/135193990</a></li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A">操作系统实验报告</a>
+<ul>
+<li><a href="#linux%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C">Linux编程基础实验</a>
+<ul>
+<li><a href="#%E4%B8%80-%E8%AE%BE%E8%AE%A1%E7%9B%AE%E7%9A%84">一、设计目的：</a></li>
+<li><a href="#%E4%BA%8C-%E8%AE%BE%E8%AE%A1%E5%86%85%E5%AE%B9">二、设计内容：</a></li>
+<li><a href="#%E4%B8%89-%E8%AE%BE%E8%AE%A1%E4%BB%BB%E5%8A%A1%E5%92%8C%E8%A6%81%E6%B1%82">三、设计任务和要求：</a>
+<ul>
+<li><a href="#31-%E5%AE%9E%E9%AA%8C%E5%87%86%E5%A4%87">3.1 实验准备：</a></li>
+<li><a href="#32-%E5%AE%9E%E9%AA%8C%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%8F%8A%E5%8E%9F%E7%90%86">3.2 实验基本知识及原理：</a></li>
+<li><a href="#33-%E5%AE%9E%E9%AA%8C%E8%AF%B4%E6%98%8E">3.3 实验说明：</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E5%8F%AF%E9%80%89%E5%99%A8%E6%9D%90">四、可选器材：</a></li>
+<li><a href="#%E4%BA%94-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">五、参考资料：</a></li>
+<li><a href="#%E5%85%AD-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">六、实验内容</a></li>
+<li><a href="#%E4%B8%83-%E5%AE%9E%E9%AA%8C%E7%BB%93%E8%AE%BA">七、实验结论</a>
+<ul>
+<li><a href="#71-%E5%AE%9E%E9%AA%8C%E9%9A%BE%E7%82%B9">7.1 实验难点</a></li>
+<li><a href="#72%E5%AE%9E%E9%AA%8C%E9%87%8D%E7%82%B9">7.2.实验重点</a></li>
+<li><a href="#%E7%89%88%E6%9D%83%E6%89%80%E6%9C%89">版权所有</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2023-12-25，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2023-12-25 10:57:01";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>Gridea+Github/Coding=0元部署个人博客 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/gridea/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>Gridea+Github/Coding=0元部署个人博客</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-01-15</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1078字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">4 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<img class="featureImg" alt="featureimg" src="https://acg.toubiec.cn/random.php?7" referrerpolicy="no-referrer">
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<!-- wp:paragraph -->
+<p>如果你使用过 Hexo 等工具基于 Github 做个人博客，那么恭喜你，你可以很轻松的上手使用Gridea。 如果你以前没有使用过，那么希望这篇文章可以帮助你顺利的完成博客搭建。</p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>之前使用过Hexo，但是不是那么方便，后来在网上乱逛的时候发现了 Gridea ，使用之后感觉非常棒。 零基础新手也能快手入手。</p>
+<!-- /wp:paragraph --><!-- wp:heading -->
+<h2>下载地址</h2>
+<!-- /wp:heading --><!-- wp:group -->
+<!-- wp:group -->
+<!-- wp:button {"backgroundColor":"luminous-vivid-orange","className":"is-style-fill"} -->
+<a href="http://pan.shellblock.top/file/22821665-428666630">网盘下载</a>   <a href="https://github.com/getgridea/gridea/releases/download/v0.9.2/Gridea.Setup.0.9.2.exe">直链下载</a>
+<!-- /wp:group --><!-- wp:heading -->
+<h2 id="准备工作">准备工作</h2>
+<!-- /wp:heading --><!-- wp:quote -->
+<blockquote>
+<p>由于 Github 和 Coding 的步骤差不多，下面就以 Github 为例来操作一下</p>
+</blockquote>
+<!-- /wp:quote --><!-- wp:paragraph -->
+<p><strong>必须：确保你已经安装过 <a href="https://git-scm.com/downloads">Git</a> 和 <a href="https://gridea.dev/">Gridea</a></strong><br /><strong>注意：同步会覆盖掉仓库的文件，若仓库内有需要备份的，请手动备份</strong></p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>首先你需要一个 <a href="http://github.com/">Github</a> 账号，如果没有的话，快去注册一个吧！</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550403256560.png" alt="Github Personal access tokesn" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>登录 Github，然后进入到 <a href="https://github.com/settings/tokens/new">这里</a> 创建一个 <strong>Token</strong>，勾选上 <strong>repo</strong> 的相关权限即可，下面是对应的截图示例：</p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>生成之后你可以复制 <strong>Token</strong> 到你可以再次找到的某个地方，因为一旦你关了这个网页就再也不会看到它了，稍后会在软件中使用</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550403732691.png" alt="Token示例" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>接下来你需要创建一个仓库，用来存放博客构建后的静态文件。我们建议你创建仓库名为 <strong>用户名.github.io</strong> 的仓库，因为 Github 会默认将此仓库设置成 <a href="https://pages.github.com/">Github Pages</a> 可访问类型，若不是用此命名的仓库，则不能默认使用 Github Pages，所以请认真确认。例如我的 Github 用户名为 <strong>EryouHao</strong>，则仓库名为 <strong>EryouHao.github.io</strong>。使用这种方式还有一个好处是，在没有自定义域名的情况下，使你的博客域名更短。当然如果想使用其他仓库来存放博客静态文件的话，也不是不可以，只不过，存放之后，若没有设置自定义域名，则访问地址将变成 <code>https://用户名.github.io/blog</code> （blog 为仓库名）这种二级目录的形式。</p>
+<!-- /wp:paragraph --><!-- wp:heading -->
+<h2 id="开始使用">开始使用</h2>
+<!-- /wp:heading --><!-- wp:paragraph -->
+<p>打开 <strong>Hve Notes</strong> 进入到<strong>配置</strong>页面，然后按照下面示例，输入相关配置并保存</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550405739647.png" alt="配置示例" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>在不开启文章评论的情况下，到此为止，你已经可以点击预览，点击同步进行博客部署啦，快去试试看吧！（当然在不同步的情况下）</p>
+<!-- /wp:paragraph --><!-- wp:heading -->
+<h2 id="开启文章评论">开启文章评论</h2>
+<!-- /wp:heading --><!-- wp:paragraph -->
+<p><strong>Gridea</strong>  目前提供了 <a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">Gitalk</a> 和 <a href="https://fehey.com/post/hve-notes-start/">Disqus</a> 两种评论系统支持。</p>
+<!-- /wp:paragraph --><!-- wp:quote -->
+<blockquote>
+<p>Gitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。如果你博客使用的是 Gitalk 的话，建议你可以选择 Gitalk 来作为评论插件。</p>
+</blockquote>
+<!-- /wp:quote --><!-- wp:paragraph -->
+<p>你可以按照 <a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">Gitalk 的文档</a> 进行相关字段配置，或者按照下面的步骤操作。</p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>首先你需要有一个 <strong>Github OAuth Application</strong>，点击<a href="https://github.com/settings/applications/new">这里</a>创建，字段填写可以参照下图</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550455713413.png" alt="Github OAuth" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>创建完成后可将 <strong>Client ID</strong> 和 <strong>Client Secret</strong>复制一下，保存到本地</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550455918492.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>接下来就可以去应用里面填写对应的信息，并开启评论</p>
+<!-- /wp:paragraph --><!-- wp:image -->
+<figure><img src="https://fehey.com/post-images/1550456148809.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>这样评论插件就设置好了，在预览时会在文章页显示评论模块，但不会显示具体的评论信息，因为这个是本地预览，而 <strong>Github OAuth</strong> 设置的域名为线上的域名。待博客同步到线上时就可以显示啦！</p>
+<!-- /wp:paragraph --><!-- wp:paragraph {"fontSize":"medium"} -->
+<p><strong>额，GitHub 看不懂？那就使用Coding吧 </strong></p>
+<!-- /wp:paragraph --><!-- wp:paragraph -->
+<p>下面介绍如何使用Coding部署个人博客</p>
+<!-- /wp:paragraph --><!-- wp:list -->
+<ul>
+<li>必须：确保你已经安装过 Git 和 Gridea</li>
+<li>注意：同步会覆盖掉仓库的文件，若仓库内有需要备份的，请手动备份</li>
+</ul>
+<!-- /wp:list --><!-- wp:paragraph -->
+<p>首先你需要一个<a href="https://e.coding.net/signup">  Coding  </a>账号，如果没有的话，赶快<a href="https://e.coding.net/signup">注册</a>一个吧（现在 Coding 是腾讯的了，直接微信登录就OK）</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/79ca8669720dbc0f0c2ee2a95ab31795.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>登录 Coding，下面是对应步骤的截图示例：</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/f8c5511d963ebf430774009abb4832a6.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>创建一个  令牌 ，勾选上 repo 的相关权限即可，下面是对应的截图示例：</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/97fe8e085c12d1aa844b31edfc469bca.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>稍后会在软件中使用 令牌 接下来你需要创建一个仓库，用来存放博客构建后的静态文件。建议你创建仓库名为 用户名.coding.me 的仓库。</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/f8c5511d963ebf430774009abb4832a6.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/e6819ee30bdb5ee733892b4ccf54168d.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/4d13a30de012411bc5c55e2cea5b7c44.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:paragraph -->
+<p>打开 Gridea 进入到配置页面，然后按照下面示例，输入相关配置并保存</p>
+<!-- /wp:paragraph --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/fde52d4b302636057f2f745739adecf1.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/c88ee13a5f1a0237fd25102eba38d23c.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/98faae94077a3593341eebd2c10e3845.png" alt="" /></figure>
+<!-- /wp:image --><!-- wp:image {"sizeSlug":"large"} -->
+<figure><img src="https://yanxuan.nosdn.127.net/49bab2a25661c0353bac883034652973.png" alt="" /></figure>
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"></div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-01-15，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-01-15 15:44:51";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

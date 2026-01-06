@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>php+mysql 实现简单登录页面(带验证码功能) | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/php-mysql-login/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>php+mysql 实现简单登录页面(带验证码功能)</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-09-08</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/rQbDYve5J/" class="tag">php</a> | 	<a href="https://blog.saky.site/tag/zcRP0Ua1_l/" class="tag">mysql</a> | 	<a href="https://blog.saky.site/tag/7yuDjG8bY/" class="tag">验证码</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1827字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">10 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h2 id="实现目标">实现目标</h2>
+<p>1、登录界面<br>
+用户名输入框<br>
+密码输入框<br>
+验证码输入框<br>
+提交按钮</p>
+<p>2、数据库新建一个用户表admin:<br>
+设置字段：</p>
+<ul>
+<li>user</li>
+<li>password</li>
+</ul>
+<p>在数据库中手动添加一条用户记录</p>
+<p>3、登录验证文件</p>
+<ul>
+<li>判断登录页面提交的用户名、密码和数据库中的用户名和密码比对，</li>
+<li>验证码和session中的验证码比对，</li>
+<li>判断提示登录成功或用户名错误、验证码错</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://pic.rmb.bdstatic.com/bjh/08c90751edbddd390d092673f410cc92.png" alt="登录界面" loading="lazy"></figure>
+<h2 id="登录界面">登录界面</h2>
+<p>index.html</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;登录&lt;/title&gt;
+  &lt;style&gt;
+    body{
+      font: 16px arial,'Microsoft Yahei','Hiragino Sans GB',sans-serif;
+    }
+    h1{
+      margin: 0;
+      color:#3a87ad;
+      font-size: 26px;
+    }
+    .content{
+      width: 45%;
+      margin: 0 auto;
+     
+    }
+    .content &gt;div{
+      margin-top: 200px;
+      padding: 20px;
+      background: #d9edf7;  
+      border-radius: 12px;
+    }
+    .content dl{
+      color: #2d6a88;
+      line-height: 40px;
+    } 
+    .content div div {
+      padding-bottom: 20px;
+      text-align:center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;div&gt;
+    &lt;form method=&quot;post&quot; action=&quot;login.php&quot;&gt;
+      &lt;div&gt;用户名：&lt;input type=&quot;text&quot;  name=&quot;username&quot;&gt;&lt;/div&gt;
+      &lt;div&gt;密码：&lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;&lt;/div&gt;
+      &lt;div&gt;验证码：&lt;input type=&quot;text&quot; name=&quot;verifycode&quot; class=&quot;captcha&quot;&gt;&lt;/div&gt;
+      &lt;div&gt;
+        &lt;img id=&quot;captcha_img&quot; src=&quot;captcha.php?r=&lt;?php echo rand();?&gt;&quot; alt=&quot;验证码&quot;&gt;
+        &lt;label&gt;&lt;a href=&quot;javascript:void(0)&quot; rel=&quot;external nofollow&quot; onclick=&quot;document.getElementById('captcha_img').src='captcha.php?r='+Math.random()&quot;&gt;换一个&lt;/a&gt; &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div&gt;&lt;input type=&quot;checkbox&quot; name=&quot;autologin[]&quot; value=&quot;1&quot;/&gt;自动登录&lt;/div&gt;&lt;br&gt;
+  
+      &lt;div&gt;&lt;button type=&quot;submit&quot;&gt;登录&lt;/button&gt;&lt;/form&gt;&lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;/div&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="验证码">验证码</h2>
+<p>captcha.php</p>
+<pre><code class="language-php">&lt;?php
+/*PHP实现验证码*/
+session_start();//开启会话
+//创建画布
+$image=imagecreatetruecolor(100,38);
+//背景颜色
+$bgcolor=imagecolorallocate($image,255,255,255);
+imagefill($image,0,0,$bgcolor);
+$captch_code='';//存储验证码
+//随机选取4个数字
+for($i=0;$i&lt;4;$i++){
+  $fontsize=10;    //
+  $fontcolor=imagecolorallocate($image,rand(0,120),rand(0,120),rand(0,120));//随机颜色
+  $fontcontent=rand(0,9);
+  $captch_code.=$fontcontent;
+  $x=($i*100/4)+rand(5,10);  //随机坐标
+  $y=rand(5,10);
+  imagestring($image,$fontsize,$x,$y,$fontcontent,$fontcolor);
+}
+/*//字母和数字混合验证码
+for($i=0;$i&lt;4;$i++) {
+  $fontsize = 10;    //
+  $fontcolor = imagecolorallocate($image, rand(0, 120), rand(0, 120), rand(0, 120));//??????
+  $data = 'abcdefghijklmnopqrstuvwxyz1234567890';  //数据字典
+  $fontcontent = substr($data, rand(0, strlen($data)), 1);
+  $captch_code.=$fontcontent;
+  $x = ($i * 100 / 4) + rand(5, 10);
+  $y = rand(5, 10);
+  imagestring($image, $fontsize, $x, $y, $fontcontent, $fontcolor);
+}*/
+$_SESSION['code']=$captch_code;
+//增加干扰点
+for($i=0;$i&lt;200;$i++){
+  $pointcolor=imagecolorallocate($image,rand(50,200),rand(50,200),rand(50,200));
+  imagesetpixel($image,rand(1,99),rand(1,29),$pointcolor);//
+}
+//增加干扰线
+for($i=0;$i&lt;3;$i++){
+  $linecolor=imagecolorallocate($image,rand(80,280),rand(80,220),rand(80,220));
+  imageline($image,rand(1,99),rand(1,29),rand(1,99),rand(1,29),$linecolor);
+}
+//输出格式
+header('content-type:image.png');
+imagepng($image);
+//销毁图片
+imagedestroy($image);
+?&gt;
+</code></pre>
+<h2 id="登录验证">登录验证</h2>
+<p>login.php</p>
+<pre><code class="language-php">&lt;?php
+header(&quot;Content-type:text/html;charset=UTF-8&quot;);
+require &quot;conn.php&quot;;      //访问数据库
+session_start();        //开启会话一获取到服务器端验证码
+$username=$_POST['username'];
+$password=$_POST['password'];
+$autologin=isset($_POST['autologin'])?1:0;   //获取是否选择了自动登录
+$verifycode=$_POST['verifycode'];
+$code=$_SESSION['code'];    //获取服务器生成的验证码
+/*
+ * 首先进行判空操作，通过后进行验证码验证，通过后再进行数据库验证。
+ * 手机号码和邮箱验证可根据需要自行添加
+ * */
+if(checkEmpty($username,$password,$verifycode)){
+  if(checkVerifycode($verifycode,$code)){
+    if(checkUser($username,$password)){
+      $_SESSION['username']=$username; //保存此时登录成功的用户名
+      if($autologin==1){        //如果用户勾选了自动登录就把用户名和加了密的密码放到cookie里面
+        setcookie(&quot;username&quot;,$username,time()+3600*24*3);  //有效期设置为3天
+        setcookie(&quot;password&quot;,md5($password),time()+3600*24*3);
+      }
+      else{
+        setcookie(&quot;username&quot;,&quot;&quot;,time()-1);  //如果没有选择自动登录就清空cookie
+        setcookie(&quot;password&quot;,&quot;&quot;,time()-1);
+      }
+      header(&quot;location: home.php &quot;);      //全部验证都通过之后跳转到首页
+    }
+  }
+}
+
+//方法：判断是否为空
+function checkEmpty($username,$password,$verifycode){
+  if($username==null||$password==null){
+    echo '&lt;html&gt;&lt;head&gt;&lt;Script Language=&quot;JavaScript&quot;&gt;alert(&quot;用户名或密码为空&quot;);&lt;/Script&gt;&lt;/head&gt;&lt;/html&gt;' . &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0;url=index.html\&quot;&gt;&quot;;
+  }
+  else{
+    if($verifycode==null){
+      echo '&lt;html&gt;&lt;head&gt;&lt;Script Language=&quot;JavaScript&quot;&gt;alert(&quot;验证码为空&quot;);&lt;/Script&gt;&lt;/head&gt;&lt;/html&gt;' . &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0;url=index.html\&quot;&gt;&quot;;
+    }
+    else{
+      return true;
+    }
+  }
+}
+//方法：检查验证码是否正确
+function checkVerifycode($verifycode,$code){
+  if($verifycode==$code){
+    return true;
+  }
+  else{
+    echo '&lt;html&gt;&lt;head&gt;&lt;Script Language=&quot;JavaScript&quot;&gt;alert(&quot;验证码错误&quot;);&lt;/Script&gt;&lt;/head&gt;&lt;/html&gt;' . &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0;url=index.html\&quot;&gt;&quot;;
+  }
+}
+//方法：查询用户是否在数据库中
+function checkUser($username,$password){
+  $conn=new Mysql();
+  $sql=&quot;select * from user where username='$username' and password='$password';&quot;;
+  $result=$conn-&gt;sql($sql);
+  if($result){
+    return true;
+  }
+  else{
+    echo '&lt;html&gt;&lt;head&gt;&lt;Script Language=&quot;JavaScript&quot;&gt;alert(&quot;用户不存在&quot;);&lt;/Script&gt;&lt;/head&gt;&lt;/html&gt;' . &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0;url=index.html\&quot;&gt;&quot;;
+  }
+  $conn-&gt;close();//关闭数据库
+}
+
+//方法：手机格式验证
+function checkPhoneNum($phonenumber){
+  $preg=&quot;/^1[34578]{1}\d{9}$/&quot;;
+  if(preg_match($preg,$phonenumber)){
+    return ture; //验证通过
+  }else{
+    echo '&lt;html&gt;&lt;head&gt;&lt;Script Language=&quot;JavaScript&quot;&gt;alert(&quot;手机号码格式有误&quot;);&lt;/Script&gt;&lt;/head&gt;&lt;/html&gt;' . &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0;url=index.html\&quot;&gt;&quot;;//手机号码格式不对
+  }
+}
+//方法：邮箱格式验证
+function checkEmail($email){
+  $preg = '/^(\w{1,25})@(\w{1,16})(\.(\w{1,4})){1,3}$/';
+  if(preg_match($preg, $email)){
+    return true;
+  }else{
+    echo '&lt;html&gt;&lt;head&gt;&lt;Script Language=&quot;JavaScript&quot;&gt;alert(&quot;邮箱格式有误&quot;);&lt;/Script&gt;&lt;/head&gt;&lt;/html&gt;' . &quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;0;url=index.html\&quot;&gt;&quot;;
+  }
+}
+</code></pre>
+<h2 id="数据库连接">数据库连接</h2>
+<p>conn.php</p>
+<pre><code class="language-php">&lt;?php
+class Mysql{
+     private static $host=&quot;localhost&quot;;
+     private static $user=&quot;root&quot;;
+     private static $password=&quot;23102310&quot;;
+     private static $dbName=&quot;chat&quot;;           //数据库名
+     private static $charset=&quot;utf8&quot;;          //字符编码
+     private static $port=&quot;3306&quot;;            //端口号
+     private $conn=null;
+          function __construct(){
+            $this-&gt;conn=new mysqli(self::$host,self::$user,self::$password,self::$dbName,self::$port);
+            if(!$this-&gt;conn)
+            {
+               die(&quot;数据库连接失败！&quot;.$this-&gt;conn-&gt;connect_error);
+            }else{
+              echo &quot;连接成功！&quot;;
+            }
+            $this-&gt;conn-&gt;query(&quot;set names &quot;.self::$charset);
+          }
+          //执行sql语句
+          function sql($sql){
+            $res=$this-&gt;conn-&gt;query($sql);
+          if(!$res)
+            {
+               echo &quot;数据操作失败&quot;;
+            }
+            else
+            {
+               if($this-&gt;conn-&gt;affected_rows&gt;0)
+               {
+                  return $res;
+               }
+               else
+               {
+                 echo &quot;0行数据受影响！&quot;;
+               }
+            }
+          }
+          //返回受影响数据行数
+          function getResultNum($sql){
+           $res=$this-&gt;conn-&gt;query($sql);
+           return mysqli_num_rows($res);
+           }
+          //关闭数据库
+          public function close()
+          {
+            @mysqli_close($this-&gt;conn);
+          }
+    }
+
+$conn=new Mysql();
+//关闭数据库
+$conn-&gt;close();
+?&gt;
+</code></pre>
+<h2 id="登录成功页面">登录成功页面</h2>
+<p>home.php</p>
+<pre><code class="language-php">&lt;?php
+// 开启Session
+session_start();
+
+// 首先判断Cookie是否有记住了用户信息
+if(empty($_COOKIE['username'])&amp;&amp;empty($_COOKIE['password'])){
+  if(isset($_SESSION['username']))
+    echo &quot;登录成功，欢迎您&quot;.$_SESSION['username'].&quot;&lt;a href='logout.php'&gt;退出登录&lt;/a&gt;&quot;;
+  else
+    echo &quot;你还没有登录，&lt;a href='index.html'&gt;请登录&lt;/a&gt;&quot;;
+}
+else
+  echo &quot;登录成功，欢迎您：&quot;.$_COOKIE['username'].&quot;&lt;a href='logout.php'&gt;退出登录&lt;/a&gt;&quot;;
+?&gt;
+</code></pre>
+<h2 id="数据库">数据库</h2>
+<p>创建表</p>
+<pre><code class="language-mysql">CREATE TABLE `user` (
+`username` varchar(20) NOT NULL PRIMARY KEY,
+`password` varchar(20)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre>
+<p>向表中添加数据</p>
+<pre><code class="language-mysql">INSERT INTO `user` (`username`, `password`) VALUES
+('admin', 'admin');
+</code></pre>
+<p>创建了一个用户名为admin，密码为admin的数据</p>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E7%9B%AE%E6%A0%87">实现目标</a></li>
+<li><a href="#%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2">登录界面</a></li>
+<li><a href="#%E9%AA%8C%E8%AF%81%E7%A0%81">验证码</a></li>
+<li><a href="#%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81">登录验证</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5">数据库连接</a></li>
+<li><a href="#%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E9%A1%B5%E9%9D%A2">登录成功页面</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-09-08，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-09-08 16:06:21";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

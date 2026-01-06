@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>【Python】NumPy ufunc | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/python-numpy-ufunc/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1767677092043" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>【Python】NumPy ufunc</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2021-04-07</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://blog.saky.site/tag/ruzWW3HYrI/" class="tag">Python</a> | 	<a href="https://blog.saky.site/tag/xLXyGaSoZ/" class="tag">ndarry</a> | 	<a href="https://blog.saky.site/tag/4k7HTYxmQ/" class="tag">numpy</a> | 	<a href="https://blog.saky.site/tag/zBxoY-sjdN/" class="tag">ufunc</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1733字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">8 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>ufunc是universal function的缩写，这些函数能够作用于narray对象的每一个元素上，而不是针对narray对象操作，numpy提供了大量的ufunc的函数。这些函数在对narray进行运算的速度比使用循环或者列表推导式要快很多，但请注意，在对单个数值进行运算时，python提供的运算要比numpy效率高。</p>
+<h3 id="广播机制">广播机制</h3>
+<p>广播（Broadcasting）是指不同形状的数组之间执行算术运算的方式，需要遵循4个原则：</p>
+<ol>
+<li>让所有输入数组都向其中shape最长的数组看齐，shape中不足的部分都通过在前面加1(指1个维度)补齐；</li>
+<li>输出数组的shape是输入数组shape的各个轴上的最大值；</li>
+<li>如果各个输入数组的对应轴的长度相同或者其长度为1时，这样的数组之间能够用来计算，否则会出错；</li>
+<li>当输入数组的某个轴的长度为1时，沿着此轴运算时，使用此轴上的第一组值。</li>
+</ol>
+<p><strong>注意</strong>: 当使用 ufunc 函数进行数组计算时, ufunc 函数会对两个数组的对应元素进行计算。进行这种计算的前提是两个数组的 <code>shape</code> 一致。若两个数组的 <code>shape</code> 不一致，则 NumPy 会实行广播机制。</p>
+<h4 id="一维ndarray广播">一维ndarray广播</h4>
+<pre><code class="language-Python">import numpy as np
+arr1 = np.array([[0,0,0],[1,1,1],[2,2,2],[3,3,3]])
+print(arr1)
+
+arr2 = np.array([1,2,3])
+print(arr2)
+
+print(arr1 + arr2)
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/img_convert/15d19cdd8f8016947fb683ad3393c8fc.png" alt="一维ndarray广播" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/img_convert/865525fdc4f37635270168472f249926.gif" alt="计算两个ndarry的和的过程" loading="lazy"></figure>
+<h4 id="二维ndarray广播">二维ndarray广播</h4>
+<pre><code class="language-Python">arr3 = np.arange(1,5).reshape(4,1)
+print(arr3)
+
+print(arr1+arr3)
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/img_convert/22cad798549c9b4912923c35329293a9.png" alt="二维ndarray广播" loading="lazy"></figure>
+<p><strong>注意：</strong> 如果一维数组元素的数量与二维数组列的数量匹配，则将二维数组乘以一维数组将导致广播。<br>
+A two dimensional array multiplied by a one dimensional array results in broadcasting if number of 1-d array elements matches the number of 2-d array columns.</p>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/img_convert/c17b4dfea5e486b5e89d849421044656.gif" alt="" loading="lazy"></figure>
+<h3 id="常用ufunc运算">常用ufunc运算</h3>
+<p><strong>注意</strong>: 对于计算单个元素，则建议采用Math库里对应的函数，np.sin( )对应math.sin( )，因为对于np.sin( )为了实现数组计算，底层做了很多复杂的处理，因此对于单个元素，math库里的函数计算速度快得多；而对于数组元素，则采用numpy库里的函数计算。<br>
+在读取计算结果时，通过下标获取数组元素的类型为Numpy中定义的类型，将其转换为python的标准类型需耗时间。针对此问题，可以采用数组提供的item( )方法，用来获取数组中单个元素，并直接返回标准的python数据类型，如：</p>
+<pre><code>&gt;&gt;&gt; a = np.arange(6.0).reshape(2,3)
+&gt;&gt;&gt; a.item(1,2)  #与a[1,2]类似
+5.0
+&gt;&gt;&gt; type(a.item(1,2))
+&lt;class 'float'&gt;
+&gt;&gt;&gt; type(a[1,2])
+&lt;class 'numpy.float64'&gt;
+</code></pre>
+<h4 id="四则运算">四则运算</h4>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/b5c3e543d96f11bae6f5645ba33800c8.png" alt="四则运算" loading="lazy"><br>
+numpy提供的四则运算ufunc能够大大的提高计算效率，但如果运算式复杂，且参与运算的narray过大，会产生大量的中间结果，从而降低计算效率。例如：计算x=a*b+c时，实际上会按照如下方式计算：</p>
+<pre><code>t = a*b
+x = t+c
+del t
+</code></pre>
+<p>这会产生两次内存分配，一次时x，一次时t，所以按照</p>
+<pre><code>x = a*b
+x = x+c
+</code></pre>
+<p>会节省一次内存的分配，从而提高效率。</p>
+<h4 id="比较和布尔运算">比较和布尔运算</h4>
+<p>使用“<code>==</code>”、“<code>&gt;</code>”等比较运算符比较两个数组，将返回一个布尔数组，它的每个元素的值是两个数组对应元素比较的结果，如：</p>
+<pre><code>&gt;&gt;&gt; np.array([1,2,3])==np.array([3,2,1])
+array([False,  True, False], dtype=bool)
+&gt;&gt;&gt; np.array([1,2,3])&lt;np.array([3,2,1])
+array([ True, False, False], dtype=bool)
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/img_convert/c33219abfc6c5b8bec179aca42a3fcfc.png" alt="比较和布尔运算" loading="lazy"></figure>
+<p><strong>注意：</strong><br>
+对两个bool数组进行逻辑运算时，将发生ValueError异常，因为bool值也是True和False，numpy无法确定运算目的，可以使用numpy.any()和numpy.all()函数，他们的使用方法和python的any()、all()函数用法相同。以bitwise_开头的函数时用于位运算，如(bitwise_and、bitwise_or)等，也可以使用<code>&amp;  |  ~  ^ </code>来进行运算。<br>
+除了numpy提供的内置ufunc函数，用户也可以编写自定义的ufunc函数，方式是：</p>
+<ol>
+<li>编写对单个数值计算的目的函数；</li>
+<li>利用np.frompyfunc(func, nin, nout)将其转换为ufunc函数，其中func是上面编写的目的函数，nin是输入的参数个数，nout是返回值的个数。</li>
+</ol>
+<pre><code>## 基本形式
+u_func = np.frompyfunc(func,nin,nout)
+ret = u_func(narray_obj,param1,param2..)
+1
+2
+3
+</code></pre>
+<p>这里返回的ret是object类型，所以实际上需要用astype()转换为目的类型。numpy.vectorize()也实现了和numpy.frompyfunc()一样的功能，区别是前者可以t通过otypes指定返回值的类型，不用再用astype()进行转换。</p>
+<pre><code>## 基本形式
+u_func = np.frompyfunc(func,otypes=[dtype1,dtype2..]
+ret = u_func(narray_object,param1,param2..)
+</code></pre>
+<h4 id="自定义ufunc函数">自定义ufunc函数</h4>
+<p>通过Numpy提供的标准ufunc函数可以满足大多要求，但有些特殊情况需要自定义函数来实现。这时，可以采用python来实现，然后使用frompyfunc( )函数将一个计算单个元素的函数转换为ufunc函数。例如，用一个分段函数来描述三角波，它的样子如图所示：<br>
+<img src="https://img-blog.csdnimg.cn/img_convert/762944ad58dbe0f6a8ceddbd1b5c391e.png" alt="三角波" loading="lazy"><br>
+Python函数定义如下：</p>
+<pre><code>ef triangle_wave(x,c,c0,hc):
+    x = x - int(x)   #周期为1，取小数部分计算
+    if x&gt;=c:
+        r = 0.0
+    elif x&lt;c0:
+        r = x/c0*hc
+    else:
+        r = (c-x)/(c-c0)*hc
+    return r
+</code></pre>
+<h5 id="1通过列表推导计算">1.通过列表推导计算</h5>
+<p>先使用列表推导计算一个列表，然后用array( )转换为数组，这种方法每次都要使用列表推导，而且对于多维数组，比较复杂，计算如下：</p>
+<pre><code>x = np.linspace(0,2,1000)
+y1 = np.array([triangle_wave(t,0.6,0.4,1.0) for t in x])
+</code></pre>
+<h5 id="2-fromnpyfunc-函数计算">2. fromnpyfunc( )函数计算</h5>
+<p>通过frompyfunc( )可以将计算单个值的函数转换为一个能对数组中每个元素计算的ufunc函数。frompyfunc( )的调用格式为：</p>
+<pre><code>frompyfunc(func,nin,nout)
+</code></pre>
+<p>其中，ufunc是计算单个元素的函数,nin是输入参数的个数，nout是func返回值的个数。如：</p>
+<pre><code>triangle_wave_ufunc = np.frompyfunc(triangle_wave,4,1)
+y2 = triangle_wave_ufunc(x,0.6,0.4,1.0)
+</code></pre>
+<p><strong>注意：</strong> triangle_wave_ufunc（ ）所返回数组的元素类型是object，因此还需要调用数组的astype()方法将其转换为双精度浮点数组</p>
+<h5 id="3-vectorize-函数计算">3. vectorize( )函数计算</h5>
+<p>使用vectorize( )可以实现和frompyfunc( )类似的功能，但他可以通过otypes参数指定返回数组的元素类型。otypes参数可以是一个表示元素类型的字符串，也可以是一个类型列表，使用列表可以描述多个返回数组的元素类型，如将上面的代码改成vectorize( )，则为：</p>
+<pre><code>triangle_wave_vec = np.vectorize(triangle_wave, otypes[np.float])
+y3 = triangle_wave_vec(x,0.6,0.4,1.0)
+</code></pre>
+<h3 id="参考资料">参考资料</h3>
+<ul>
+<li><a href="https://numpy.org/devdocs/user/theory.broadcasting.html">https://numpy.org/devdocs/user/theory.broadcasting.html</a></li>
+<li><a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">https://numpy.org/doc/stable/user/basics.broadcasting.html</a></li>
+<li><a href="https://www.numpy.org.cn/user/basics/broadcasting.html">https://www.numpy.org.cn/user/basics/broadcasting.html</a></li>
+<li><a href="https://blog.csdn.net/lanchunhui/article/details/50158975">https://blog.csdn.net/lanchunhui/article/details/50158975</a></li>
+<li><a href="https://blog.csdn.net/kezunhai/article/details/46127845">https://blog.csdn.net/kezunhai/article/details/46127845</a></li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6">广播机制</a>
+<ul>
+<li><a href="#%E4%B8%80%E7%BB%B4ndarray%E5%B9%BF%E6%92%AD">一维ndarray广播</a></li>
+<li><a href="#%E4%BA%8C%E7%BB%B4ndarray%E5%B9%BF%E6%92%AD">二维ndarray广播</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E7%94%A8ufunc%E8%BF%90%E7%AE%97">常用ufunc运算</a>
+<ul>
+<li><a href="#%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97">四则运算</a></li>
+<li><a href="#%E6%AF%94%E8%BE%83%E5%92%8C%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97">比较和布尔运算</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89ufunc%E5%87%BD%E6%95%B0">自定义ufunc函数</a>
+<ul>
+<li><a href="#1%E9%80%9A%E8%BF%87%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E8%AE%A1%E7%AE%97">1.通过列表推导计算</a></li>
+<li><a href="#2-fromnpyfunc-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97">2. fromnpyfunc( )函数计算</a></li>
+<li><a href="#3-vectorize-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97">3. vectorize( )函数计算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2021-04-07，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2021-04-07 14:12:42";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>91</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>
