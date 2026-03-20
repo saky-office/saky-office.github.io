@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>YOLOv8安装+入门训练 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/yolov8-build/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1773985676289" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>YOLOv8安装+入门训练</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2024-01-29</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">999字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">5 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<p>在开始本教程之前请确保已经科学上网</p>
+<h2 id="anaconda-安装">Anaconda 安装</h2>
+<p>下载地址：<a href="https://www.anaconda.com/download/">Free Download | Anaconda</a><br>
+我们需要安装 anaconda，双击打开安装程序，下一步直到选择路径</p>
+<blockquote>
+<p>这里不要在其他盘符新建文件夹，请务必使用默认的路径直接安装，否则可能会出现奇怪的 bug</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://oss.956898603.xyz/2024/01/29/65b7792298b63.png" alt="" loading="lazy"></figure>
+<p>勾选如图选项，然后点击 install 安装。后续完成安装即可。<br>
+如果安装程序有提示失败，那么可以尝试完全卸载后再勾选最后一个选项安装。</p>
+<h3 id="anaconda-升级-python">anaconda 升级 python</h3>
+<ol>
+<li>先更新conda</li>
+</ol>
+<pre><code class="language-shell">conda upgrade conda
+</code></pre>
+<p>如果上一步更新失败，执行这个命令即可</p>
+<pre><code>conda update --force conda
+</code></pre>
+<p><strong>常见报错解决方法</strong><br>
+报错1：<code>CondaHTTPError: HTTP 000 CONNECTION FAILED</code></p>
+<p>conda配置镜像源：</p>
+<pre><code class="language-shell">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --append channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/fastai/
+conda config --append channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --append channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
+ 
+ 
+conda config --set show_channel_urls yes
+</code></pre>
+<p>报错2：<code>CondaValueError: Malformed version string '~': invalid character(s).</code></p>
+<pre><code class="language-shell">conda upgrade -n base -c defaults --override-channels conda
+</code></pre>
+<ol start="2">
+<li>更新anaconda</li>
+</ol>
+<pre><code class="language-shell">conda update anaconda
+</code></pre>
+<ol start="3">
+<li>安装python，这个命令默认升级到最新版本</li>
+</ol>
+<pre><code class="language-shell">conda install python
+</code></pre>
+<p>本文以<code>3.8</code>为例说明</p>
+<pre><code class="language-shell">conda install python=3.8
+</code></pre>
+<h2 id="yolov8">Yolov8</h2>
+<p>新建一个<code>yolo</code>文件夹，CMD进入文件夹，克隆存储库</p>
+<pre><code class="language-shell">git clone https://github.com/ultralytics/ultralytics.git
+git clone https://github.com/HumanSignal/labelImg.git
+</code></pre>
+<p>将 labelimg 项目放在 ultralytics项目文件夹目录下，方便 pycharm 使用<br>
+<img src="https://oss.956898603.xyz/2024/01/29/65b77a4c92205.png" alt="" loading="lazy"></p>
+<h2 id="pycharm-中的-yolov8-项目配置环境">Pycharm 中的 yolov8 项目配置环境</h2>
+<p>打开 pycharm，导入文件夹<br>
+<img src="https://oss.956898603.xyz/2024/01/29/65b77baa88fac.png" alt="" loading="lazy"><br>
+<img src="https://oss.956898603.xyz/2024/01/29/65b77bd09b177.png" alt="" loading="lazy"><br>
+接下来我们设置编译器环境。按照下图所示，设置使用<code>anaconda</code>，python 版本统一选择 <code>3.8</code>，然后点击确定。<br>
+<img src="https://oss.956898603.xyz/2024/01/29/65b77c38a3d43.png" alt="" loading="lazy"><br>
+<img src="https://oss.956898603.xyz/2024/01/29/65b77c8b8d85c.png" alt="" loading="lazy"><br>
+然后重新启动 pycharm 进行镜像源设置<br>
+下面是一些镜像源，需要一条一条的添加进去。名称随意，授权默认无。</p>
+<pre><code class="language-url">http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+ 
+http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+ 
+http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+ 
+http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
+ 
+http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+</code></pre>
+<p>全部添加进去后点击应用，确定</p>
+<h2 id="pytorch安装">Pytorch安装</h2>
+<p>进入<a href="https://pytorch.org/">https://pytorch.org/</a>，往下拉，本文以<code>Windows</code>+<code>Conda</code>为例说明<br>
+<img src="https://oss.956898603.xyz/2024/01/29/65b77f0b92409.png" alt="" loading="lazy"></p>
+<h3 id="amd显卡">AMD显卡</h3>
+<p><strong>注意</strong>：AMD显卡，不支持cuda，所以无法安装GPU版本的pytorch</p>
+<pre><code class="language-shell">conda install pytorch torchvision torchaudio cpuonly
+</code></pre>
+<p><strong>检验pytorch是否安装好</strong>：</p>
+<pre><code class="language-shell">python
+
+import torch
+
+torch.__version__
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://oss.956898603.xyz/2024/01/29/65b7801180bbb.png" alt="" loading="lazy"></figure>
+<h3 id="nvidia-显卡">nVidia 显卡</h3>
+<pre><code class="language-shell">conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+</code></pre>
+<p><strong>检验pytorch是否安装好</strong>：</p>
+<pre><code class="language-shell">python
+
+import torch
+
+torch.cuda.is_available()
+</code></pre>
+<p>如果返回<code>True</code>，那就证明没有问题了。如果返回<code>False</code>，可能是因为你的显卡驱动版本过低</p>
+<h2 id="yolov8-demo项目">yolov8 demo项目</h2>
+<p>再次回到 pycharm 主界面，会提示安装依赖包（其实一直都会提示，只不过这个时候我们才理会这个）。点击安装即可。</p>
+<p>这里需要多等一会儿，如果安装卡主，可以退出 pycharm 重新打开会提示安装依赖包。重新点击即可。不过可能无法全部完成安装，会有一些包最终还是安装失败。使用下面的命令来安装。</p>
+<pre><code class="language-shell">pip install ultralytics -i https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre>
+<p>继续在终端里输入命令，来运行下 yolo 的图像检测，看看是否真的成功了。命令如下：</p>
+<pre><code class="language-shell">yolo task=detect mode=predict model=yolov8n.pt conf=0.25 source='你想要检测的文件路径'
+</code></pre>
+<blockquote>
+<p>文件路径格式的一个例子：D:/yolo/pic/123.jpg</p>
+</blockquote>
+<p>执行后，看到会自动下载 github 上 pt 这个文件，并且开始进行图像检测。</p>
+<p>运行结束后在 <code>ultralytics\runs\detect</code> 文件夹中会生成检测完成后的图片打开图片。</p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li>https://www.alantorp.online/archives/884/12/17/</li>
+<li>https://blog.csdn.net/qq_42233538/article/details/129997616</li>
+<li>https://blog.csdn.net/weixin_44110563/article/details/123324304</li>
+<li>https://docs.ultralytics.com/zh/quickstart/</li>
+<li>https://youtu.be/_a7cVL9hqnk</li>
+<li>https://www.ruan-cat.com/ruan-cat-own-notes/python/yolov8/yolov8.html</li>
+<li>https://zhuanlan.zhihu.com/p/603272140</li>
+<li>https://www.bilibili.com/read/cv23913741/</li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#anaconda-%E5%AE%89%E8%A3%85">Anaconda 安装</a>
+<ul>
+<li><a href="#anaconda-%E5%8D%87%E7%BA%A7-python">anaconda 升级 python</a></li>
+</ul>
+</li>
+<li><a href="#yolov8">Yolov8</a></li>
+<li><a href="#pycharm-%E4%B8%AD%E7%9A%84-yolov8-%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83">Pycharm 中的 yolov8 项目配置环境</a></li>
+<li><a href="#pytorch%E5%AE%89%E8%A3%85">Pytorch安装</a>
+<ul>
+<li><a href="#amd%E6%98%BE%E5%8D%A1">AMD显卡</a></li>
+<li><a href="#nvidia-%E6%98%BE%E5%8D%A1">nVidia 显卡</a></li>
+</ul>
+</li>
+<li><a href="#yolov8-demo%E9%A1%B9%E7%9B%AE">yolov8 demo项目</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2024-01-29，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2024-01-29 18:06:19";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>93</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>

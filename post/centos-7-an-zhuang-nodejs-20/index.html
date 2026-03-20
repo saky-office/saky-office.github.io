@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://blog.saky.site/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="永远相信美好的事情即将发生"><meta charset="UTF-8"><title>Centos 7 安装 Node.js 20 | Shellblock</title>
+<link href="https://blog.saky.site/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.css"><script async src="https://www.unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js"></script><script src="https://blog.saky.site/media/js/magnify.min.js"></script><script defer src="https://lib.baomitu.com/KaTeX/0.12.0/katex.min.js"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://blog.saky.site/post/centos-7-an-zhuang-nodejs-20/" />
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://blog.saky.site"><img alt="logo" style="display:inline-block;" src="https://blog.saky.site/images/avatar.png"/></a><h1 title="Shellblock" class="weaklink"><a  href="/">Shellblock</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/links" class="selected active current nav__item" >友链</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1773985676289" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>Centos 7 安装 Node.js 20</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2026-01-04</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px"></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">1519字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">8 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<blockquote>
+<p>操作系统版本过低，该Node版本不兼容此操作系统</p>
+</blockquote>
+<p>由于 Centos 停止维护，而一些 Node 项目需要使用 Node.js 20或更高版本，本文详细介绍如何在 Centos7 下手动安装Node.js 20，强制兼容低版本系统</p>
+<h2 id="初步安装-node">初步安装 node</h2>
+<p>1.下载 node.js 的 Linux 版本</p>
+<pre><code class="language-shell">cd ~
+curl -O https://nodejs.org/dist/v20.11.1/node-v20.11.1-linux-x64.tar.xz
+</code></pre>
+<p>2.解压缩</p>
+<pre><code class="language-shell">tar -xf node-v20.11.1-linux-x64.tar.xz
+mv node-v20.11.1-linux-x64 ~/nodejs
+</code></pre>
+<p>3.在命令行中生效<br>
+只在当前终端生效</p>
+<pre><code class="language-shell">export PATH=~/nodejs/bin:$PATH
+</code></pre>
+<p>永久生效</p>
+<pre><code class="language-shell">echo 'export PATH=~/nodejs/bin:$PATH' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<p>4.检查是否生效</p>
+<pre><code class="language-shell">node -v
+npm -v
+</code></pre>
+<p>不出意外的话，这一步会报一个类似的错：<br>
+<img src="https://oss.956898603.xyz/2026/01/04/6959fa49a5c79.png" alt="" loading="lazy"></p>
+<p>​ 原因是因为 node18 开始，都需要 2.27以上的版本支持，但是 centos7.6 老系统默认没有那么高的版本，因此接下来我们去安装<code>glibc_2.28</code>。</p>
+<h2 id="安装-glibc-228">安装 glib.c 2.28</h2>
+<pre><code class="language-shell">wget http://ftp.gnu.org/gnu/glibc/glibc-2.28.tar.gz
+tar xf glibc-2.28.tar.gz 
+cd glibc-2.28/ &amp;&amp; mkdir build  &amp;&amp; cd build
+../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+</code></pre>
+<p>这一步会报一个错：</p>
+<blockquote>
+<p>configure: error:<br>
+*** These critical programs are missing or too old: make bison compiler<br>
+*** Check the INSTALL file for required versions.</p>
+</blockquote>
+<p>就是提示我们的工具集太老了，经过测试，我们需要把服务器上的 gcc 升级到 8，然后 make 要升级到 4</p>
+<h2 id="安装gcc8">安装GCC8</h2>
+<p>首先安装RedHat的软件集合（SCLs）</p>
+<pre><code class="language-shell">yum install centos-release-scl -y
+</code></pre>
+<p>如果安装了GCC4.8就先卸载掉吧，防止冲突（会同步移除g++）：</p>
+<pre><code class="language-shell">yum remove gcc -y
+</code></pre>
+<p>接下来就是安装GCC8以及对应的C++编译器：</p>
+<pre><code class="language-shell">yum install devtoolset-8 -y
+</code></pre>
+<p>这一步会报一个错：<br>
+<img src="https://oss.956898603.xyz/2026/01/04/6959f24825a0d.png" alt="" loading="lazy"></p>
+<h3 id="找不到-gcc-源的解决方案">找不到 gcc 源的解决方案</h3>
+<p>运行</p>
+<pre><code class="language-shell">yum repolist | grep -E &quot;centos-sclo-scl|centos-sclo-rh&quot;
+</code></pre>
+<p>检查是不是有<code>centos-sclo-rh</code>和<code>centos-sclo-scl</code><br>
+如果没有上面这两个，运行一下</p>
+<pre><code class="language-shell">yum install centos-release-scl*
+</code></pre>
+<p>会生成默认的两个文件，在/etc/yum.repos.d/文件夹下可以找到这两个文件</p>
+<p>如何仍然找不到文件，可以自行创建对应缺失文件（⚠️注意大小写，建议直接复制）</p>
+<p>CentOS-SCLo-scl.repo</p>
+<pre><code class="language-repo"># CentOS-SCLo-sclo.repo
+#
+# Please see http://wiki.centos.org/SpecialInterestGroup/SCLo for more
+# information
+
+[centos-sclo-sclo]
+name=CentOS-7 - SCLo sclo
+baseurl=http://mirror.centos.org/centos/7/sclo/$basearch/sclo/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
+[centos-sclo-sclo-testing]
+name=CentOS-7 - SCLo sclo Testing
+baseurl=http://buildlogs.centos.org/centos/7/sclo/$basearch/sclo/
+gpgcheck=0
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
+[centos-sclo-sclo-source]
+name=CentOS-7 - SCLo sclo Sources
+baseurl=http://vault.centos.org/centos/7/sclo/Source/sclo/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
+[centos-sclo-sclo-debuginfo]
+name=CentOS-7 - SCLo sclo Debuginfo
+baseurl=http://debuginfo.centos.org/centos/7/sclo/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+</code></pre>
+<p>CentOS-SCLo-scl-rh.repo</p>
+<pre><code class="language-repo"># CentOS-SCLo-rh.repo
+#
+# Please see http://wiki.centos.org/SpecialInterestGroup/SCLo for more
+# information
+
+[centos-sclo-rh]
+name=CentOS-7 - SCLo rh
+baseurl=http://mirror.centos.org/centos/7/sclo/$basearch/rh/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
+[centos-sclo-rh-testing]
+name=CentOS-7 - SCLo rh Testing
+baseurl=http://buildlogs.centos.org/centos/7/sclo/$basearch/rh/
+gpgcheck=0
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
+[centos-sclo-rh-source]
+name=CentOS-7 - SCLo rh Sources
+baseurl=http://vault.centos.org/centos/7/sclo/Source/rh/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+
+[centos-sclo-rh-debuginfo]
+name=CentOS-7 - SCLo rh Debuginfo
+baseurl=http://debuginfo.centos.org/centos/7/sclo/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+</code></pre>
+<p><strong>解决方法</strong><br>
+修改CentOS-SCLo-scl.repo</p>
+<pre><code class="language-shell">vi /etc/yum.repos.d/CentOS-SCLo-scl.repo
+</code></pre>
+<p>修改此部分的baseurl</p>
+<pre><code>[centos-sclo-sclo]
+name=CentOS-7 - SCLo sclo
+baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/sclo/
+# mirrorlist=http://mirrorlist.centos.org?arch=$basearch&amp;release=7&amp;repo=sclo-sclo
+gpgcheck=0
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+</code></pre>
+<p>修改CentOS-SCLo-scl-rh.repo</p>
+<pre><code class="language-shell">vi /etc/yum.repos.d/CentOS-SCLo-scl-rh.repo
+</code></pre>
+<p>修改此部分的baseurl</p>
+<pre><code>[centos-sclo-rh]
+name=CentOS-7 - SCLo rh
+baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/rh/
+# mirrorlist=http://mirrorlist.centos.org?arch=$basearch&amp;release=7&amp;repo=sclo-rh
+gpgcheck=0
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+</code></pre>
+<p>刷新缓存</p>
+<pre><code class="language-shell">yum repolist
+yum clean all
+yum makecache
+</code></pre>
+<p>如仍然报错<code>No package devtoolset-8-gcc* available</code><br>
+运行<code>yum clean all</code>，然后运行<code>yum makecache</code></p>
+<p>临时生效，执行：</p>
+<pre><code class="language-shell">scl enable devtoolset-8 bash
+</code></pre>
+<p>会新创建一个<code>bash</code>会话，键入<code>exit</code>即可退出。</p>
+<p>如果想要永久生效，可以执行：</p>
+<pre><code class="language-shell">echo 'source scl_source enable devtoolset-8' &gt;&gt; ~/.bashrc
+</code></pre>
+<p>添加环境变量到当前用户的bash配置里，也就是.bashrc文件。仅对当前登陆的用户生效。</p>
+<p>卸载的话需要手动编辑.bashrc文件，删除</p>
+<pre><code class="language-shell">source scl_source enable devtoolset-8
+</code></pre>
+<p>这行就行</p>
+<p>执行：</p>
+<pre><code class="language-shell">source ~/.bash_profile
+</code></pre>
+<p>可以刷新当前登陆用户的环境变量，然后控制台输入：</p>
+<pre><code class="language-shell">gcc -v
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://oss.956898603.xyz/2026/01/04/6959f1818487a.png" alt="" loading="lazy"></figure>
+<h2 id="安装-make-4">安装 make 4</h2>
+<pre><code class="language-shell">wget http://ftp.gnu.org/gnu/make/make-4.3.tar.gz
+tar -xzvf make-4.3.tar.gz &amp;&amp; cd make-4.3/
+./configure  --prefix=/usr/local/make
+make &amp;&amp; make install
+cd /usr/bin/ &amp;&amp; mv make make.bak
+ln -sv /usr/local/make/bin/make /usr/bin/make
+</code></pre>
+<p>这时,所有的问题都已经解决完毕,再重新执行上一步更新glibc即可</p>
+<pre><code class="language-shell">cd /root/glibc-2.28/build
+../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+
+## 安装 bison
+yum install -y bison
+
+## 安装软件（过程较长，耐心等待）
+make &amp;&amp; make install
+</code></pre>
+<p>验证一下</p>
+<pre><code class="language-shell">npm -v
+</code></pre>
+<p>如果还是出现下面的问题，要连接新的动态库</p>
+<pre><code>node: /lib64/libstdc++.so.6: version `CXXABI_1.3.9' not found (required by node)
+node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by node)
+node: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by node)
+</code></pre>
+<p>用下面命令查看</p>
+<pre><code class="language-shell">strings /usr/lib64/libstdc++.so.6 | grep CXXABI
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://img2024.cnblogs.com/blog/1893152/202403/1893152-20240311203237858-1010753407.png" alt="" loading="lazy"></figure>
+<p>更新libstdc++.so.6.0.26</p>
+<pre><code class="language-shell"># 更新lib libstdc++.so.6.0.26
+wget https://cdn.frostbelt.cn/software/libstdc%2B%2B.so.6.0.26
+ 
+# 替换系统中的/usr/lib64
+cp libstdc++.so.6.0.26 /usr/lib64/
+cd /usr/lib64/
+ln -snf ./libstdc++.so.6.0.26 libstdc++.so.6
+</code></pre>
+<p>验证</p>
+<pre><code class="language-shell">npm -v
+</code></pre>
+<h2 id="主要参考">主要参考</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/curiositywang/p/18860169">Centos 7.6 安装 Node.js 20 的环境配置记录</a></li>
+<li><a href="https://www.cnblogs.com/yuwen01/p/18067005">node: /lib64/libm.so.6: version `GLIBC_2.27‘ not found问题解决方案</a></li>
+<li><a href="https://explause.com/?p=61">安装 gcc 8</a></li>
+<li><a href="https://www.cnblogs.com/Jedi-Pz/p/18447117">找不到 gcc 源的解决方案</a></li>
+<li><a href="https://blog.csdn.net/qq522044637/article/details/141635771">/lib64/libm.so.6: version `GLIBC_2.27‘ not found 如何解决？</a></li>
+</ul>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%88%9D%E6%AD%A5%E5%AE%89%E8%A3%85-node">初步安装 node</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-glibc-228">安装 glib.c 2.28</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85gcc8">安装GCC8</a>
+<ul>
+<li><a href="#%E6%89%BE%E4%B8%8D%E5%88%B0-gcc-%E6%BA%90%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">找不到 gcc 源的解决方案</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85-make-4">安装 make 4</a></li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E5%8F%82%E8%80%83">主要参考</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline.956898603.xyz',
+    });
+  </script>
+  
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2026-01-04，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2026-01-04 12:44:22";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"><a href="https://weibo.com/shellblock"title="weibo"><i class="iconfont icon-weibo"></i></a><a href="https://github.com/shellblock"title="github"><i class="iconfont icon-github"></i></a><a href="mailto:saky@saky.site"title="envelope"><i class="iconfont icon-envelope"></i></a><a href="https://blog.saky.site/atom.xml"title="rss"><i class="iconfont icon-rss"></i></a></div></div><div class="copyright"id="copyright">Copyright © 2019-<script type="text/javascript">document.write((new Date()).getFullYear());</script> <a href="https://blog.saky.site" style="margin:0;">shellblock</a>. All Rights Reserved.<p><a href="http://www.beian.miit.gov.cn" target="_blank" style="color: inherit;">皖ICP备20010050号</a><img src="https://oss.956898603.xyz/static/social/icp_moe/ico23.png" /><a href="https://icp.gov.moe/?keyword=20200301" target="_blank">萌ICP备20200301号</a></p><p>
+<a href="https://shellblock.cn/">个人主页</a>｜<a href="/post/privacy">隐私政策</a>｜<a href="/post/about">关于本站</a></p></div>
+<br />
+</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>93</strong> posts</span></div></div>
+<script src="https://lib.baomitu.com/instant.page/3.0.0/instantpage.min.js" type="module" defer></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d22bf3b73f77afb4a3ec12717bed28b1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" async src="https://blog.saky.site/media/js/prism.js"></script>
+</body>
+</html>
